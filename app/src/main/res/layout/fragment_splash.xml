@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.splash.SplashFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.splash.SplashViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@drawable/app_background"
+        android:animateLayoutChanges="true">
+
+
+        <ImageView
+            android:id="@+id/img_go_plus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/go_logo_white"
+            app:visibleGone="@{!viewModel.obsHideChild}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_cash_less"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.40" />
+
+
+        <ImageView
+            android:id="@+id/img_cash_less"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cash_logo_white"
+            app:visibleGone="@{!viewModel.obsHideChild}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_aman"
+            app:layout_constraintStart_toEndOf="@+id/img_go_plus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.40" />
+
+
+        <ImageView
+            android:id="@+id/img_aman"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/aman_logo_white"
+            app:visibleGone="@{!viewModel.obsHideChild}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_cash_less"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.40" />
+
+
+        <ImageView
+            android:id="@+id/img_logos"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_190sdp"
+            android:src="@drawable/logos_white"
+            app:visibleInVisible="@{viewModel.obsHideChild}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+
+    defaultConfig {
+        applicationId "com.gsgroup.hrapp"
+        minSdkVersion 17
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    // To inline the bytecode built with JVM target 1.8 into
+    // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    //Main Libs, key: main
+    implementation(main.kotlin)
+    implementation (main.kotlinCore)
+    implementation (main.appCompat)
+    implementation (main.materialDesign)
+    implementation (main.constraintLayout)
+    implementation (main.fragmentKtx)
+    implementation (main.activityKtx)
+    implementation (main.lifecycleViewmodelKtx)
+    implementation (main.lifecycleRuntimeKtx)
+    implementation (main.lifecycleLivedataKtx)
+    implementation (main.lifecycleViewmodelSavedstateKtx)
+    implementation (main.lifecycleJava8)
+
+    //External Libs, key: external
+    implementation (external.bottomNav)
+    implementation (external.timber)
+    implementation (external.sdpAndroid)
+    implementation (external.sspAndroid)
+    implementation (external.converterGson)
+    implementation (external.gson)
+    implementation (external.loggingInterceptors)
+    implementation (external.dexter)
+    implementation (external.pixImage)
+    implementation (external.glide)
+    kapt (external.glideCompiler)
+	implementation project(path: ':sweetdialoglibrary')
+
+
+}

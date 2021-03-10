@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@drawable/app_background"
+        android:padding="@dimen/_16sdp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ar"
+            style="@style/ButtonLangStyle"
+            android:background="@drawable/btn_lang_right"
+            android:text="@string/ar"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_en"
+            style="@style/ButtonLangStyle"
+            android:background="@drawable/btn_lang_left"
+            android:text="@string/en"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_ar"
+            app:layout_constraintTop_toTopOf="@id/btn_ar" />
+
+        <ImageView
+            android:id="@+id/img_logos"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_160sdp"
+            android:src="@drawable/logos_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_ar" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_username"
+            style="@style/TIL.WhiteStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/img_logos"
+            app:startIconDrawable="@drawable/ic_user">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="@string/username"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
+            style="@style/TIL.WhiteStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/til_username"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/EditText.WhiteStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/chk_remember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="@string/remember_me"
+            android:textColor="@color/white"
+            app:buttonTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_password" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_login"
+            style="@style/SubmitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/chk_remember"
+            android:text="@string/login"
+            android:onClick="@{()->viewModel.onLoginClick()}"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_48sdp"
+            android:layout_marginStart="@dimen/_48sdp"
+            android:textColor="@color/button_color_green"
+            />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_biometric"
+            style="@style/SubmitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            android:text="@string/login_with_biometric"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_48sdp"
+            android:layout_marginStart="@dimen/_48sdp"
+            android:textColor="@color/button_color_red"
+            app:icon="@drawable/ic_fingerprint"
+            app:iconTint="@color/button_color_red"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

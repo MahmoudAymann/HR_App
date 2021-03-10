@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="item"
+                type="com.gsgroup.hrapp.model.HomeItem" />
+    </data>
+
+    <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            setButtonIcon="@{item.icon}"
+            app:iconGravity="top"
+            android:text="@{item.title}"
+            app:backgroundTint="@color/white"
+            tools:text="@tools:sample/full_names"
+            android:textColor="@color/black"
+            app:iconTint="@color/black"
+            android:layout_margin="@dimen/_6sdp"
+            android:paddingTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:cornerRadius="@dimen/_8sdp"
+            android:textSize="@dimen/_12ssp"
+            app:rippleColor="@color/gray"
+            />
+
+</layout>

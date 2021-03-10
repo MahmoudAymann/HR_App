@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">HR App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ar">AR</string>
+    <string name="en">EN</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="login">Login</string>
+    <string name="login_with_biometric">Login With Biometric</string>
+    <string name="covid_19">COVID-19</string>
+    <string name="logout">Logout</string>
+    <string name="salary_info">Salary Info</string>
+    <string name="last_logout">Last Logout</string>
+    <string name="first_login">First Login</string>
+    <string name="date">Date</string>
+    <string name="direct_manger">Direct Manager</string>
+    <string name="requests">Requests</string>
+    <string name="sign_in_out_logs">Sign In/Out Logs</string>
+    <string name="my_hr">HR Reps</string>
+    <string name="my_team">My Team</string>
+    <string name="company_policy">Company Polices</string>
+    <string name="home">Home</string>
+    <string name="chat">Chat</string>
+    <string name="notification">Notification</string>
+    <string name="faq">FAQ</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
+    <string name="exit_app">Exit App?</string>
+    <string name="cancel">Cancel</string>
+    <string name="for_signing_in_out">For Signing In/Out</string>
+</resources>
