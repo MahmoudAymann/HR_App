@@ -3,6 +3,7 @@ package com.gsgroup.hrapp.app
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -14,7 +15,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -44,6 +44,13 @@ class OtherViewsBinding {
         list?.apply {
             fbn.items = this
         }?:Timber.e("list is null")
+    }
+
+    @BindingAdapter("setUnderLinedText")
+    fun TextView.setUnderLined(set: Boolean){
+        if(set){
+            paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        }
     }
 
     @BindingAdapter("imageColor")
@@ -101,7 +108,7 @@ class OtherViewsBinding {
     }
 
     @BindingAdapter("app:visibleGone")
-    fun View.bindViewGone( b: Boolean?) {
+    fun View.bindViewGone(b: Boolean?) {
         b?.let {
             if (b) {
                 visible()

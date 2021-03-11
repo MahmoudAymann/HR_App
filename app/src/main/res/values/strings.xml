@@ -30,4 +30,10 @@
     <string name="exit_app">Exit App?</string>
     <string name="cancel">Cancel</string>
     <string name="for_signing_in_out">For Signing In/Out</string>
+    <string name="enter_salary">Enter Salary</string>
+    <string name="l_e">L.E</string>
+    <string name="number_of_deductions">Number of Deductions</string>
+    <string name="money_deductions">Money Deductions</string>
+    <string name="total_salary">Total Salary</string>
+    <string name="click_here_for_salary_details">*click here for salary details</string>
 </resources>

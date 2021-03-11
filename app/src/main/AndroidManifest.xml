@@ -25,6 +25,8 @@
         tools:ignore="AllowBackup,UnusedAttribute"
         tools:replace="android:theme">
         <activity android:name=".ui.activity.MainActivity">
+        </activity>
+        <activity android:name=".base.BNActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

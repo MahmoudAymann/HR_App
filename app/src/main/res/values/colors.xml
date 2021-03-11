@@ -20,4 +20,5 @@
     <color name="half_white">#80FFFFFF</color>
     <color name="button_color_green">#3CA827</color>
     <color name="button_color_red">#FF0000</color>
+    <color name="red">#FF0000</color>
 </resources>
