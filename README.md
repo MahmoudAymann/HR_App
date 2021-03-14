@@ -1,4 +1,4 @@
 # HR App Android-Lite 
 
-- supports api 16 (Jelly Bean 4.1) to latest stable android version.
+- supports api 17 (Jelly Bean 4.2) to latest stable android version.
 - new design
