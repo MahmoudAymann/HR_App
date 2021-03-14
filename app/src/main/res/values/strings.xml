@@ -36,4 +36,18 @@
     <string name="money_deductions">Money Deductions</string>
     <string name="total_salary">Total Salary</string>
     <string name="click_here_for_salary_details">*click here for salary details</string>
+    <string name="select_city">Select City</string>
+    <string name="app_version" translatable="false">1.10</string>
+    <string name="powered_by_gs_group" translatable="false">Powered by GS-Group (%1$s %2$s) </string>
+    <string name="app_version_name" translatable="false">VA</string>
+    <string name="app_version_lite" translatable="false">VL</string>
+    <string name="select_area">Select Area</string>
+    <string name="no_data">no data found</string>
+    <string name="search">search</string>
+    <string name="user_guide">User Guide</string>
+    <string name="new_notification">New Notifications</string>
+    <string name="old_notification">Old Notifications</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_language">Change Language</string>
+    <string name="total_num_of_employees">Total Num of Employees</string>
 </resources>

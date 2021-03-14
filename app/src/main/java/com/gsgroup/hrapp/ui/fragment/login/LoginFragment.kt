@@ -2,6 +2,7 @@ package com.gsgroup.hrapp.ui.fragment.login
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.constants.Codes
@@ -11,16 +12,14 @@ import com.gsgroup.hrapp.util.bindViewModel
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.viewBinding
 
-class LoginFragment : BaseFragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun pageTitle(): String = getString(R.string.login)
-
-    private val binding by viewBinding(FragmentLoginBinding::bind)
 
     lateinit var viewModel: LoginViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = bindViewModel(binding) {
+        viewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
                     Codes.HOME_SCREEN -> replaceFragment<HomeFragment>()
@@ -28,6 +27,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             }
         }
     }
+
+    override val mViewModel: LoginViewModel by viewModels()
 
 
 }

@@ -11,10 +11,13 @@ import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.util.Base64
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -28,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.gsgroup.hrapp.R
+import com.gsgroup.hrapp.model.ListDataItem
 import com.gsgroup.hrapp.util.*
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
@@ -39,16 +43,51 @@ import timber.log.Timber
 
 class OtherViewsBinding {
 
+
+    @BindingAdapter("setEditTextList")
+    fun setEditTextList(til: TextInputLayout, items: ArrayList<ListDataItem>?) {
+        items?.let {
+            val adapter = ArrayAdapter(til.context, android.R.layout.simple_list_item_1, items)
+            (til.editText as AppCompatAutoCompleteTextView).setAdapter(adapter)
+        } ?: Timber.e("list in null")
+    }
+
+    @BindingAdapter("setNotificationTextColor", "setNotificationSelected", requireAll = true)
+    fun setNotificationTextStatus(
+        textView: TextView,
+        isSelected: Boolean,
+        isNew: Boolean
+    ) {
+        if (isSelected) {
+            textView.background =
+                ContextCompat.getDrawable(textView.context, R.drawable.shadow_white)
+            if (isNew) {
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        textView.context,
+                        R.color.button_color_green
+                    )
+                )
+            } else {
+                textView.setTextColor(ContextCompat.getColor(textView.context, R.color.red))
+            }
+        } else {
+            textView.background = null
+            textView.setTextColor(Color.BLACK)
+        }
+
+    }
+
     @BindingAdapter("setBottomBarMenu")
     fun bindMenuInBottomBar(fbn: FluidBottomNavigation, list: List<FluidBottomNavigationItem>?) {
         list?.apply {
             fbn.items = this
-        }?:Timber.e("list is null")
+        } ?: Timber.e("list is null")
     }
 
     @BindingAdapter("setUnderLinedText")
-    fun TextView.setUnderLined(set: Boolean){
-        if(set){
+    fun TextView.setUnderLined(set: Boolean) {
+        if (set) {
             paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
         }
     }

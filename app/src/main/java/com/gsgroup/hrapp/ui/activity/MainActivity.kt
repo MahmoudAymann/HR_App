@@ -1,6 +1,7 @@
 package com.gsgroup.hrapp.ui.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseActivity
 import com.gsgroup.hrapp.databinding.ActivityMainBinding
@@ -10,18 +11,13 @@ import com.gsgroup.hrapp.util.*
 import com.tenclouds.fluidbottomnavigation.listener.OnTabSelectedListener
 import timber.log.Timber
 
-class MainActivity : BaseActivity(), OnTabSelectedListener {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSelectedListener {
 
-    private val binding by bindView(ActivityMainBinding::inflate)
-    private lateinit var viewModel: MainViewModel
+    override val mViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        viewModel = bindViewModel(binding) {
-
-        }
-        replaceFragment<LoginFragment>()
+        replaceFragment<SplashFragment>()
     }
 
     override fun onBackPressed() {
@@ -33,15 +29,14 @@ class MainActivity : BaseActivity(), OnTabSelectedListener {
 
     fun changeTitle(title: String?) {
         title?.let {
-//            viewModel.obsTitle.set(title)
+            mViewModel.obsTitle.set(title)
         } ?: Timber.e("title is null")
     }
 
     fun showBottomBar(show: Boolean = true) {
-//        viewModel.obsShowBottomBar.set(show)
+        mViewModel.obsShowBottomBar.set(show)
     }
 
-    //
     override fun onTabSelected(position: Int) {
         when (position) {
 

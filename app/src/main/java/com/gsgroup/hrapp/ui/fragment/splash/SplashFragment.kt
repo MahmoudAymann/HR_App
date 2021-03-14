@@ -1,36 +1,31 @@
 package com.gsgroup.hrapp.ui.fragment.splash
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.databinding.FragmentSplashBinding
+import com.gsgroup.hrapp.ui.fragment.login.LoginFragment
+import com.gsgroup.hrapp.util.initAnimation
 
-class SplashFragment : BaseFragment(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
     override fun pageTitle(): String? = null
 
+    override val mViewModel: SplashViewModel by viewModels()
 
-//        viewModel.apply {
-//            binding.imgAman.initAnimation(R.anim.rtl_en, 1) {
-//                obsHideChild.set(true)
-//            }
-//            binding.imgGoPlus.initAnimation(R.anim.ltr_en, 1) {
-//                binding.imgLogos.initAnimation(R.anim.slide_from_top_to_bottom, 1) {
-////                    replaceFragment<LoginFragment>()
-//                }
-//            }
-//        }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentSplashBinding.inflate(layoutInflater, container, false)
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mViewModel.apply {
+            binding.imgAman.initAnimation(R.anim.rtl_en, 1) {
+                obsHideChild.set(true)
+            }
+            binding.imgGoPlus.initAnimation(R.anim.ltr_en, 1) {
+                binding.imgLogos.initAnimation(R.anim.slide_from_top_to_bottom, 1) {
+                    replaceFragment<LoginFragment>()
+                }
+            }
+        }
     }
 
 

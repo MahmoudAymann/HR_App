@@ -143,7 +143,7 @@ fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
 
 
 
-inline fun <reified T : BaseFragment> FragmentActivity.replaceFragment(
+inline fun <reified T : BaseFragment<*,*>> FragmentActivity.replaceFragment(
     bundle: Bundle? = null
 ) {
     val fragment = T::class.java.newInstance()
@@ -151,7 +151,7 @@ inline fun <reified T : BaseFragment> FragmentActivity.replaceFragment(
         supportFragmentManager.apply {
             if (supportFragmentManager.backStackEntryCount != 0) {
                 val currentFragmentTag = getBackStackEntryAt(backStackEntryCount - 1).name
-                (findFragmentByTag(currentFragmentTag) as BaseFragment).let { curFrag ->
+                (findFragmentByTag(currentFragmentTag) as BaseFragment<*,*>).let { curFrag ->
                     beginTransaction().hide(curFrag)
                 }
             }
@@ -245,12 +245,26 @@ inline fun <reified VM : ViewModel> ViewModelStoreOwner.bindViewModel(
     }
 }
 
-inline fun <T : ViewBinding> AppCompatActivity.bindView(
-    crossinline bindingInflater: (LayoutInflater) -> T
-) =
-    lazy(LazyThreadSafetyMode.NONE) {
-        bindingInflater.invoke(layoutInflater)
+
+@Suppress("UNCHECKED_CAST")
+fun <B : ViewDataBinding> LifecycleOwner.bindView(): B {
+    return if(this is Activity) {
+        val inflateMethod = getTClass<B>().getMethod("inflate", LayoutInflater::class.java)
+        val invokeLayout = inflateMethod.invoke(null, this.layoutInflater) as B
+        this.setContentView(invokeLayout.root)
+        invokeLayout
+    }else{
+        val fragment = this as Fragment
+        val inflateMethod = getTClass<B>().getMethod("bind", View::class.java)
+        val lifecycle = fragment.viewLifecycleOwner.lifecycle
+        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
+            error("Cannot access view bindings. View lifecycle is ${lifecycle.currentState}!")
+        }
+        val invoke : B = inflateMethod.invoke(null, fragment.requireView()) as B
+        invoke
     }
+}
+
 
 fun <T : Any?, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -> Unit) {
     liveData.observe(if (this is Fragment) viewLifecycleOwner else this, Observer(body))

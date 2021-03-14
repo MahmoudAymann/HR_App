@@ -18,6 +18,8 @@
         <item name="textAllCaps">false</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="ButtonLangStyle" parent="Widget.AppCompat.Button">
@@ -62,6 +64,16 @@
 
     <style name="BlackTextColor" parent="">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="til_dropdown_list" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusTopStart">@dimen/_24sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_24sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_24sdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_24sdp</item>
+        <item name="boxStrokeColor">@color/til_border_state_color</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="hintEnabled">false</item>
     </style>
 
 </resources>

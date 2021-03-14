@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_6sdp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_8sdp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        tools:ignore="ContentDescription"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@tools:sample/full_names"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/img_profile"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_job_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@tools:sample/full_names"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                        app:layout_constraintStart_toStartOf="@+id/tv_name"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@tools:sample/full_names"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_job_title"
+                        app:layout_constraintStart_toStartOf="@+id/tv_name"
+                        />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab_private_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        app:backgroundTint="@color/call_green"
+                        app:fabSize="mini"
+                        app:srcCompat="@drawable/ic_call"
+                        app:tint="@color/white"
+                        app:layout_constraintStart_toStartOf="@id/img_profile"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_company"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_private_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:textStyle="bold"
+
+                        app:layout_constraintBottom_toBottomOf="@+id/fab_private_num"
+                        app:layout_constraintStart_toEndOf="@+id/fab_private_num"
+                        app:layout_constraintTop_toTopOf="@+id/fab_private_num"
+                        tools:text="011111111" />
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab_business_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:backgroundTint="@color/call_green"
+                        app:fabSize="mini"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        app:srcCompat="@drawable/ic_call"
+                        app:tint="@color/white"
+                        app:layout_constraintStart_toStartOf="@id/img_profile"
+                        app:layout_constraintTop_toBottomOf="@+id/fab_private_num"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_business_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/fab_business_num"
+                        app:layout_constraintStart_toEndOf="@+id/fab_business_num"
+                        app:layout_constraintTop_toTopOf="@+id/fab_business_num"
+                        tools:text="011111111" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab_mail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:backgroundTint="@color/black"
+                        app:fabSize="mini"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        app:srcCompat="@drawable/ic_mail"
+                        app:tint="@color/white"
+                        app:layout_constraintStart_toStartOf="@id/img_profile"
+                        app:layout_constraintTop_toBottomOf="@+id/fab_business_num"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/tv_mail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/fab_mail"
+                        app:layout_constraintStart_toEndOf="@+id/fab_mail"
+                        app:layout_constraintTop_toTopOf="@+id/fab_mail"
+                        tools:text="w@w.com" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_profile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/CircleImageView"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <ProgressBar
+                android:id="@+id/pb_image"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/img_profile"
+                app:layout_constraintEnd_toEndOf="@+id/img_profile"
+                app:layout_constraintStart_toStartOf="@+id/img_profile"
+                app:layout_constraintTop_toTopOf="@id/img_profile" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/BlackTextColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:gravity="start"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_profile"
+                app:layout_constraintTop_toTopOf="@+id/img_profile"
+                tools:text="@tools:sample/full_names" />
+
+            <TextView
+                android:id="@+id/tv_code"
+                style="@style/BlackTextColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_job_title"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="AM_123" />
+
+            <TextView
+                android:id="@+id/tv_job_title"
+                style="@style/BlackTextColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_code"
+                app:layout_constraintTop_toTopOf="@+id/tv_code"
+                tools:text="AndroidDev" />
+
+            <TextView
+                android:id="@+id/tv_company"
+                style="@style/BlackTextColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_location"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_code"
+                tools:text="Aman" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                style="@style/BlackTextColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_company"
+                app:layout_constraintTop_toTopOf="@+id/tv_company"
+                tools:text="Egypt" />
+
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab_change_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/change_password"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/tv_company"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fab_login_logs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/sign_in_out_logs"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/fab_change_password"
+                app:layout_constraintTop_toTopOf="@id/fab_change_password"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.myteam.MyTeamViewModel" />
+    </data>
+
+</layout>
