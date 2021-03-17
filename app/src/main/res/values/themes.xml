@@ -18,7 +18,8 @@
     </style>
 
     <style name="Theme.HRApp.Arabic" parent="Theme.HRApp">
-        <item name="fontFamily">@font/pnu_regular</item>
+        <item name="fontFamily">@font/pnu_medium_arabic</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
 </resources>

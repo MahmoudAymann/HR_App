@@ -53,9 +53,18 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_16sdp"
             tools:listitem="@layout/item_chat_view"
+            app:adapter="@{viewModel.adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.chat.ChatViewModel"
+            />
+    </data>
 </layout>

@@ -6,20 +6,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_8sdp">
+        android:padding="@dimen/_8sdp"
+        tools:background="@drawable/app_background">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/img_profile"
+            style="@style/circular_image_view"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/CircleImageView"
-            app:strokeColor="@color/white"
-            app:strokeWidth="@dimen/_2sdp"
-            tools:ignore="ContentDescription"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            android:src="@drawable/app_background"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -31,6 +29,7 @@
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:text="@{item.name}"
             app:layout_constraintEnd_toStartOf="@+id/tv_date"
             app:layout_constraintStart_toEndOf="@+id/img_profile"
             app:layout_constraintTop_toTopOf="@id/img_profile"
@@ -46,6 +45,7 @@
             android:singleLine="true"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
+            android:text="@{item.message}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_profile"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
@@ -59,6 +59,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_8ssp"
             android:textStyle="bold"
+            android:text="@{item.time}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_date"
             app:layout_constraintTop_toTopOf="@id/img_profile"
@@ -72,11 +73,19 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_8ssp"
             android:textStyle="bold"
+            android:text="@{item.date}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_time"
             tools:text="@tools:sample/date/ddmmyy" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.chat.ChatItem"
+            />
+    </data>
 
 </layout>

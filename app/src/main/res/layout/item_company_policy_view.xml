@@ -18,9 +18,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="@tools:sample/full_names"
+                android:text="@{item.title}"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+    <data>
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.company_polices.CompanyPolicyItem"
+            />
+    </data>
 </layout>

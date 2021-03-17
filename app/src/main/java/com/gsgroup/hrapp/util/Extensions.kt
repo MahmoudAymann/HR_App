@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
@@ -16,6 +17,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.AnimRes
 import androidx.annotation.ColorRes
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
@@ -23,17 +25,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.*
-import androidx.viewbinding.ViewBinding
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.gsgroup.hrapp.BR
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.app.BaseApplication
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.ui.activity.MainActivity
 import timber.log.Timber
 import java.io.File
 import java.lang.reflect.ParameterizedType
-import kotlin.properties.ReadOnlyProperty
-import kotlin.reflect.KProperty
 
 
 fun Activity.showActivity(
@@ -49,6 +54,28 @@ fun AppCompatActivity.findFragmentById(id: Int): Fragment? {
     }
 }
 
+
+fun Activity.restartApp() {
+    showActivity(MainActivity::class.java)
+    finishAffinity()
+}
+
+fun FragmentActivity.showLogoutDialog(onClick: () -> Unit) {
+    val dialog = SweetAlertDialog(this)
+        .setContentText(getString(R.string.log_out_check_message))
+        .setConfirmButton(getString(R.string.yes)) {
+            it.closeDialog()
+            onClick()
+        }
+        .setCancelButton(getString(R.string.no)) { sDialog ->
+            sDialog.closeDialog()
+        }
+        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.red))
+        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
+        .setCancelButtonBackgroundColor(getColorFromRes(R.color.white))
+    dialog.show()
+}
+
 fun Activity.showExitDialog() {
     val dialog = SweetAlertDialog(this)
         .setContentText(getString(R.string.exit_app))
@@ -62,8 +89,26 @@ fun Activity.showExitDialog() {
             sDialog.closeDialog()
         }
         .setConfirmButtonBackgroundColor(getColorFromRes(R.color.colorPrimary))
+        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
         .setCancelButtonBackgroundColor(getColorFromRes(R.color.white))
     dialog.show()
+}
+
+fun Context.showDialog(msg: String?, type: Int? = null, okClick: () -> Unit = {}) {
+    SweetAlertDialog(
+        this,
+        type ?: SweetAlertDialog.NORMAL_TYPE
+    )
+        .setContentText(msg)
+        .setConfirmButton(getString(R.string.yes)) { sDialog ->
+            sDialog.closeDialog()
+            okClick()
+        }.setCancelButton(getString(R.string.no)) {
+            it.closeDialog()
+        }
+        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.black))
+        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
+        .show()
 }
 
 fun Context.getColorFromRes(@ColorRes colorRes: Int): Int {
@@ -142,34 +187,21 @@ fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
 }
 
 
-
-inline fun <reified T : BaseFragment<*,*>> FragmentActivity.replaceFragment(
+inline fun <reified T : BaseFragment<*, *>> FragmentActivity.replaceFragment(
     bundle: Bundle? = null
 ) {
     val fragment = T::class.java.newInstance()
     fragment.let { myFrag ->
-        supportFragmentManager.apply {
-            if (supportFragmentManager.backStackEntryCount != 0) {
-                val currentFragmentTag = getBackStackEntryAt(backStackEntryCount - 1).name
-                (findFragmentByTag(currentFragmentTag) as BaseFragment<*,*>).let { curFrag ->
-                    beginTransaction().hide(curFrag)
-                }
-            }
-        }.commit {
+        supportFragmentManager.commit {
             if (!AppUtil.isOldDevice())
                 setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             myFrag.arguments = bundle
-            if (supportFragmentManager.findFragmentByTag(myFrag.tag) == fragment) {
-                Timber.e("show now")
-                show(fragment)
-            } else {
-                Timber.e("add")
-                replace(R.id.fragment_container, myFrag, myFrag.tag)
-            }
+            replace(R.id.fragment_container_view, myFrag, myFrag.tag)
             addToBackStack(myFrag::class.java.name)
         }
     }
 }
+
 
 fun String.removeSpaces(): String = this.replace(" ", "").trim()
 
@@ -247,27 +279,36 @@ inline fun <reified VM : ViewModel> ViewModelStoreOwner.bindViewModel(
 
 
 @Suppress("UNCHECKED_CAST")
-fun <B : ViewDataBinding> LifecycleOwner.bindView(): B {
-    return if(this is Activity) {
+fun <B : ViewDataBinding> LifecycleOwner.bindView(container: ViewGroup? = null): B {
+    return if (this is Activity) {
         val inflateMethod = getTClass<B>().getMethod("inflate", LayoutInflater::class.java)
         val invokeLayout = inflateMethod.invoke(null, this.layoutInflater) as B
         this.setContentView(invokeLayout.root)
         invokeLayout
-    }else{
+    } else {
         val fragment = this as Fragment
-        val inflateMethod = getTClass<B>().getMethod("bind", View::class.java)
+        val inflateMethod = getTClass<B>().getMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        )
+
         val lifecycle = fragment.viewLifecycleOwner.lifecycle
         if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
             error("Cannot access view bindings. View lifecycle is ${lifecycle.currentState}!")
         }
-        val invoke : B = inflateMethod.invoke(null, fragment.requireView()) as B
+        val invoke: B = inflateMethod.invoke(null, layoutInflater, container, false) as B
         invoke
     }
 }
 
-
 fun <T : Any?, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -> Unit) {
-    liveData.observe(if (this is Fragment) viewLifecycleOwner else this, Observer(body))
+    liveData.observe(if (this is Fragment) viewLifecycleOwner else this, Observer {
+        if (lifecycle.currentState == Lifecycle.State.RESUMED) {
+            body(it)
+        }
+    })
 }
 
 inline fun <reified T : AppCompatActivity> Fragment.castToActivity(
@@ -295,49 +336,47 @@ fun View.invisible(){
     visibility = View.INVISIBLE
 }
 
-class FragmentViewBindingDelegate<T : ViewBinding>(
-    val fragment: Fragment,
-    val viewBindingFactory: (View) -> T
-) : ReadOnlyProperty<Fragment, T> {
-    private var binding: T? = null
 
-    init {
-        fragment.lifecycle.addObserver(object : DefaultLifecycleObserver {
-            val viewLifecycleOwnerLiveDataObserver =
-                Observer<LifecycleOwner?> {
-                    val viewLifecycleOwner = it ?: return@Observer
-
-                    viewLifecycleOwner.lifecycle.addObserver(object : DefaultLifecycleObserver {
-                        override fun onDestroy(owner: LifecycleOwner) {
-                            binding = null
-                        }
-                    })
-                }
-
-            override fun onCreate(owner: LifecycleOwner) {
-                fragment.viewLifecycleOwnerLiveData.observeForever(viewLifecycleOwnerLiveDataObserver)
-            }
-
-            override fun onDestroy(owner: LifecycleOwner) {
-                fragment.viewLifecycleOwnerLiveData.removeObserver(viewLifecycleOwnerLiveDataObserver)
-            }
-        })
+fun LifecycleOwner.navigateSafe(directions: NavDirections, navOptions: NavOptions? = null) {
+    val navController: NavController?
+    val mView: View?
+    if (this is Fragment) {
+        navController = findNavController()
+        mView = view
+    } else {
+        val activity = this as Activity
+        navController = activity.findNavController(R.id.fragment_container_view)
+        mView = currentFocus
     }
-
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        val binding = binding
-        if (binding != null) {
-            return binding
-        }
-
-        val lifecycle = fragment.viewLifecycleOwner.lifecycle
-        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
-            throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
-        }
-
-        return viewBindingFactory(thisRef.requireView()).also { this.binding = it }
-    }
+    if (canNavigate(navController, mView)) navController.navigate(directions, navOptions)
 }
 
-fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
-    FragmentViewBindingDelegate(this, viewBindingFactory)
+fun LifecycleOwner.navigateSafe(@IdRes navFragmentRes: Int, bundle: Bundle? = null) {
+    val navController: NavController?
+    val mView: View?
+    if (this is Fragment) {
+        navController = findNavController()
+        mView = view
+    } else {
+        val activity = this as Activity
+        navController = activity.findNavController(R.id.fragment_container_view)
+        mView = currentFocus
+    }
+    if (canNavigate(navController, mView)) navController.navigate(navFragmentRes, bundle)
+}
+
+fun canNavigate(controller: NavController, view: View?): Boolean {
+    val destinationIdInNavController = controller.currentDestination?.id
+    // add tag_navigation_destination_id to your res\values\ids.xml so that it's unique:
+    val destinationIdOfThisFragment =
+        view?.getTag(R.id.tag_navigation_destination_id) ?: destinationIdInNavController
+
+    // check that the navigation graph is still in 'this' fragment, if not then the app already navigated:
+    return if (destinationIdInNavController == destinationIdOfThisFragment) {
+        view?.setTag(R.id.tag_navigation_destination_id, destinationIdOfThisFragment)
+        true
+    } else {
+        Timber.e("May not navigate: current destination is not the current fragment.")
+        false
+    }
+}

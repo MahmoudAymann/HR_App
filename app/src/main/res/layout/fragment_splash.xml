@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@drawable/app_background"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:layoutDirection="ltr">
 
 
         <ImageView

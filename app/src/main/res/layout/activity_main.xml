@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/app_background">
+        android:background="@drawable/app_background"
+        android:animateLayoutChanges="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
@@ -25,7 +26,9 @@
                 android:id="@+id/id_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibleGone="@{viewModel.obsShowHeaderView}"
+                >
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_salary"
@@ -34,12 +37,12 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{()->viewModel.onSalaryClick()}"
                     android:text="@string/salary_info"
-                    app:icon="@drawable/ic_notification"
+                    app:icon="@drawable/ic_money"
                     app:iconGravity="top"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/btn_covid"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:visibleGone="@{viewModel.obsShowMainToolbar}" />
+                    app:visibleGone="@{viewModel.obsShowMainToolbarIcons}" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_covid"
@@ -52,17 +55,19 @@
                     app:iconGravity="top"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibleGone="@{viewModel.obsShowMainToolbarIcons}"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_logout"
                     style="@style/MaterialButton.IconOnly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onCovidClick()}"
+                    android:onClick="@{()->viewModel.onLogoutClick()}"
                     android:text="@string/logout"
                     app:icon="@drawable/ic_logout"
                     app:iconGravity="top"
+                    app:visibleGone="@{viewModel.obsShowMainToolbarIcons}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +81,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"
+                    app:visibleInVisible="@{viewModel.obsShowBackButton || viewModel.obsShowMainToolbarIcons}"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,20 +110,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:maxImageSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/ic_back"
+                android:layoutDirection="ltr"
                 app:visibleGone="@{viewModel.obsShowBackButton}"
                 tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <FrameLayout
-            android:id="@+id/fragment_container"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/main_nav_graph"
             app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_header" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_header"
+            />
 
         <com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
             android:id="@+id/bottom_nav_bar"
@@ -127,8 +135,8 @@
             app:iconColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:textColor="@color/colorPrimary"
-            app:visibleGone="@{viewModel.obsShowBottomBar}"
             setBottomBarMenu="@{viewModel.bottomBarMenuItems}"
+            app:visibleInVisible="@{viewModel.obsShowBottomBar}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

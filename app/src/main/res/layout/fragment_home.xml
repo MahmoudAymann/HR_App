@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.gsgroup.hrapp.ui.fragment.home.HomeViewModel" />
@@ -31,17 +30,17 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_8sdp">
 
-                <com.google.android.material.imageview.ShapeableImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/img_profile"
+                    style="@style/circular_image_view"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
-                    android:scaleType="centerCrop"
                     android:onClick="@{()->viewModel.onImageClick()}"
+                    app:civ_border="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/CircleImageView"
-                    tools:ignore="ContentDescription"
-                    tools:src="@tools:sample/backgrounds/scenic" />
+                    android:src="@drawable/app_background" />
+
 
                 <ProgressBar
                     android:id="@+id/pb_image"
@@ -63,6 +62,7 @@
                     android:gravity="start"
                     android:textAlignment="viewStart"
                     android:textStyle="bold"
+                    android:text="Mahmoud Ayman"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_profile"
                     app:layout_constraintTop_toTopOf="@+id/img_profile"
@@ -74,6 +74,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:text="AM_123"
+                    android:textAlignment="viewStart"
                     app:layout_constraintEnd_toStartOf="@+id/tv_job_title"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name"
@@ -85,10 +87,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     style="@style/BlackTextColor"
+                    android:textAlignment="viewStart"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_code"
                     app:layout_constraintTop_toTopOf="@+id/tv_code"
-                    tools:text="AndroidDev" />
+                    tools:text="AndroidDev"
+                    android:text="android dev"/>
 
                 <TextView
                     android:id="@+id/tv_company"
@@ -96,6 +101,9 @@
                     android:layout_height="wrap_content"
                     style="@style/BlackTextColor"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:text="Aman"
+                    android:textAlignment="viewStart"
+
                     app:layout_constraintEnd_toStartOf="@+id/tv_location"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_code"
@@ -107,6 +115,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
                     style="@style/BlackTextColor"
+                    android:text="Egypt"
+                    android:textAlignment="viewStart"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_company"
                     app:layout_constraintTop_toTopOf="@+id/tv_company"
@@ -145,7 +156,9 @@
                     app:layout_constraintEnd_toEndOf="@id/tv_last_logout_static"
                     app:layout_constraintStart_toStartOf="@id/tv_last_logout_static"
                     app:layout_constraintTop_toBottomOf="@id/tv_last_logout_static"
-                    tools:text="14/02/2020" />
+                    tools:text="14/02/2020"
+                    android:text="2:45 pm"
+                    />
 
                 <TextView
                     android:id="@+id/tv_login_static"
@@ -167,11 +180,12 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:gravity="center"
                     android:textAlignment="center"
+                    android:text="2:45 pm"
                     android:textColor="@color/button_color_green"
                     app:layout_constraintEnd_toEndOf="@id/tv_login_static"
                     app:layout_constraintStart_toStartOf="@id/tv_login_static"
                     app:layout_constraintTop_toBottomOf="@+id/tv_login_static"
-                    tools:text="@tools:sample/date/ddmmyy" />
+                    tools:text="@tools:sample/date/day_of_week" />
 
                 <TextView
                     android:id="@+id/tv_date_static"
@@ -194,6 +208,7 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:gravity="center"
                     android:textAlignment="center"
+                    android:text="14/02/2020"
                     app:layout_constraintEnd_toEndOf="@id/tv_date_static"
                     app:layout_constraintStart_toStartOf="@id/tv_date_static"
                     app:layout_constraintTop_toBottomOf="@id/tv_date_static"
@@ -223,8 +238,10 @@
             android:layout_height="wrap_content"
             android:text="@string/for_signing_in_out"
             style="@style/SubmitButton"
+            android:onClick="@{()->viewModel.onLoginLogsClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 

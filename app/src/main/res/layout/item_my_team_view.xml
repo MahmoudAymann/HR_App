@@ -18,16 +18,16 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_8sdp">
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/img_profile"
+                style="@style/circular_image_view"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:scaleType="centerCrop"
+                android:src="@drawable/app_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
-                tools:ignore="ContentDescription"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                app:civ_border="false"
+                />
 
             <ProgressBar
                 android:id="@+id/pb_image"
@@ -49,6 +49,7 @@
                 android:gravity="start"
                 android:textAlignment="viewStart"
                 android:textStyle="bold"
+                android:text="@{item.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_profile"
                 app:layout_constraintTop_toTopOf="@+id/img_profile"
@@ -60,6 +61,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:text="@{item.code}"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toStartOf="@+id/tv_job_title"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"
@@ -71,6 +74,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
+                android:text="@{item.jobTitle}"
+                android:textAlignment="viewStart"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_code"
                 app:layout_constraintTop_toTopOf="@+id/tv_code"
@@ -82,6 +88,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:text="@{item.company}"
+                android:textAlignment="viewStart"
+
                 app:layout_constraintEnd_toStartOf="@+id/tv_location"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_code"
@@ -93,38 +102,43 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
+                android:text="Egypt"
+                android:textAlignment="viewStart"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_company"
                 app:layout_constraintTop_toTopOf="@+id/tv_company"
                 tools:text="Egypt" />
 
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/fab_change_password"
+                style="@style/SubmitButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:text="@string/change_password"
+                app:cornerRadius="@dimen/_24sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_8sdp"
-                android:textAllCaps="false"
-                app:backgroundTint="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/tv_company"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 />
 
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/fab_login_logs"
+                style="@style/SubmitButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:text="@string/sign_in_out_logs"
-                android:textAllCaps="false"
-                app:backgroundTint="@color/white"
+                app:cornerRadius="@dimen/_24sdp"
+                android:padding="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@id/fab_change_password"
                 app:layout_constraintTop_toTopOf="@id/fab_change_password"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,8 +151,9 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.gsgroup.hrapp.ui.fragment.myteam.MyTeamViewModel" />
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.myteam.MyTeamItem"
+            />
     </data>
 
 </layout>

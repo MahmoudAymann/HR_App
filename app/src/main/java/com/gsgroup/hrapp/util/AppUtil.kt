@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.view.View
@@ -13,8 +14,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Spinner
+import androidx.annotation.FontRes
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.ObservableField
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
@@ -35,7 +38,9 @@ object AppUtil {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
     }
 
-
+    fun Context.getFont(@FontRes fontRes:Int) : Typeface? {
+        return ResourcesCompat.getFont(this, fontRes)
+    }
 
     private fun getMinDate(date: String): Calendar {
         val day = date.split("-").toTypedArray()

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil.getBinding
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import com.gsgroup.hrapp.BR
 import com.gsgroup.hrapp.util.LocalUtil
 import com.gsgroup.hrapp.util.bindView
@@ -28,6 +29,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActi
         binding = bindView()
         binding.setVariable(BR.viewModel, mViewModel)
     }
+
 
 
 }

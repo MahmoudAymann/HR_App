@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,6 +34,7 @@
                 tools:text="(15)"
                 android:textColor="@color/button_color_green"
                 android:textStyle="bold"
+                android:text="@{`(`+viewModel.obsCount+`)`}"
                 android:layout_marginStart="@dimen/_8sdp"
                 app:layout_constraintStart_toEndOf="@+id/tv_counter_static"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +45,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/tv_counter_static"
                 android:layout_marginTop="@dimen/_16sdp"
+                app:adapter="@{viewModel.adapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_my_team_view"
                 />
@@ -54,4 +57,11 @@
     </ScrollView>
 
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.myteam.MyTeamViewModel"
+            />
+    </data>
 </layout>

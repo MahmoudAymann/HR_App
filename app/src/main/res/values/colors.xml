@@ -22,6 +22,5 @@
     <color name="button_color_red">#FF0000</color>
     <color name="red">#FF0000</color>
     <color name="call_green">#58FF39</color>
-    <color name="cardviews_shadow_end_color">#03000000</color>
     <color name="elevation_color">#BDBDBD</color>
 </resources>

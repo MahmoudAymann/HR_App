@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.gsgroup.hrapp.BR
+import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.ui.activity.MainActivity
 import com.gsgroup.hrapp.util.bindView
 import com.gsgroup.hrapp.util.castToActivity
@@ -18,11 +19,13 @@ import com.gsgroup.hrapp.util.showKeyboard
  * Created by MahmoudAyman on 6/17/2020.
  **/
 
-abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> :
+    Fragment() {
 
     abstract fun pageTitle(): String?
 
     protected abstract val mViewModel: VM
+
     lateinit var binding: B
 
     override fun onCreateView(
@@ -31,8 +34,12 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = bindView()
-        binding.setVariable(BR.viewModel, mViewModel)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.setVariable(BR.viewModel, mViewModel)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,9 +58,9 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
         }
     }
 
-    fun changeMainTitle(title: String?) {
+    private fun changeMainTitle(title: String?) {
         castToActivity<MainActivity> {
-//            it?.changeTitle(title)
+            it?.changeTitle(title)
         }
     }
 
@@ -65,7 +72,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     fun showBottomBar(show: Boolean = true) {
         castToActivity<MainActivity> {
-//            it?.showBottomBar(show)
+            it?.showBottomBar(show)
         }
     }
 

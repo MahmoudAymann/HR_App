@@ -7,28 +7,30 @@ import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentLoginBinding
-import com.gsgroup.hrapp.ui.fragment.home.HomeFragment
-import com.gsgroup.hrapp.util.bindViewModel
+import com.gsgroup.hrapp.util.navigateSafe
 import com.gsgroup.hrapp.util.observe
-import com.gsgroup.hrapp.util.viewBinding
+import com.gsgroup.hrapp.util.restartApp
+import com.gsgroup.hrapp.util.showDialog
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun pageTitle(): String = getString(R.string.login)
 
-    lateinit var viewModel: LoginViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.apply {
+        mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
-                    Codes.HOME_SCREEN -> replaceFragment<HomeFragment>()
+                    Codes.HOME_SCREEN -> navigateSafe(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+                    Codes.RESTART_APP -> activity?.restartApp()
+                    Codes.CHANGE_LANG -> activity?.showDialog(getString(R.string.ask_change_language)){ mViewModel.changeLang() }
                 }
             }
         }
     }
 
     override val mViewModel: LoginViewModel by viewModels()
+
 
 
 }

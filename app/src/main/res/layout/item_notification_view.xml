@@ -20,6 +20,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textAlignment="viewStart"
+                android:text="@{item.title}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_date"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
                 android:textAlignment="viewStart"
                 android:maxLines="3"
                 android:ellipsize="end"
+                android:text="@{item.message}"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 android:layout_marginTop="@dimen/_8sdp"
                 tools:text="@tools:sample/lorem/random"
@@ -46,8 +48,18 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@tools:sample/date/ddmmyy"
                 android:textSize="@dimen/_8ssp"
-                android:textColor="@color/gray"/>
+                android:text="@{item.date}"
+                android:textColor="@color/gray"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.notification.NotificationItem"
+            />
+    </data>
 </layout>

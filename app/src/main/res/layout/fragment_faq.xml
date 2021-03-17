@@ -17,6 +17,7 @@
             android:paddingStart="@dimen/_24sdp"
             android:paddingEnd="@dimen/_24sdp"
             android:text="@string/user_guide"
+            android:onClick="@{()->viewModel.onUserGuideClick()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,8 +31,17 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialButton"
-            tools:layout_editor_absoluteX="21dp" />
+            app:adapter="@{viewModel.adapter}"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.faq.FAQViewModel"
+            />
+    </data>
 </layout>

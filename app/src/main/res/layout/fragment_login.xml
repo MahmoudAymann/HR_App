@@ -19,18 +19,22 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_ar"
             style="@style/ButtonLangStyle"
-            android:background="@drawable/btn_lang_right"
             android:text="@string/ar"
-            android:textColor="@color/black"
+            android:onClick="@{()->viewModel.onLangClick(true)}"
+            android:background="@{viewModel.obsIsArabic? @drawable/btn_lang_right_white : @drawable/btn_lang_right_black}"
+            android:textColor="@{viewModel.obsIsArabic? @color/black : @color/white}"
+            android:layoutDirection="ltr"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_en"
             style="@style/ButtonLangStyle"
-            android:background="@drawable/btn_lang_left"
             android:text="@string/en"
-            android:textColor="@color/white"
+            android:layoutDirection="ltr"
+            android:background="@{viewModel.obsIsArabic? @drawable/btn_lang_left_black : @drawable/btn_lang_left_white}"
+            android:textColor="@{viewModel.obsIsArabic? @color/white : @color/black}"
+            android:onClick="@{()->viewModel.onLangClick(false)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_ar"
             app:layout_constraintTop_toTopOf="@id/btn_ar" />

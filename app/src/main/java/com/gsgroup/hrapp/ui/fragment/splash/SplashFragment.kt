@@ -8,6 +8,7 @@ import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.databinding.FragmentSplashBinding
 import com.gsgroup.hrapp.ui.fragment.login.LoginFragment
 import com.gsgroup.hrapp.util.initAnimation
+import com.gsgroup.hrapp.util.navigateSafe
 
 class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
     override fun pageTitle(): String? = null
@@ -22,7 +23,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
             }
             binding.imgGoPlus.initAnimation(R.anim.ltr_en, 1) {
                 binding.imgLogos.initAnimation(R.anim.slide_from_top_to_bottom, 1) {
-                    replaceFragment<LoginFragment>()
+                    navigateSafe(SplashFragmentDirections.actionSplashFragmentToLoginFragment())
                 }
             }
         }

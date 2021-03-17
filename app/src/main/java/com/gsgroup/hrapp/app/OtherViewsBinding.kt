@@ -52,32 +52,6 @@ class OtherViewsBinding {
         } ?: Timber.e("list in null")
     }
 
-    @BindingAdapter("setNotificationTextColor", "setNotificationSelected", requireAll = true)
-    fun setNotificationTextStatus(
-        textView: TextView,
-        isSelected: Boolean,
-        isNew: Boolean
-    ) {
-        if (isSelected) {
-            textView.background =
-                ContextCompat.getDrawable(textView.context, R.drawable.shadow_white)
-            if (isNew) {
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        textView.context,
-                        R.color.button_color_green
-                    )
-                )
-            } else {
-                textView.setTextColor(ContextCompat.getColor(textView.context, R.color.red))
-            }
-        } else {
-            textView.background = null
-            textView.setTextColor(Color.BLACK)
-        }
-
-    }
-
     @BindingAdapter("setBottomBarMenu")
     fun bindMenuInBottomBar(fbn: FluidBottomNavigation, list: List<FluidBottomNavigationItem>?) {
         list?.apply {
@@ -147,23 +121,20 @@ class OtherViewsBinding {
     }
 
     @BindingAdapter("app:visibleGone")
-    fun View.bindViewGone(b: Boolean?) {
-        b?.let {
-            if (b) {
-                visible()
-            } else
-                gone()
-        }
+    fun bindViewGone(view: View, b: Boolean) {
+        if (b) {
+            view.visible()
+        } else
+            view.gone()
     }
 
     @BindingAdapter("app:visibleInVisible")
-    fun View.bindViewInvisible(b: Boolean?) {
-        b?.let {
-            if (b) {
-                visible()
-            } else
-                invisible()
-        }
+    fun bindViewInvisible(view: View, b: Boolean) {
+        if (b) {
+            view.visible()
+        } else
+            view.invisible()
+
     }
 
     @BindingAdapter("android:onTextChanged")

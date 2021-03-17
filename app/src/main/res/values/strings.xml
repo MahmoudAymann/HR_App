@@ -1,9 +1,7 @@
 <resources>
-    <string name="app_name">HR App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name" translatable="false">HR App</string>
     <string name="ar">AR</string>
-    <string name="en">EN</string>
+    <string name="en" translatable="false">EN</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
@@ -50,4 +48,8 @@
     <string name="change_password">Change Password</string>
     <string name="change_language">Change Language</string>
     <string name="total_num_of_employees">Total Num of Employees</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="ask_change_language">are you sure you want to change language?</string>
+    <string name="log_out_check_message">are you sure you want to logout?</string>
 </resources>

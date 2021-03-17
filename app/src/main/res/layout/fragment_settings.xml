@@ -6,19 +6,22 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="@dimen/_16sdp"
-            tools:background="@drawable/app_background">
+            tools:background="@drawable/app_background"
+            >
 
             <TextView
                 android:id="@+id/tv_change_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
+                android:onClick="@{()->viewModel.onChangePasswordClick()}"
                 android:gravity="center_vertical"
                 android:padding="@dimen/_8sdp"
                 android:text="@string/change_password"
@@ -39,36 +42,55 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_16sdp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_en"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:layout_constraintEnd_toStartOf="@+id/lang_container"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_change_password" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_change_password"
+                />
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_ar"
-                style="@style/ButtonLangStyle"
-                android:background="@drawable/btn_lang_right"
-                android:text="@string/ar"
-                android:textColor="@color/black"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lang_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/tv_change_language"
                 app:layout_constraintTop_toTopOf="@+id/tv_change_language"
-                app:layout_constraintBottom_toBottomOf="@id/tv_change_language"/>
+                >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_en"
-                style="@style/ButtonLangStyle"
-                android:background="@drawable/btn_lang_left"
-                android:text="@string/en"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_ar"
-                app:layout_constraintTop_toTopOf="@id/btn_ar" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ar"
+                    style="@style/ButtonLangStyle"
+                    android:background="@{viewModel.obsIsArabic? @drawable/btn_lang_right_white : @drawable/btn_lang_right_black}"
+                    android:layoutDirection="ltr"
+                    android:onClick="@{()->viewModel.onLangClick(true)}"
+                    android:text="@string/ar"
+                    android:textColor="@{viewModel.obsIsArabic? @color/black : @color/white}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_en"
+                    style="@style/ButtonLangStyle"
+                    android:background="@{viewModel.obsIsArabic? @drawable/btn_lang_left_black : @drawable/btn_lang_left_white}"
+                    android:layoutDirection="ltr"
+                    android:onClick="@{()->viewModel.onLangClick(false)}"
+                    android:text="@string/en"
+                    android:textColor="@{viewModel.obsIsArabic? @color/white : @color/black}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_ar"
+                    app:layout_constraintTop_toTopOf="@id/btn_ar"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </ScrollView>
 
-
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.settings.SettingsViewModel"
+            />
+    </data>
 </layout>

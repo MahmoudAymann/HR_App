@@ -21,6 +21,7 @@
                 tools:text="Question 1?"
                 android:textAlignment="viewStart"
                 android:textStyle="bold"
+                android:text="@{item.title}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -35,10 +36,20 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:maxLines="3"
                 android:ellipsize="end"
+                android:text="@{item.message}"
                 app:layout_constraintTop_toBottomOf="@+id/tv_question"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.faq.FAQItem"
+            />
+    </data>
 </layout>

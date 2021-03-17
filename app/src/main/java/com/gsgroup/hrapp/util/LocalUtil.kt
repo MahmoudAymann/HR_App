@@ -6,6 +6,9 @@ import android.content.res.Resources
 import android.os.Build
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import com.gsgroup.hrapp.R
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefLanguage
 import java.util.*
@@ -74,12 +77,17 @@ object LocalUtil {
             appConfig,
             appRes.displayMetrics
         )
-        if (isBiggerThanOrEqualAndroidN17())
-            activity.window.decorView.layoutDirection =
-                when (activity.getPrefLanguage()) {
-                    "ar" -> View.LAYOUT_DIRECTION_RTL
-                    "en" -> View.LAYOUT_DIRECTION_LTR
-                    else -> View.LAYOUT_DIRECTION_LOCALE
-                }
+        when (activity.getPrefLanguage()) {
+            ConstString.LANG_AR -> {
+                activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+                activity.theme.applyStyle(R.style.Theme_HRApp_Arabic, true)
+            }
+            ConstString.LANG_EN -> {
+                activity.theme.applyStyle(R.style.Theme_HRApp, true)
+                activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
+            }
+            else -> View.LAYOUT_DIRECTION_LOCALE
+        }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }
