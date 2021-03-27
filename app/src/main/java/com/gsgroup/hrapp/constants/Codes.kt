@@ -1,6 +1,11 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val CHANGE_PASSWORD_SCREEN: Int = 1010
+    val INFECT_SCREEN: Int = 1009
+
+    val NEWS_SCREEN: Int = 1008
+
     val COVID_SCREEN: Int = 1007
     val BACK_BUTTON_PRESSED: Int = 1006
     val LOG_OUT: Int = 1005

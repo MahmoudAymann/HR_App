@@ -25,6 +25,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                 when (it) {
                     Codes.RESTART_APP -> activity?.restartApp()
                     Codes.CHANGE_LANG -> activity?.showDialog(getString(R.string.ask_change_language)){ mViewModel.changeLang() }
+                    Codes.CHANGE_PASSWORD_SCREEN->navigateSafe(SettingsFragmentDirections.actionSettingsFragmentToChangePasswordFragment())
                 }
             }
         }

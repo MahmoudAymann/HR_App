@@ -71,7 +71,12 @@
         android:id="@+id/settingsFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings"
-        />
+        >
+        <action
+            android:id="@+id/action_settingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            />
+    </fragment>
 
     <fragment
         android:id="@+id/notificationFragment"
@@ -107,6 +112,12 @@
         android:name="com.gsgroup.hrapp.ui.fragment.salary.SalaryFragment"
         android:label="SalaryFragment"
         tools:layout="@layout/fragment_salary"
+        />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordFragment"
+        android:label="ChangePasswordFragment"
+        tools:layout="@layout/fragment_change_password"
         />
 
 

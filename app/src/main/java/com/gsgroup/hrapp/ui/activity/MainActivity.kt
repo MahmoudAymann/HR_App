@@ -8,17 +8,15 @@ import androidx.navigation.fragment.NavHostFragment
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseActivity
 import com.gsgroup.hrapp.constants.Codes
-import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.databinding.ActivityMainBinding
 import com.gsgroup.hrapp.ui.fragment.home.HomeFragmentDirections
-import com.gsgroup.hrapp.util.AppUtil.getFont
-import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.gsgroup.hrapp.util.navigateSafe
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.showExitDialog
 import com.gsgroup.hrapp.util.showLogoutDialog
 import com.tenclouds.fluidbottomnavigation.listener.OnTabSelectedListener
 import timber.log.Timber
+import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSelectedListener,
     NavController.OnDestinationChangedListener {
@@ -28,20 +26,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
-        navController = navHostFragment.navController
-        navController?.addOnDestinationChangedListener(this)
+        setupNavController()
         binding.bottomNavBar.onTabSelectedListener = this
-        binding.bottomNavBar.textFont =
-            if (getPrefLanguage() == ConstString.LANG_AR) getFont(R.font.pnu_medium_arabic)!! else getFont(
-                R.font.segoe_reg
-            )!!
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> onBackPressed()
-                    Codes.COVID_SCREEN->""
+                    Codes.COVID_SCREEN -> ""
                     Codes.SALARY_SCREEN -> navigateSafe(HomeFragmentDirections.actionHomeFragmentToSalaryFragment())
                     Codes.LOG_OUT -> showLogoutDialog {
                         navigateSafe(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
@@ -49,6 +40,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
                 }
             }
         }
+    }
+
+    private fun getNumberOfDays(year: Int, month: Int) : Int{
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month - 1)
+        return calendar.getActualMaximum(Calendar.DATE)
+    }
+
+    private fun setupNavController() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        navController = navHostFragment.navController
+        navController?.addOnDestinationChangedListener(this)
     }
 
 
@@ -104,7 +108,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
             }
             R.id.homeFragment -> showExitDialog()
             else -> {
-                navController?.navigateUp()
+                super.onBackPressed()
             }
         }
     }

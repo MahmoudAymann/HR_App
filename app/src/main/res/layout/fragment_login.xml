@@ -108,7 +108,6 @@
             android:textColor="@color/button_color_green"
             />
 
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_biometric"
             style="@style/SubmitButton"

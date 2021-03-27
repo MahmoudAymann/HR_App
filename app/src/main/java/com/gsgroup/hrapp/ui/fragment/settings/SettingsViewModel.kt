@@ -12,7 +12,6 @@ class SettingsViewModel(val app: Application) : AndroidBaseViewModel(app) {
     val obsIsArabic = ObservableBoolean(app.getPrefLanguage() == ConstString.LANG_AR)
     private var selectedLang = ""
 
-
     fun onLangClick(isArabic: Boolean) {
         selectedLang = if (isArabic) ConstString.LANG_AR else ConstString.LANG_EN
         if (app.getPrefLanguage() != selectedLang) {
@@ -27,6 +26,6 @@ class SettingsViewModel(val app: Application) : AndroidBaseViewModel(app) {
 
 
     fun onChangePasswordClick(){
-
+        setValue(Codes.CHANGE_PASSWORD_SCREEN)
     }
 }

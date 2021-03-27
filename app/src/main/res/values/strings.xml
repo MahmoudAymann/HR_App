@@ -52,4 +52,19 @@
     <string name="no">NO</string>
     <string name="ask_change_language">are you sure you want to change language?</string>
     <string name="log_out_check_message">are you sure you want to logout?</string>
+    <string name="latest_virus_news">Latest Virus News</string>
+    <string name="i_ve_infected_by_virus">I\'ve infected by virus</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="password_helper_text">not less than 8 numbers or chars</string>
+    <string name="infect_date">Infect Date</string>
+    <string name="date_of_symptoms_appeared">Date of Symptoms appeared</string>
+    <string name="exam_date">Examination Date</string>
+    <string name="isolation_starting_date">Isolation Starting Date</string>
+    <string name="isolation_period">Isolation Period</string>
+    <string name="what_is_symptoms">What\'s symptoms</string>
+    <string name="attachments">Attachments</string>
+    <string name="add_image">Add Image</string>
+    <string name="send">Send</string>
 </resources>

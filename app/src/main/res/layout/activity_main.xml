@@ -137,6 +137,7 @@
             app:textColor="@color/colorPrimary"
             setBottomBarMenu="@{viewModel.bottomBarMenuItems}"
             app:visibleInVisible="@{viewModel.obsShowBottomBar}"
+            setBottomBarFont="@{true}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

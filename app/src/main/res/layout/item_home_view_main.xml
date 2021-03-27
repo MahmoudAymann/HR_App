@@ -7,7 +7,7 @@
     <data>
         <variable
                 name="item"
-                type="com.gsgroup.hrapp.model.HomeItem" />
+                type="com.gsgroup.hrapp.data.model.HomeItem" />
     </data>
 
     <com.google.android.material.button.MaterialButton

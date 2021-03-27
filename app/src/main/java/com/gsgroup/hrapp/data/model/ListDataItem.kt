@@ -1,4 +1,4 @@
-package com.gsgroup.hrapp.model
+package com.gsgroup.hrapp.data.model
 
 data class ListDataItem(var id: Int? = null, var name: String? = null) {
     companion object {

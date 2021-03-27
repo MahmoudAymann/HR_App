@@ -1,4 +1,4 @@
-package com.gsgroup.hrapp.model
+package com.gsgroup.hrapp.data.model
 
 import android.content.Context
 import android.os.Parcelable

@@ -2,7 +2,6 @@ package com.gsgroup.hrapp.app
 
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -17,7 +16,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
-import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -31,8 +29,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.gsgroup.hrapp.R
-import com.gsgroup.hrapp.model.ListDataItem
+import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.data.model.ListDataItem
 import com.gsgroup.hrapp.util.*
+import com.gsgroup.hrapp.util.AppUtil.getFont
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
 import timber.log.Timber
@@ -43,6 +44,44 @@ import timber.log.Timber
 
 class OtherViewsBinding {
 
+    @BindingAdapter("drawableEnd")
+    fun setDrawableEndOnTextView(tv: TextView, isWrong: Boolean?) {
+        isWrong?.let { wrong ->
+            tv.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                if (wrong) R.drawable.ic_close else R.drawable.ic_correct,
+                0
+            )
+        }
+    }
+
+    @BindingAdapter("showHelperText")
+    fun onFocusChange(et: TextInputEditText, helperText: TextView) {
+        et.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                helperText.visible()
+            } else {
+                helperText.gone()
+            }
+        }
+    }
+
+    @BindingAdapter("setCalendarFabColor")
+    fun colorFab(fab: FloatingActionButton, color: Int) {
+        fab.backgroundTintList = ColorStateList.valueOf(color)
+    }
+
+    @BindingAdapter("setBottomBarFont")
+    fun setBottomBarTextFont(bottomNavigation: FluidBottomNavigation, boolean: Boolean) {
+        if (boolean) {
+            bottomNavigation.context.apply {
+                if (getPrefLanguage() == ConstString.LANG_AR) getFont(R.font.pnu_medium_arabic)!! else getFont(
+                    R.font.segoe_reg
+                )!!
+            }
+        }
+    }
 
     @BindingAdapter("setEditTextList")
     fun setEditTextList(til: TextInputLayout, items: ArrayList<ListDataItem>?) {
@@ -72,11 +111,6 @@ class OtherViewsBinding {
             val colorDrawable = ColorDrawable(color)
             imageView.setImageDrawable(colorDrawable)
         }
-    }
-
-    @BindingAdapter("app:setCalendarFabColor")
-    fun colorFab(fab: FloatingActionButton, color: Int?) {
-        fab.backgroundTintList = ColorStateList.valueOf(color ?: Color.GRAY)
     }
 
 

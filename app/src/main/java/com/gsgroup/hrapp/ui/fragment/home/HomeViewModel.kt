@@ -3,7 +3,7 @@ package com.gsgroup.hrapp.ui.fragment.home
 import android.app.Application
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
-import com.gsgroup.hrapp.model.HomeItem
+import com.gsgroup.hrapp.data.model.HomeItem
 
 class HomeViewModel(val app: Application) : AndroidBaseViewModel(app) {
 
