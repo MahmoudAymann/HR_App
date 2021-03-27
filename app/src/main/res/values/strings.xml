@@ -67,4 +67,14 @@
     <string name="attachments">Attachments</string>
     <string name="add_image">Add Image</string>
     <string name="send">Send</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="what_problem_details">Problem Details</string>
+    <string name="phone_notes">- please enter the business phone number provided by the company</string>
+    <string name="directed_to">Directed To</string>
+    <string name="salary_info_notes">- notes</string>
+    <string name="describe_ur_issue">Describe Your Issue</string>
+    <string name="urgent_problem">Urgent Problem?</string>
+    <string name="print_insurance_notes">- print insurance notes</string>
+    <string name="medical_approval_to_treat_a_chronic_disease">Medical approval to treat a chronic disease</string>
+    <string name="normal_medical_approval">Normal Medical Approval</string>
 </resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp"
+            tools:background="@drawable/app_background"
+            >
+
+            <TextView
+                android:id="@+id/tv_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/directed_to"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_symptoms"
+                style="@style/TIL.WhiteStyle.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/tv_static"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:minHeight="@dimen/_80sdp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/salary_info_notes"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_symptoms"
+                tools:layout_editor_absoluteX="21dp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/send"
+                app:layout_constraintTop_toBottomOf="@+id/tv_notes"
+                tools:layout_editor_absoluteX="21dp"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp"
+            tools:background="@drawable/app_background"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_phone"
+                style="@style/TIL.WhiteStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditText.WhiteStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_phone_number"
+                    android:inputType="phone"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/what_problem_details"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_phone"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_symptoms"
+                style="@style/TIL.WhiteStyle.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/tv_static"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:minHeight="@dimen/_80sdp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/tv_notes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/phone_notes"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_symptoms"
+                tools:layout_editor_absoluteX="21dp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/send"
+                app:layout_constraintTop_toBottomOf="@+id/tv_notes"
+                tools:layout_editor_absoluteX="21dp"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

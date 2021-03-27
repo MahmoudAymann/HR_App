@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp"
+            tools:background="@drawable/app_background"
+            >
+
+            <TextView
+                android:id="@+id/tv_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/describe_ur_issue"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_symptoms"
+                style="@style/TIL.WhiteStyle.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/tv_static"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:minHeight="@dimen/_80sdp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/chk_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/urgent_problem"
+                android:textColor="@color/white"
+                app:buttonTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_symptoms"
+                />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_image1"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/chk_box"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_camera"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.3"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="@dimen/_8sdp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                android:layout_marginTop="@dimen/_32sdp"
+                app:layout_constraintTop_toBottomOf="@id/cv_image1"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

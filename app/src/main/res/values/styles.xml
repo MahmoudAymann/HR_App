@@ -51,7 +51,7 @@
 
     <style name="SubmitButton" parent="">
         <item name="backgroundTint">@color/white</item>
-        <item name="cornerRadius">@dimen/_10sdp</item>
+        <item name="cornerRadius">@dimen/_16sdp</item>
         <item name="textAllCaps">false</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
