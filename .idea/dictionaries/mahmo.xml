@@ -2,13 +2,16 @@
   <dictionary name="mahmo">
     <words>
       <w>aman</w>
+      <w>autharea</w>
       <w>ayman</w>
       <w>calendaritem</w>
       <w>changepassword</w>
       <w>covid</w>
       <w>gsgroup</w>
       <w>hrapp</w>
+      <w>myrequest</w>
       <w>segoe</w>
+      <w>toreply</w>
     </words>
   </dictionary>
 </component>

@@ -1,17 +1,28 @@
-package com.gsgroup.hrapp.ui.fragment.notification
+package com.gsgroup.hrapp.ui.fragment.requests.myrequest.show
 
 import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableInt
 import com.gsgroup.hrapp.base.BaseViewModel
 
-class NotificationViewModel : BaseViewModel() {
+class MyRequestsViewModel : BaseViewModel() {
 
+    val obsChangeSelectedBackgroundToNew = ObservableBoolean(true)
     val obsIsNewNow = ObservableBoolean(true)
     private var selectedNew = true
-    val adapter = NotificationAdapter(::itemClick)
-    val obsChangeSelectedBackgroundToNew = ObservableBoolean(true)
-    private fun itemClick(item: NotificationItem) {
-
+    fun onSelectClick(isNew: Boolean) {
+        if (isNew) {
+            if (!selectedNew) {
+                obsIsNewNow.set(true)
+                selectedNew = true
+                obsChangeSelectedBackgroundToNew.set(true)
+            }
+        } else {
+            if (selectedNew) {
+                obsIsNewNow.set(false)
+                selectedNew = false
+                obsChangeSelectedBackgroundToNew.set(false)
+            }
+        }
+        val url = if (isNew) "get new" else "get old"
     }
 
     fun onNotificationClick(isNew: Boolean) {
@@ -31,8 +42,4 @@ class NotificationViewModel : BaseViewModel() {
         val url = if (isNew) "get new" else "get old"
     }
 
-
-    init {
-        adapter.setList(NotificationItem.getDummyList())
-    }
 }

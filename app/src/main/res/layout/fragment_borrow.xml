@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.borrow.BorrowViewModel"
+            />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/app_background"
+            android:padding="@dimen/_16sdp"
+            >
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.obsIsStaff == 1}"
+                android:onClick="@{()->viewModel.onStaffClick(true)}"
+                android:text="@string/are_you_employee"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_representative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:checked="@{viewModel.obsIsStaff == 0}"
+                android:onClick="@{()->viewModel.onStaffClick(false)}"
+                android:text="@string/are_you_representative"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rb_employee"
+                />
+
+            <TextView
+                android:id="@+id/tv_work_period_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/work_period"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rb_representative"
+                app:visibleGone="@{viewModel.obsIsStaff != -1}"
+                />
+
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_work_period_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.obsWorkingPeriodLess == 1}"
+                android:onClick="@{()->viewModel.onWorkPeriod1Click(true)}"
+                android:text="@{viewModel.obsWorkPeriodLessText}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_work_period_static"
+                app:visibleGone="@{viewModel.obsIsStaff != -1}"
+                tools:text="working period less"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_work_period_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.obsWorkingPeriodLess == 0}"
+                android:onClick="@{()->viewModel.onWorkPeriod1Click(false)}"
+                android:text="@{viewModel.obsWorkPeriodMoreText}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rb_work_period_1"
+                app:visibleGone="@{viewModel.obsIsStaff != -1}"
+                tools:text="working days more"
+                />
+
+            <TextView
+                android:id="@+id/payment_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/payment_period"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rb_work_period_2"
+                app:visibleGone="@{viewModel.obsWorkingPeriodLess != -1}"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_month_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.obsIsAnnual == 0}"
+                android:onClick="@{()->viewModel.onMonthlyClick(false)}"
+                android:text="@string/from_monthly_salary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment_period"
+                app:visibleGone="@{viewModel.obsWorkingPeriodLess != -1}"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_yearly_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.obsIsAnnual == 1}"
+                android:onClick="@{()->viewModel.onMonthlyClick(true)}"
+                android:text="@string/yearly_salary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rb_month_salary"
+                app:visibleGone="@{viewModel.obsWorkingPeriodLess != -1}"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_working_days"
+                style="@style/TIL.WhiteStyle.Filled.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rb_yearly_salary"
+                app:visibleGone="@{viewModel.obsShowWorkingDays}"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/working_days"
+                    android:inputType="number"
+                    android:onTextChanged="@{viewModel.workingDaysTextChanged}"
+                    android:text="@={viewModel.obsWorkingDays}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_salary"
+                style="@style/TIL.WhiteStyle.Filled.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_working_days"
+                app:visibleGone="@{viewModel.obsIsAnnual != -1}"
+                tools:layout_editor_absoluteX="16dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/salary"
+                    android:inputType="number"
+                    android:onTextChanged="@{viewModel.salaryTextChanged}"
+                    android:text="@={viewModel.obsSalary}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_valid_amount"
+                style="@style/TIL.WhiteStyle.Filled.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:enabled="false"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/til_salary"
+                app:visibleGone="@{viewModel.obsIsAnnual != -1}"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/amount_valid_from_company"
+                    android:inputType="none"
+                    android:text="@={viewModel.obsCompanyAmount}"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_send"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_32sdp"
+                android:text="@string/send"
+                app:layout_constraintTop_toBottomOf="@+id/til_valid_amount"
+                app:visibleGone="@{viewModel.obsIsAnnual != -1}"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

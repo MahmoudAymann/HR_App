@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/_8sdp"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        tools:background="@drawable/app_background">
 
         <TextView
             android:id="@+id/btn_new_notification"

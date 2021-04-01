@@ -234,15 +234,36 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_signing_in_out"
+            android:id="@+id/btn_attend"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="@string/sign_attendance_in"
             style="@style/SubmitButton"
+            app:backgroundTint="@color/button_color_green"
+            android:textColor="@color/white"
             android:onClick="@{()->viewModel.onLoginLogsClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_out"
+            android:layout_marginEnd="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_out"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:text="@string/sign_attendance_out"
+            style="@style/SubmitButton"
+            app:backgroundTint="@color/red"
+            android:textColor="@color/white"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:onClick="@{()->viewModel.onLoginLogsClick()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_attend"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
 

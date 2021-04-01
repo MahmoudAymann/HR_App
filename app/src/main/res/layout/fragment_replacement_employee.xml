@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp"
+            tools:background="@drawable/app_background"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_search"
+                style="@style/TIL.WhiteStyle.Filled.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="@dimen/_16sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_16sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_16sdp"
+                app:boxCornerRadiusTopStart="@dimen/_16sdp"
+                app:endIconDrawable="@drawable/ic_search"
+                app:endIconMode="custom"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_hire_date"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/appointing_the_employee_to_a_maximum"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                android:layout_marginTop="@dimen/_24sdp"
+                app:layout_constraintTop_toBottomOf="@id/til_search"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                app:layout_constraintTop_toBottomOf="@id/btn_hire_date"
+                android:layout_marginTop="@dimen/_48sdp"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

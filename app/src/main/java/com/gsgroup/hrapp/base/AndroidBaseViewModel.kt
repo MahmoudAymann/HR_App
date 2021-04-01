@@ -1,6 +1,7 @@
 package com.gsgroup.hrapp.base
 
 import android.app.Application
+import androidx.annotation.StringRes
 import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.PropertyChangeRegistry
@@ -8,7 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.load.engine.Resource
 
-open class AndroidBaseViewModel(app: Application) : AndroidViewModel(app), Observable {
+open class AndroidBaseViewModel(val app: Application) : AndroidViewModel(app), Observable {
     private val mCallBacks: PropertyChangeRegistry = PropertyChangeRegistry()
     val mutableLiveData = MutableLiveData<Any?>()
     var isLoading = ObservableBoolean()
@@ -50,6 +51,10 @@ open class AndroidBaseViewModel(app: Application) : AndroidViewModel(app), Obser
 
     fun postResult(o: Resource<Any?>?) {
         resultLiveData.postValue(o)
+    }
+
+    fun getString(@StringRes stringRes: Int): String {
+        return app.getString(stringRes)
     }
 
 }

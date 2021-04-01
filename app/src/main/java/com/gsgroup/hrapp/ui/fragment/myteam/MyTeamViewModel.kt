@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.databinding.ObservableInt
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 
-class MyTeamViewModel(var app: Application) : AndroidBaseViewModel(app) {
+class MyTeamViewModel( app: Application) : AndroidBaseViewModel(app) {
 
     val adapter = MyTeamAdapter(::onItemClick)
     val obsCount = ObservableInt()

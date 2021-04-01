@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:background="@drawable/app_background"
+            android:padding="@dimen/_16sdp"
+            >
+
+            <TextView
+                android:id="@+id/btn_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@{viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onSelectClick(true)}"
+                android:text="@string/new_notification"
+                android:textColor="@{viewModel.obsIsNewNow ? @color/button_color_green: @color/black}"
+                app:layout_constraintEnd_toStartOf="@id/btn_old"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/btn_old"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@{!viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onNotificationClick(false)}"
+                android:text="@string/old_notification"
+                android:textColor="@{!viewModel.obsIsNewNow? @color/button_color_red: @color/black}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_new"
+                app:layout_constraintTop_toTopOf="@id/btn_new"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_filter"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_old"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/filter"
+                app:iconGravity="end"
+                app:icon="@drawable/ic_filter"
+                android:textColor="@color/default_normal_text_color_material"
+                app:iconTint="@color/default_normal_text_color_material"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/btn_filter"
+                tools:listitem="@layout/item_request_view"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.myrequest.toreply.RequestsToReplyViewModel"
+            />
+    </data>
+
+</layout>

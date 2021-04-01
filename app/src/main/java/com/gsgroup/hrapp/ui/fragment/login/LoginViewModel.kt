@@ -8,7 +8,7 @@ import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefLanguage
 
-class LoginViewModel(var app: Application) : AndroidBaseViewModel(app) {
+class LoginViewModel( app: Application) : AndroidBaseViewModel(app) {
 
     val obsIsArabic = ObservableBoolean(app.getPrefLanguage() == ConstString.LANG_AR)
     private var selectedLang = ""

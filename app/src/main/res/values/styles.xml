@@ -40,7 +40,11 @@
         <item name="endIconTint">@color/white</item>
     </style>
     <style name="TIL.WhiteStyle.Filled" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxBackgroundMode">filled</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/til_border_state_transparent</item>
+    </style>
+    <style name="TIL.WhiteStyle.Filled.Dense" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/til_border_state_transparent</item>
         <item name="boxBackgroundColor">@color/white</item>
     </style>
 
@@ -51,7 +55,7 @@
 
     <style name="SubmitButton" parent="">
         <item name="backgroundTint">@color/white</item>
-        <item name="cornerRadius">@dimen/_16sdp</item>
+        <item name="cornerRadius">@dimen/_12sdp</item>
         <item name="textAllCaps">false</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
@@ -86,5 +90,6 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
 
 </resources>

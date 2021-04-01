@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp"
+            tools:background="@drawable/app_background"
+            >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_company"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_company"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_city"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_city"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/btn_company"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_area"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_area"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/btn_city"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_job_title"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_job_title"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/btn_area"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_hire_date"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/appointing_the_employee_to_a_maximum"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/btn_area"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_submit"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                android:layout_marginTop="@dimen/_32sdp"
+                app:layout_constraintTop_toBottomOf="@id/btn_hire_date"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+</layout>

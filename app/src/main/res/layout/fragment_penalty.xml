@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp"
+            tools:background="@drawable/app_background"
+            >
+
+            <TextView
+                android:id="@+id/tv_emp_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/the_employee"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_emp"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/select_employee"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/tv_emp_static"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_penalty_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/penalty_type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_emp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_penalty_type"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/select_penalty_type"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/tv_penalty_static"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_penalty_repeat_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/penalty_repeat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_penalty_type"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_penalty_repeat"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/select_penalty_repeat"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/tv_penalty_repeat_static"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_penalty_value_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/penalty_value"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_penalty_repeat"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_penalty_value"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/select_penalty_value"
+                app:icon="@drawable/ic_enter_arrow"
+                app:iconGravity="end"
+                app:layout_constraintTop_toBottomOf="@id/tv_penalty_value_static"
+                />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_details"
+                style="@style/TIL.WhiteStyle.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:hintEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/btn_penalty_value"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:hint="@string/reason_and_details_of_the_penalty"
+                    android:inputType="textMultiLine"
+                    android:minHeight="@dimen/_80sdp"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_send"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:text="@string/send"
+                app:layout_constraintTop_toBottomOf="@+id/til_details"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.penalty.PenaltyViewModel"
+            />
+    </data>
+
+</layout>
