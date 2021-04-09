@@ -23,17 +23,24 @@
         android:theme="@style/Theme.HRApp"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,UnusedAttribute"
-        tools:replace="android:theme">
-        <activity android:name=".ui.activity.MainActivity">
+        tools:replace="android:theme"
+        >
+        <activity android:name=".ui.activity.MainActivity"/>
+
+        <activity android:name=".ui.activity.details.DetailsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.fragment.map.MapActivity"/>
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC897Ymk9DHVZddbJS7oFTVoyLbu08S7zE"/>
+        <activity android:name=".ui.fragment.map.MapActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC897Ymk9DHVZddbJS7oFTVoyLbu08S7zE"
+            />
     </application>
 
 </manifest>

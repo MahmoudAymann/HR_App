@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,10 +16,17 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.sign_in_out_logs.SignInOutLogViewModel"
+            />
+    </data>
 </layout>

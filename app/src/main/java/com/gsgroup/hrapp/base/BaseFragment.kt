@@ -1,19 +1,19 @@
 package com.gsgroup.hrapp.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.gsgroup.hrapp.BR
-import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.ui.activity.MainActivity
-import com.gsgroup.hrapp.util.bindView
-import com.gsgroup.hrapp.util.castToActivity
-import com.gsgroup.hrapp.util.replaceFragment
-import com.gsgroup.hrapp.util.showKeyboard
+import com.gsgroup.hrapp.ui.activity.details.DetailsActivity
+import com.gsgroup.hrapp.util.*
 
 /**
  * Created by MahmoudAyman on 6/17/2020.
@@ -52,14 +52,24 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> :
         activity?.onBackPressed()
     }
 
+     fun showDetailsActivity(@IdRes destinationId: Int, intent: Intent = Intent()) {
+         activity?.showActivityWithDestination<DetailsActivity>(destinationId, intent)
+    }
+
+     fun showMainActivity(intent: Intent = Intent()) {
+         activity?.showActivity<MainActivity>(intent)
+    }
+
     fun showProgress(show: Boolean = true) {
-        castToActivity<BaseActivity<*,*>> {
+        castToActivity<BaseActivity<*, *>> {
             it?.showProgress?.set(show)
         }
     }
 
     private fun changeMainTitle(title: String?) {
         castToActivity<MainActivity> {
+            it?.changeTitle(title)
+        } ?: castToActivity<DetailsActivity> {
             it?.changeTitle(title)
         }
     }

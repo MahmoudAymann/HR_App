@@ -13,6 +13,7 @@ class MainViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsShowMainToolbarIcons = ObservableBoolean()
     val obsShowBackButton = ObservableBoolean()
     val obsShowBottomBar = ObservableBoolean()
+    var showProgressBar = ObservableBoolean()
     val obsShowHeaderView = ObservableBoolean()
     val bottomBarMenuItems = MainModel.getBottomNavBarList(app)
 
@@ -24,8 +25,8 @@ class MainViewModel(app: Application) : AndroidBaseViewModel(app) {
         setValue(Codes.COVID_SCREEN)
     }
 
-    fun onLogoutClick() {
-        setValue(Codes.LOG_OUT)
+    fun onNewsClick() {
+        setValue(Codes.NEWS_SCREEN)
     }
 
     fun onBackClick() {
@@ -46,6 +47,7 @@ class MainViewModel(app: Application) : AndroidBaseViewModel(app) {
         obsShowBottomBar.set(false)
         obsShowBackButton.set(false)
         obsShowMainToolbarIcons.set(false)
+        obsShowHeaderView.set(false)
     }
 
     private fun mainScreenPermissions() { //show bottom bar and toolbar with all buttons

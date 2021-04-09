@@ -34,17 +34,34 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.gsgroup.hrapp.BR
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.app.BaseApplication
+import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.data.remote.ErrorResponse
 import com.gsgroup.hrapp.ui.activity.MainActivity
+import com.mabaat.androidapp.base.network.response.NetworkResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.File
 import java.lang.reflect.ParameterizedType
 
 
-fun Activity.showActivity(
-    destActivity: Class<out AppCompatActivity>,
-    intent: Intent = Intent(this, destActivity)
+inline fun <reified T : AppCompatActivity> Activity.showActivity(
+    intent: Intent = Intent()
 ) {
+    intent.setClass(this, T::class.java)
+    this.startActivity(intent)
+}
+
+inline fun <reified T : AppCompatActivity> Activity.showActivityWithDestination(
+    @IdRes destination: Int,
+    intent: Intent = Intent()
+) {
+    intent.apply {
+        setClass(this@showActivityWithDestination, T::class.java)
+        putExtra(ConstString.DESTINATION_NAME, destination)
+    }
     this.startActivity(intent)
 }
 
@@ -54,9 +71,37 @@ fun AppCompatActivity.findFragmentById(id: Int): Fragment? {
     }
 }
 
+fun <T : Any> AndroidBaseViewModel.requestNewCallRefactor(
+    networkCall: suspend () -> NetworkResponse<T, ErrorResponse>,
+    disableProgress: Boolean = false,
+    successCallBack: (T) -> Unit
+) {
+    viewModelScope.launch {
+        postResult(Resource.loading(null))
+        isLoading.set(!disableProgress)
+        val res = networkCall() // execute
+        Timber.e("$res")
+        when (res) {
+            is NetworkResponse.Success -> {
+                viewModelScope.launch(Dispatchers.Main) {
+                    successCallBack(res.body)
+                }
+            }
+            is NetworkResponse.ServerError -> postResult(Resource.message(getShownError(res.body)))
+            is NetworkResponse.NetworkError -> postResult(Resource.message(app.getString(R.string.network_error)))
+            is NetworkResponse.UnknownError -> postResult(Resource.message(app.getString(R.string.server_error)))
+        }
+    }
+}
+
+private fun getShownError(response: ErrorResponse?): String {
+    return response?.validation?.let {
+        "${it[0]}"
+    } ?: "null"
+}
 
 fun Activity.restartApp() {
-    showActivity(MainActivity::class.java)
+    showActivity<MainActivity>()
     finishAffinity()
 }
 
@@ -303,6 +348,38 @@ fun <B : ViewDataBinding> LifecycleOwner.bindView(container: ViewGroup? = null):
     }
 }
 
+fun Context.showSuccessfulDialog(message: String?, onClick: () -> Unit = {}) {
+    val dialog = SweetAlertDialog(
+        this,
+        SweetAlertDialog.SUCCESS_TYPE
+    )
+        .setConfirmButton(getString(R.string.yes)) { sDialog ->
+            sDialog.closeDialog()
+            onClick()
+        }
+        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.colorPrimary))
+        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
+    message?.let {
+        dialog.setContentText(message)
+    }
+    dialog.show()
+}
+
+fun Context.showErrorDialog(message: String?, onClick: () -> Unit = {}) {
+    SweetAlertDialog(
+        this,
+        SweetAlertDialog.ERROR_TYPE
+    )
+        .setContentText(message)
+        .setConfirmButton(getString(R.string.continue_)) { sDialog ->
+            sDialog.closeDialog()
+            onClick()
+        }
+        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.colorPrimary))
+        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
+        .show()
+}
+
 fun <T : Any?, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -> Unit) {
     liveData.observe(if (this is Fragment) viewLifecycleOwner else this, Observer {
         if (lifecycle.currentState == Lifecycle.State.RESUMED) {
@@ -313,26 +390,28 @@ fun <T : Any?, L : LiveData<T>> LifecycleOwner.observe(liveData: L, body: (T?) -
 
 inline fun <reified T : AppCompatActivity> Fragment.castToActivity(
     callback: (T?) -> Unit
-): T {
+): T? {
     return if (requireActivity() is T) {
         callback(requireActivity() as T)
         requireActivity() as T
     } else {
         Timber.e("class cast exception, check your fragment is in the correct activity")
         callback(null)
-        throw ClassCastException()
+        null
     }
 
 }
 
 
-fun View.visible(){
+fun View.visible() {
     visibility = View.VISIBLE
 }
-fun View.gone(){
+
+fun View.gone() {
     visibility = View.GONE
 }
-fun View.invisible(){
+
+fun View.invisible() {
     visibility = View.INVISIBLE
 }
 

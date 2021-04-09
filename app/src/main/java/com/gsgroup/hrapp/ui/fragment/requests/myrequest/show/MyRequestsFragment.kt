@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.databinding.FragmentMyRequestsBinding
 import com.gsgroup.hrapp.databinding.FragmentRequestsToReplyBinding
 
 class MyRequestsFragment :

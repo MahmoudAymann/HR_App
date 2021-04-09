@@ -9,7 +9,6 @@
             type="com.gsgroup.hrapp.ui.fragment.home.HomeViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,7 +87,6 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     style="@style/BlackTextColor"
                     android:textAlignment="viewStart"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_code"
                     app:layout_constraintTop_toTopOf="@+id/tv_code"
@@ -103,7 +101,6 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="Aman"
                     android:textAlignment="viewStart"
-
                     app:layout_constraintEnd_toStartOf="@+id/tv_location"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_code"
@@ -117,7 +114,6 @@
                     style="@style/BlackTextColor"
                     android:text="Egypt"
                     android:textAlignment="viewStart"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_company"
                     app:layout_constraintTop_toTopOf="@+id/tv_company"
@@ -214,46 +210,43 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_date_static"
                     tools:text="@tools:sample/date/ddmmyy" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_16sdp"
             app:adapter="@{viewModel.adapter}"
-            android:layout_marginTop="@dimen/_24sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btn_attend"
             app:layout_constraintTop_toBottomOf="@+id/info_container"
             app:spanCount="3"
             tools:itemCount="4"
-            tools:listitem="@layout/item_home_view_main" />
-
+            tools:listitem="@layout/item_home_view_main"
+            android:layout_marginBottom="@dimen/_8sdp"
+            />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_attend"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_40sdp"
             android:text="@string/sign_attendance_in"
             style="@style/SubmitButton"
             app:backgroundTint="@color/button_color_green"
             android:textColor="@color/white"
             android:onClick="@{()->viewModel.onLoginLogsClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_out"
-            android:layout_marginEnd="@dimen/_8sdp"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            android:layout_marginEnd="@dimen/_8sdp" />
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_out"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_40sdp"
             android:text="@string/sign_attendance_out"
             style="@style/SubmitButton"
             app:backgroundTint="@color/red"
@@ -261,13 +254,9 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:onClick="@{()->viewModel.onLoginLogsClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_attend"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-
-
+            app:layout_constraintTop_toTopOf="@id/btn_attend"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

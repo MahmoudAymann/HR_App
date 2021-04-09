@@ -7,7 +7,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.load.engine.Resource
+import com.gsgroup.hrapp.util.Resource
 
 open class AndroidBaseViewModel(val app: Application) : AndroidViewModel(app), Observable {
     private val mCallBacks: PropertyChangeRegistry = PropertyChangeRegistry()

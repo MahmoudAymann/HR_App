@@ -50,6 +50,8 @@
     <string name="total_num_of_employees">Total Num of Employees</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="server_error">Server Error</string>
+    <string name="network_error">TIMEOUT!, please check your network and try again.</string>
     <string name="ask_change_language">are you sure you want to change language?</string>
     <string name="log_out_check_message">are you sure you want to logout?</string>
     <string name="latest_virus_news">Latest Virus News</string>
@@ -126,4 +128,11 @@
     <string name="to_hour">To Hour</string>
     <string name="full_day">Full Day</string>
     <string name="mission_details">Mission Details</string>
+    <string name="pinned">Pinned</string>
+    <string name="accepted">Accepted</string>
+    <string name="rejected">Rejected</string>
+    <string name="latest_news">News</string>
+    <string name="all_data_required">enter all data correctly</string>
+    <string name="continue_">Continue</string>
+    <string name="news">News</string>
 </resources>

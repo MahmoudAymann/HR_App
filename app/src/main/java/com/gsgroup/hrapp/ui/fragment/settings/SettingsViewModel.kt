@@ -28,4 +28,7 @@ class SettingsViewModel( app: Application) : AndroidBaseViewModel(app) {
     fun onChangePasswordClick(){
         setValue(Codes.CHANGE_PASSWORD_SCREEN)
     }
+    fun onLogoutClick(){
+        setValue(Codes.LOG_OUT)
+    }
 }

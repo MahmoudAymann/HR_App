@@ -6,15 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.gsgroup.hrapp.ui.activity.MainViewModel"
+            type="com.gsgroup.hrapp.ui.activity.details.DetailsViewModel"
             />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/app_background"
-        >
+        android:background="@drawable/app_background">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
@@ -22,9 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_header"
-            app:navGraph="@navigation/main_nav_graph"
             tools:background="@color/black"
             />
 
@@ -32,59 +30,14 @@
             android:id="@+id/cl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/id_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:visibleGone="@{viewModel.obsShowHeaderView}"
-                >
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_salary"
-                    style="@style/MaterialButton.IconOnly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onSalaryClick()}"
-                    android:text="@string/salary_info"
-                    app:icon="@drawable/ic_money"
-                    app:iconGravity="top"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btn_covid"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:visibleGone="@{viewModel.obsShowMainToolbarIcons}" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_covid"
-                    style="@style/MaterialButton.IconOnly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onCovidClick()}"
-                    android:text="@string/covid_19"
-                    app:icon="@drawable/ic_shield"
-                    app:iconGravity="top"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:visibleGone="@{viewModel.obsShowMainToolbarIcons}"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_logout"
-                    style="@style/MaterialButton.IconOnly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.onNewsClick()}"
-                    android:text="@string/latest_news"
-                    app:icon="@drawable/ic_newspaper"
-                    app:iconGravity="top"
-                    app:visibleGone="@{viewModel.obsShowMainToolbarIcons}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                app:visibleGone="@{viewModel.obsShowHeaderView}">
 
                 <ImageView
                     android:layout_width="?actionBarSize"
@@ -95,7 +48,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
-                    app:visibleInVisible="@{viewModel.obsShowBackButton || viewModel.obsShowMainToolbarIcons}"/>
+                    />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -119,31 +72,17 @@
                 android:onClick="@{()->viewModel.onBackClick()}"
                 app:backgroundTint="@color/white"
                 app:fabCustomSize="@dimen/_24sdp"
+                app:visibleGone="@{viewModel.obsShowBackButton}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:maxImageSize="@dimen/_12sdp"
                 app:srcCompat="@drawable/ic_back"
-                android:layoutDirection="ltr"
-                app:visibleGone="@{viewModel.obsShowBackButton}"
                 tools:ignore="ContentDescription"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
-            android:id="@+id/bottom_nav_bar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            app:accentColor="@color/colorPrimary"
-            tools:background="@color/white"
-            app:iconColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:textColor="@color/colorPrimary"
-            setBottomBarMenu="@{viewModel.bottomBarMenuItems}"
-            app:visibleInVisible="@{viewModel.obsShowBottomBar}"
-            setBottomBarFont="@{true}"
-            />
 
         <ProgressBar
             android:layout_width="wrap_content"

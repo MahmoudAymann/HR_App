@@ -10,10 +10,7 @@ import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.util.Base64
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.text.HtmlCompat
@@ -37,12 +34,15 @@ import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
 import timber.log.Timber
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by MahmoudAyman on 6/18/2020.
  **/
 
 class OtherViewsBinding {
+
 
     @BindingAdapter("drawableEnd")
     fun setDrawableEndOnTextView(tv: TextView, isWrong: Boolean?) {
@@ -51,6 +51,18 @@ class OtherViewsBinding {
                 0,
                 0,
                 if (wrong) R.drawable.ic_close else R.drawable.ic_correct,
+                0
+            )
+        }
+    }
+
+    @BindingAdapter("setTvDrawableTopIcon")
+    fun setDrawableTopOnTextView(tv: TextView, icon: Int?) {
+        icon?.let {
+            tv.setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                it,
+                0,
                 0
             )
         }

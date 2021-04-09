@@ -34,6 +34,13 @@ import kotlin.collections.ArrayList
 
 object AppUtil {
 
+    fun getNumberOfDays(year: Int, month: Int) : Int{
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month - 1)
+        return calendar.getActualMaximum(Calendar.DATE)
+    }
+
     fun isOldDevice():Boolean{
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
     }

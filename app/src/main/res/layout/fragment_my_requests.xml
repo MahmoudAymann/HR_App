@@ -25,11 +25,12 @@
                 android:background="@{viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onSelectClick(true)}"
-                android:text="@string/new_notification"
+                android:text="@string/pinned"
                 android:textColor="@{viewModel.obsIsNewNow ? @color/button_color_green: @color/black}"
-                app:layout_constraintEnd_toStartOf="@id/btn_old"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_accepted"
+
                 />
 
             <TextView
@@ -41,11 +42,12 @@
                 android:background="@{!viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onNotificationClick(false)}"
-                android:text="@string/old_notification"
+                android:text="@string/accepted"
                 android:textColor="@{!viewModel.obsIsNewNow? @color/button_color_red: @color/black}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_new"
-                app:layout_constraintTop_toTopOf="@id/btn_new"
+                app:layout_constraintStart_toEndOf="@id/btn_pinned"
+                app:layout_constraintTop_toTopOf="@id/btn_pinned"
+                app:layout_constraintEnd_toStartOf="@id/btn_rejected"
                 />
 
 
@@ -58,11 +60,11 @@
                 android:background="@{!viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onNotificationClick(false)}"
-                android:text="@string/old_notification"
+                android:text="@string/rejected"
                 android:textColor="@{!viewModel.obsIsNewNow? @color/button_color_red: @color/black}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_new"
-                app:layout_constraintTop_toTopOf="@id/btn_new"
+                app:layout_constraintStart_toEndOf="@id/btn_accepted"
+                app:layout_constraintTop_toTopOf="@id/btn_pinned"
                 />
 
             <com.google.android.material.button.MaterialButton
@@ -70,15 +72,15 @@
                 style="@style/SubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                app:layout_constraintTop_toBottomOf="@+id/btn_old"
+                android:text="@string/filter"
+                android:textColor="@color/default_normal_text_color_material"
+                app:icon="@drawable/ic_filter"
+                app:iconGravity="end"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:iconTint="@color/default_normal_text_color_material"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/filter"
-                app:iconGravity="end"
-                app:icon="@drawable/ic_filter"
-                android:textColor="@color/default_normal_text_color_material"
-                app:iconTint="@color/default_normal_text_color_material"
+                app:layout_constraintTop_toBottomOf="@+id/btn_pinned"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -96,7 +98,6 @@
     </ScrollView>
 
     <data>
-
         <variable
             name="viewModel"
             type="com.gsgroup.hrapp.ui.fragment.requests.myrequest.toreply.RequestsToReplyViewModel"
