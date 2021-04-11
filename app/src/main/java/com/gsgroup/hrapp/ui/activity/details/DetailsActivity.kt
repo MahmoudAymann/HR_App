@@ -10,8 +10,6 @@ import com.gsgroup.hrapp.base.BaseActivity
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.databinding.ActivityDetailsBinding
-import com.gsgroup.hrapp.ui.fragment.home.HomeFragmentDirections
-import com.gsgroup.hrapp.util.navigateSafe
 import com.gsgroup.hrapp.util.observe
 import timber.log.Timber
 
@@ -32,6 +30,10 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding, DetailsViewModel>()
                 }
             }
         }
+    }
+
+    fun showBottomSheet(show: Boolean){
+        mViewModel.obsShowSheet.set(show)
     }
 
     private fun setupNavController() {

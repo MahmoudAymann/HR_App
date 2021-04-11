@@ -6,42 +6,42 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
         >
 
-        <TextView
+        <com.lb.auto_fit_textview.AutoResizeTextView
             android:id="@+id/tv_day"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{item.dayName}"
+            android:maxLines="1"
             tools:text="@tools:sample/date/day_of_week"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/fab_day"
             app:layout_constraintStart_toStartOf="@id/fab_day"
             app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/_8ssp"
             />
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fab_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
+            android:layout_width ="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_day"
             app:layout_constraintEnd_toEndOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/tv_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{item.dayNum}"
-            app:layout_constraintEnd_toEndOf="@id/fab_day"
-            app:layout_constraintStart_toStartOf="@id/fab_day"
-            app:layout_constraintBottom_toBottomOf="@id/fab_day"
-            app:layout_constraintTop_toTopOf="@id/fab_day"
+            app:fabSize="mini"
+            tools:ignore="ContentDescription"
             tools:text="1"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            app:cornerRadius="@dimen/_24sdp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             />
 
 

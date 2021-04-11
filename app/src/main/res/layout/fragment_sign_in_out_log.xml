@@ -7,16 +7,83 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        tools:background="@drawable/app_background"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:padding="@dimen/_8sdp">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_month"
+                style="@style/SpinnerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:icon="@drawable/ic_enter_arrow"
+                android:text="@{viewModel.obsMonth}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/select_month"
+                />
 
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_year"
+                style="@style/SpinnerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                app:icon="@drawable/ic_enter_arrow"
+                android:text="@{viewModel.obsYear}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_month"
+                tools:text="@string/select_year"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/days_logs_bg"
+                android:paddingBottom="@dimen/_8sdp"
+                app:adapter="@{viewModel.logsAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/btn_year"
+                app:spanCount="7"
+                tools:listitem="@layout/item_logs_view"
+                />
+
+            <TextView
+                android:id="@+id/tv_static"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:text="@string/colors_table"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/rv_days"
+                />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_colors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/days_logs_bg"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_8sdp"
+                app:adapter="@{viewModel.colorsAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_static"
+                tools:listitem="@layout/item_colors_view"
                 />
 
 

@@ -15,7 +15,7 @@ abstract class BaseAdapter<T : BaseParcelable>(
     private val itemClick: (T) -> Unit = {}
 ) : ListAdapter<T, BaseViewHolder<T>>(BaseItemCallback()) {
 
-    val listOfItems = arrayListOf<T?>()
+    var mCurrentList = arrayListOf<T?>()
 
     private var position: Int = 0
 
@@ -45,41 +45,41 @@ abstract class BaseAdapter<T : BaseParcelable>(
     fun removeItem(item: T?, isListEmpty: (Boolean) -> Unit = {}) {
         Timber.e("deleting > $item in pos: $position")
         item?.let {
-            listOfItems.remove(it)
-            submitList(listOfItems.toMutableList())
-            isListEmpty(listOfItems.size == 0)
+            mCurrentList.remove(it)
+            submitList(mCurrentList.toMutableList())
+            isListEmpty(mCurrentList.size == 0)
         }
     }
 
     fun updateList(newList: List<T>) {
-        listOfItems.addAll(newList)
-        submitList(listOfItems.toMutableList())
+        mCurrentList.addAll(newList)
+        submitList(mCurrentList.toMutableList())
     }
 
-    fun setList(newList: List<T?>) {
-        listOfItems.clear()
-        listOfItems.addAll(newList)
-        submitList(listOfItems.toMutableList())
+    fun setList(newList: List<T>) {
+        mCurrentList.clear()
+        mCurrentList.addAll(newList)
+        submitList(mCurrentList.toMutableList())
     }
 
     fun addItemToList(item: T?, isAdded: (Boolean) -> Unit) {
         item?.let {
-            listOfItems.add(item)
-            submitList(listOfItems.toMutableList())
+            mCurrentList.add(item)
+            submitList(mCurrentList.toMutableList())
             isAdded(true)
         } ?: Timber.e("item is null")
     }
 
     fun editItem(item: T?) {
         item?.let {
-            listOfItems[position] = item
-            submitList(listOfItems.toMutableList())
+            mCurrentList[position] = item
+            submitList(mCurrentList.toMutableList())
         } ?: Timber.e("item is null")
     }
 
     fun clearCurrentList() {
-        listOfItems.clear()
-        submitList(listOfItems.toMutableList())
+        mCurrentList.clear()
+        submitList(mCurrentList.toMutableList())
     }
 
 }

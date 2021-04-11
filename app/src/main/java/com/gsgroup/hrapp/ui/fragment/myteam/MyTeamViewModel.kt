@@ -14,7 +14,7 @@ class MyTeamViewModel( app: Application) : AndroidBaseViewModel(app) {
 
     init {
         adapter.setList(MyTeamItem.getDummyList())
-        obsCount.set(adapter.listOfItems.size)
+        obsCount.set(adapter.mCurrentList.size)
     }
 
 

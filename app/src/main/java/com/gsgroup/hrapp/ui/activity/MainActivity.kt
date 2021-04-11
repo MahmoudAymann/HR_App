@@ -100,4 +100,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
         }
     }
 
+    fun showBottomSheet(show: Boolean) {
+
+    }
+
 }

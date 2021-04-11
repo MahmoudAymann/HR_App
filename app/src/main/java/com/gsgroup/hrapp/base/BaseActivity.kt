@@ -31,5 +31,4 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActi
     }
 
 
-
 }

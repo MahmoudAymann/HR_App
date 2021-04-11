@@ -66,6 +66,14 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> :
         }
     }
 
+    fun showBottomSheet(show: Boolean = true){
+        castToActivity<MainActivity> {
+            it?.showBottomSheet(show)
+        }?:castToActivity<DetailsActivity> {
+            it?.showBottomSheet(show)
+        }
+    }
+
     private fun changeMainTitle(title: String?) {
         castToActivity<MainActivity> {
             it?.changeTitle(title)

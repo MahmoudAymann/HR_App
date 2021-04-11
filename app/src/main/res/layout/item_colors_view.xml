@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/img_color"
+            style="@style/circular_image_view"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            app:cardCornerRadius="@dimen/_16sdp"
+            tools:cardBackgroundColor="@color/gray"
+            app:cardElevation="0dp"
+            setCardBackgroundColor="@{item.color}"
+            app:strokeWidth="@dimen/_1sdp"
+            app:strokeColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:text="@{item.name}"
+            app:layout_constraintBottom_toBottomOf="@id/img_color"
+            app:layout_constraintStart_toEndOf="@id/img_color"
+            app:layout_constraintTop_toTopOf="@+id/img_color"
+            tools:text="@string/vacation_balance"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <data>
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.sign_in_out_logs.ItemColor"
+            />
+    </data>
+</layout>

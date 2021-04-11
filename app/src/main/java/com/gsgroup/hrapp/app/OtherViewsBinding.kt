@@ -14,14 +14,18 @@ import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.text.HtmlCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
+import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -34,8 +38,6 @@ import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigation
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
 import timber.log.Timber
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by MahmoudAyman on 6/18/2020.
@@ -43,6 +45,12 @@ import kotlin.collections.ArrayList
 
 class OtherViewsBinding {
 
+    @BindingAdapter("setCardBackgroundColor")
+    fun setCardViewBg(cv: MaterialCardView, color: Int?) {
+        color?.let {
+            cv.setCardBackgroundColor(color)
+        }
+    }
 
     @BindingAdapter("drawableEnd")
     fun setDrawableEndOnTextView(tv: TextView, isWrong: Boolean?) {
@@ -184,7 +192,7 @@ class OtherViewsBinding {
     }
 
     @BindingAdapter("android:onTextChanged")
-    fun bindViewInvisible(tie: TextInputEditText, textChanged: TextWatcher) {
+    fun bindViewInvisible(tie: EditText, textChanged: TextWatcher) {
         tie.addTextChangedListener(textChanged)
     }
 
@@ -194,6 +202,7 @@ class OtherViewsBinding {
             recyclerView.adapter = it
             divider?.let { div ->
                 if (div) {
+                    Timber.e("set divider")
                     val decoration =
                         DividerItemDecoration(recyclerView.context, LinearLayoutManager.VERTICAL)
                     recyclerView.addItemDecoration(decoration)

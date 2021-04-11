@@ -13,6 +13,18 @@ class DetailsViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsShowBackButton = ObservableBoolean()
     var showProgressBar = ObservableBoolean()
     val obsShowHeaderView = ObservableBoolean()
+    val obsShowSheet = ObservableBoolean()
+
+//    val adapter = SearchAdapter(::onItemClick)
+//
+//    private fun onItemClick(searchItem: SearchItem) {
+//        Timber.e("$searchItem")
+//    }
+
+    init {
+//        adapter.setList(SearchItem.getDummyData())
+//        notifyChange()
+    }
 
     fun onBackClick() {
         setValue(Codes.BACK_BUTTON_PRESSED)

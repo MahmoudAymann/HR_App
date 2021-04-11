@@ -31,6 +31,7 @@
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         app:civ_border="false"
+                        android:onClick="@{()->viewModel.showBottom()}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/app_background" />
@@ -43,6 +44,8 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:textStyle="bold"
                         android:text="Mahmoud"
+                        android:onClick="@{()->viewModel.onBack()}"
+                        android:textColor="@color/black"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/img_profile"
                         />
@@ -155,5 +158,12 @@
 
     </ScrollView>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.hr.HRViewModel"
+            />
+    </data>
 
 </layout>

@@ -6,7 +6,7 @@ import com.gsgroup.hrapp.base.BaseViewHolder
 
 class LogsAdapter(itemClick: (LogsItem) -> Unit) : BaseAdapter<LogsItem>(itemClick) {
 
-    override fun layoutRes(): Int = R.layout.item_notification_view
+    override fun layoutRes(): Int = R.layout.item_logs_view
     override fun onViewHolderCreated(viewHolder: BaseViewHolder<LogsItem>) {
 
     }

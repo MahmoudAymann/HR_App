@@ -30,7 +30,6 @@ fun getHeaderInterceptor(): Interceptor {
     }
 }
 
-
 private fun createOkHttpClient(): OkHttpClient {
     return OkHttpClient.Builder()
         .apply {
