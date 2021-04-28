@@ -10,8 +10,8 @@
     <string name="covid_19">COVID-19</string>
     <string name="logout">Logout</string>
     <string name="salary_info">Salary Info</string>
-    <string name="last_logout">Last Logout</string>
-    <string name="first_login">First Login</string>
+    <string name="last_logout">Check Out</string>
+    <string name="first_login">Check In</string>
     <string name="date">Date</string>
     <string name="direct_manger">Direct Manager</string>
     <string name="requests">Requests</string>
@@ -51,7 +51,7 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="server_error">Server Error</string>
-    <string name="network_error">TIMEOUT!, please check your network and try again.</string>
+    <string name="network_error">please check your network and try again…</string>
     <string name="ask_change_language">are you sure you want to change language?</string>
     <string name="log_out_check_message">are you sure you want to logout?</string>
     <string name="latest_virus_news">Latest Virus News</string>
@@ -97,8 +97,8 @@
     <string name="salary">Salary</string>
     <string name="amount_valid_from_company">Amount Valid From The Company</string>
     <string name="working_days">Working Days</string>
-    <string name="sign_attendance_in">Sign Attendance In</string>
-    <string name="sign_attendance_out">Sign Attendance Out</string>
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
     <string name="hire_new_employee">Hire New Employee</string>
     <string name="hire_replacement_employee">Hire Replacement Employee</string>
     <string name="select_company">Select Company</string>
@@ -140,4 +140,13 @@
     <string name="colors_table">Colors Table</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit">Submit</string>
+    <string name="invalid_area_selected">please choose area first</string>
+    <string name="out_of_area_range">out of area range</string>
+    <string name="getting_your_location">getting your location first, please wait...</string>
+    <string name="allow_location_permission">please allow location permission</string>
+    <string name="please_select_city_first">please select city first</string>
+    <string name="get_location_settings_failed">sorry we cant get the location, please check the location settings</string>
+    <string name="private_number">Private Number</string>
+    <string name="business_number">Business Number</string>
 </resources>

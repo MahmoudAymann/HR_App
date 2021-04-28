@@ -1,6 +1,20 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val EMAIL_CLICK: Int = 1021
+    val PRIVATE_PHONE: Int = 1020
+    val BUSINESS_PHONE: Int = 1019
+    val SHARE_LOCATION_CLICK: Int = 1018
+
+    val CURRENT_LOCATION_CLICK: Int = 1017
+
+    val REQUEST_CHECK_SETTINGS: Int = 1016
+    val CHECK_OUT: Int = 1015
+
+    val CHECK_IN: Int = 1014
+    val OPEN_CITY_LIST: Int = 1013
+    val OPEN_AREA_LIST: Int = 1012
+    val LOGIN_SCREEN: Int = 1011
     val CHANGE_PASSWORD_SCREEN: Int = 1010
     val INFECT_SCREEN: Int = 1009
 

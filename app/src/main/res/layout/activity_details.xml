@@ -37,14 +37,15 @@
             android:id="@+id/cl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleGone="@{viewModel.obsShowHeaderView}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/id_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:visibleGone="@{viewModel.obsShowHeaderView}">
+                app:visibleGone="@{viewModel.obsShowToolbar}">
 
                 <ImageView
                     android:layout_width="?actionBarSize"
@@ -69,6 +70,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/id_toolbar"
+                app:visibleGone="@{viewModel.obsShowTitleBar}"
                 tools:text="title" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -78,6 +80,7 @@
                 android:onClick="@{()->viewModel.onBackClick()}"
                 app:backgroundTint="@color/white"
                 app:fabCustomSize="@dimen/_24sdp"
+                android:layoutDirection="ltr"
                 app:visibleGone="@{viewModel.obsShowBackButton}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

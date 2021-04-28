@@ -11,6 +11,7 @@ import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefLanguage
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import java.util.*
 
 /**

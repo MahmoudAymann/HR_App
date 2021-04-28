@@ -56,7 +56,7 @@ abstract class BaseAdapter<T : BaseParcelable>(
         submitList(mCurrentList.toMutableList())
     }
 
-    fun setList(newList: List<T>) {
+    fun setList(newList: List<T?>) {
         mCurrentList.clear()
         mCurrentList.addAll(newList)
         submitList(mCurrentList.toMutableList())

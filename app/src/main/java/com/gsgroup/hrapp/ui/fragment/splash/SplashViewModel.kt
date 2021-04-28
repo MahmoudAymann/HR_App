@@ -1,15 +1,25 @@
 package com.gsgroup.hrapp.ui.fragment.splash
 
+import android.app.Application
 import androidx.databinding.ObservableBoolean
-import com.gsgroup.hrapp.base.BaseViewModel
+import com.gsgroup.hrapp.base.AndroidBaseViewModel
+import com.gsgroup.hrapp.constants.Codes
+import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import timber.log.Timber
 
-class SplashViewModel : BaseViewModel() {
+class SplashViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val obsHideChild = ObservableBoolean(false)
 
-    init {
+
+    fun startNavigation() {
+        Timber.e("$userData")
+        userData?.id?.let {
+            postValue(Codes.HOME_SCREEN)
+        } ?: postValue(Codes.LOGIN_SCREEN)
 
     }
-
 
 }

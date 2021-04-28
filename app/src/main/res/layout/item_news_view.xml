@@ -49,6 +49,7 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:textColor="@color/black"
+                android:text="@{item.title}"
                 android:textAlignment="viewStart"
                 app:layout_constraintEnd_toStartOf="@+id/tv_date"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -63,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
+                android:text="@{item.publishedAt}"
                 android:textColor="@color/button_color_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image"
@@ -77,9 +79,16 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 tools:src="@tools:sample/backgrounds/scenic"
                 android:scaleType="fitXY"
+                loadImage="@{item.source}"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+    <data>
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.news.ItemNews"
+            />
+    </data>
 </layout>

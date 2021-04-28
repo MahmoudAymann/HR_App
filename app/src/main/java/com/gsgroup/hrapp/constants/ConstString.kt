@@ -1,6 +1,9 @@
 package com.gsgroup.hrapp.constants
 
 object ConstString {
+    val RESULT_FROM_BOTTOMSHEET_LIST: String ="RESULT_FROM_FRAGMENT_BOTTOMSHEET_LIST"
+    val BUNDLE_FRAGMENT: String = "BUNDLE_FRAGMENT"
+    val PREF_USER_DATA: String = "USER_DATA"
     val DESTINATION_NAME: String = "DESTINATION_NAME"
     const val DEFAULT_LANG: String = "en"
     const val LANG_EN: String = "en"

@@ -7,15 +7,21 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.gsgroup.hrapp.base.network.RetrofitBuilder
+import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.data.remote.ApiHelper
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.Resource
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 
 open class AndroidBaseViewModel(val app: Application) : AndroidViewModel(app), Observable {
     private val mCallBacks: PropertyChangeRegistry = PropertyChangeRegistry()
     val mutableLiveData = MutableLiveData<Any?>()
     var isLoading = ObservableBoolean()
-
+    val userData by app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
+    val apiHelper = ApiHelper(RetrofitBuilder(app).apiService)
     //for network
-    val resultLiveData = MutableLiveData<Resource<Any?>>()
+    val resultLiveData = MutableLiveData<Resource<Any?>?>()
     override fun onCleared() {
         super.onCleared()
     }

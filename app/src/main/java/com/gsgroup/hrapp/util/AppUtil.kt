@@ -1,30 +1,25 @@
 package com.gsgroup.hrapp.util
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import android.widget.Spinner
+import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.databinding.ObservableField
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
-import com.gsgroup.hrapp.R
-import com.gsgroup.hrapp.app.BaseApplication
-import timber.log.Timber
-import java.text.SimpleDateFormat
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,14 +29,38 @@ import kotlin.collections.ArrayList
 
 object AppUtil {
 
-    fun getNumberOfDays(year: Int, month: Int) : Int{
+
+    fun Context.getDrawableForLiteVersions(@DrawableRes drawableRes: Int): Drawable? {
+        return if (isOldDevice())
+            VectorDrawableCompat.create(resources, drawableRes, theme)
+        else
+            ContextCompat.getDrawable(this, drawableRes)
+    }
+
+    fun Context.callPhoneNumber(phone: String?) {
+        phone?.let {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${phone}")
+            startActivity(intent)
+        }
+    }
+
+    fun Context.openMailIntent(mail: String?) {
+        mail?.let {
+            val emailIntent = Intent(Intent.ACTION_SENDTO)
+            emailIntent.data = Uri.parse("mailto:$mail")
+            startActivity(Intent.createChooser(emailIntent, "send mail"))
+        }
+    }
+
+    fun getNumberOfDays(year: Int, month: Int): Int {
         val calendar: Calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month - 1)
         return calendar.getActualMaximum(Calendar.DATE)
     }
 
-    fun isOldDevice():Boolean{
+    fun isOldDevice(): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
     }
 
@@ -105,6 +124,20 @@ object AppUtil {
                     Uri.parse("http://play.google.com/store/apps/details?id=" + context.packageName)
                 )
             )
+        }
+    }
+
+    fun FragmentActivity.goToSettingsPermissions(
+        msg: String,
+        register: ActivityResultLauncher<Intent>
+    ) {
+        showDialog(msg) {
+            val myAppSettings = Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:$packageName")
+            )
+            myAppSettings.addCategory(Intent.CATEGORY_DEFAULT)
+            register.launch(myAppSettings)
         }
     }
 }

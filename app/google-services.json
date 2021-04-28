@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "927413979394",
+    "project_id": "newhra-3421d",
+    "storage_bucket": "newhra-3421d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927413979394:android:ef3682aed3cabca7dd5a1b",
+        "android_client_info": {
+          "package_name": "com.gsgroup.hrapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927413979394-4s38lvca8vcb07ibmb5b2manrp2hpbll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gsgroup.hrapp",
+            "certificate_hash": "8734cfd6dd9a81a3570ff591d0788af9ee24c6fc"
+          }
+        },
+        {
+          "client_id": "927413979394-dvlq5j8vh85v9su00tunjgih4tc2mafa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gsgroup.hrapp",
+            "certificate_hash": "7f4dea4c6c924b682ed5c68395113c74243c39fa"
+          }
+        },
+        {
+          "client_id": "927413979394-t1j48u94ihslor918nlr3718jqnalnek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc3IYSElfPCE4AhKqW-EvSZvbRMqEdhJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927413979394-t1j48u94ihslor918nlr3718jqnalnek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

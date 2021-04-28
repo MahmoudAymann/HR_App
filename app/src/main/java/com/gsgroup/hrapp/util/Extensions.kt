@@ -3,8 +3,11 @@ package com.gsgroup.hrapp.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.JsonReader
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +23,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.contentValuesOf
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -31,27 +35,73 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.TypeAdapter
 import com.gsgroup.hrapp.BR
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.app.BaseApplication
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.base.network.response.NetworkResponse
+import com.gsgroup.hrapp.base.network.response.UNKNOWN_ERROR_RESPONSE_CODE
+import com.gsgroup.hrapp.base.network.response.extractNetworkResponse
 import com.gsgroup.hrapp.constants.ConstString
-import com.gsgroup.hrapp.data.remote.ErrorResponse
+import com.gsgroup.hrapp.data.model.ErrorResponse
+import com.gsgroup.hrapp.data.model.SearchItemInterface
 import com.gsgroup.hrapp.ui.activity.MainActivity
-import com.mabaat.androidapp.base.network.response.NetworkResponse
+import com.gsgroup.hrapp.ui.activity.details.DetailsActivity
+import com.gsgroup.hrapp.util.ExceptionUtil.getErrorFromException
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Converter
+import retrofit2.HttpException
 import timber.log.Timber
 import java.io.File
+import java.io.IOException
 import java.lang.reflect.ParameterizedType
 
+
+fun Any?.isNull(): Boolean {
+    return this == null
+}
+
+
+fun <T : Any> Fragment.listenForResult(key: String, callback: (T?) -> Unit) {
+    //Observe the result to be set by Fragment B in the stateHandle of the currentBackStackEntry
+    val currentBackStackEntry = findNavController().currentBackStackEntry
+    val savedStateHandle = currentBackStackEntry?.savedStateHandle
+    savedStateHandle?.getLiveData<T>(key)
+        ?.observe(currentBackStackEntry, Observer { result ->
+            callback(result)
+        })
+}
+
+fun Fragment.setResultToFragment(key: String, it: SearchItemInterface?) {
+    val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
+    savedStateHandle?.set(key, it)
+    findNavController().navigateUp()
+}
 
 inline fun <reified T : AppCompatActivity> Activity.showActivity(
     intent: Intent = Intent()
 ) {
     intent.setClass(this, T::class.java)
     this.startActivity(intent)
+}
+
+inline fun <reified T : Parcelable> castToObj(obj: Parcelable?): T? {
+    return if (obj is T) {
+        obj
+    } else
+        null
 }
 
 inline fun <reified T : AppCompatActivity> Activity.showActivityWithDestination(
@@ -71,37 +121,32 @@ fun AppCompatActivity.findFragmentById(id: Int): Fragment? {
     }
 }
 
-fun <T : Any> AndroidBaseViewModel.requestNewCallRefactor(
-    networkCall: suspend () -> NetworkResponse<T, ErrorResponse>,
-    disableProgress: Boolean = false,
+fun <T : Any> AndroidBaseViewModel.requestNewCallDeferred(
+    networkCall: () -> Deferred<T>,
     successCallBack: (T) -> Unit
 ) {
+    //this usually used when supporting apis below 21
     viewModelScope.launch {
-        postResult(Resource.loading(null))
-        isLoading.set(!disableProgress)
-        val res = networkCall() // execute
-        Timber.e("$res")
-        when (res) {
-            is NetworkResponse.Success -> {
-                viewModelScope.launch(Dispatchers.Main) {
-                    successCallBack(res.body)
-                }
-            }
-            is NetworkResponse.ServerError -> postResult(Resource.message(getShownError(res.body)))
-            is NetworkResponse.NetworkError -> postResult(Resource.message(app.getString(R.string.network_error)))
-            is NetworkResponse.UnknownError -> postResult(Resource.message(app.getString(R.string.server_error)))
+        postResult(Resource.loading())
+        try {
+            val res = networkCall().await() // execute
+            Timber.tag("response").d("$res")
+            successCallBack(res)
+        } catch (e: Exception) {
+            Timber.e(e)
+            postResult(Resource.message(e.getErrorFromException(app)))
         }
     }
 }
 
 private fun getShownError(response: ErrorResponse?): String {
-    return response?.validation?.let {
+    return response?.errors?.let {
         "${it[0]}"
     } ?: "null"
 }
 
 fun Activity.restartApp() {
-    showActivity<MainActivity>()
+    showActivity<DetailsActivity>()
     finishAffinity()
 }
 
@@ -207,28 +252,34 @@ fun String.isValidUrl(): Boolean {
 
 
 fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
-//    val picasso =
-//        Picasso.Builder(this.context).downloader(OkHttp3Downloader(UnsafeOkHttpClient().client))
-//            .build()
-//    picasso.isLoggingEnabled = true
-//    picasso.load(url)
-//        .error(R.drawable.ic_broken_image)
-//        .placeholder(R.color.offwhite)
-//        .fit()
-//        .into(this, object : Callback {
-//            override fun onSuccess() {
-//                progressBar?.apply {
-//                    visibility = View.GONE
-//                }
-//            }
-//
-//            override fun onError(e: Exception?) {
-//                Timber.e("$e")
-//                progressBar?.apply {
-//                    visibility = View.GONE
-//                }
-//            }
-//        })
+    Glide.with(this).load(url)
+        .error(R.drawable.ic_broken_image)
+        .addListener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                Timber.e("$e")
+                setImageResource(R.drawable.ic_broken_image)
+                setPadding(200, 50, 200, 50)
+                return true
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                setImageDrawable(resource)
+                return true
+            }
+
+        })
+        .into(this)
 }
 
 

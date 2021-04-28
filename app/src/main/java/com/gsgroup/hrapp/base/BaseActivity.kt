@@ -1,16 +1,16 @@
 package com.gsgroup.hrapp.base
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil.getBinding
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import com.gsgroup.hrapp.BR
 import com.gsgroup.hrapp.util.LocalUtil
 import com.gsgroup.hrapp.util.bindView
-import com.gsgroup.hrapp.util.bindViewModel
+
 
 /**
  * Created by MahmoudAyman on 7/17/2020.
@@ -18,7 +18,7 @@ import com.gsgroup.hrapp.util.bindViewModel
 
 abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
-    val showProgress = ObservableBoolean()
+    val baseShowProgress = ObservableBoolean()
     protected abstract val mViewModel: VM
     lateinit var binding: B
 

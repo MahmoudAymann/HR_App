@@ -25,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
         setupNavController()
         binding.bottomNavBar.onTabSelectedListener = this
         mViewModel.apply {
-            showProgressBar = showProgress
+            showProgressBar = baseShowProgress
             observe(mutableLiveData) {
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> onBackPressed()
@@ -88,11 +88,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
 
     override fun onBackPressed() {
         when (navController?.currentDestination?.id) {
-            R.id.loginFragment -> {
-                showExitDialog()
-            }
-            R.id.splashFragment -> {
-            }
             R.id.homeFragment -> showExitDialog()
             else -> {
                 super.onBackPressed()

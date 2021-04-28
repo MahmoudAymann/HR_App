@@ -10,21 +10,12 @@ import com.gsgroup.hrapp.constants.Codes
 class DetailsViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val obsTitle = ObservableField<String>()
-    val obsShowBackButton = ObservableBoolean()
     var showProgressBar = ObservableBoolean()
+    val obsShowBackButton = ObservableBoolean()
     val obsShowHeaderView = ObservableBoolean()
-    val obsShowSheet = ObservableBoolean()
+    val obsShowToolbar = ObservableBoolean()
+    val obsShowTitleBar = ObservableBoolean()
 
-//    val adapter = SearchAdapter(::onItemClick)
-//
-//    private fun onItemClick(searchItem: SearchItem) {
-//        Timber.e("$searchItem")
-//    }
-
-    init {
-//        adapter.setList(SearchItem.getDummyData())
-//        notifyChange()
-    }
 
     fun onBackClick() {
         setValue(Codes.BACK_BUTTON_PRESSED)
@@ -33,8 +24,13 @@ class DetailsViewModel(app: Application) : AndroidBaseViewModel(app) {
     fun setScreenPermissions(id: Int) {
         when (id) {
             R.id.splashFragment, R.id.loginFragment -> authScreenPermissions()
+            R.id.mapFragment, R.id.bottomSheetFragment-> fullScreenPermission()
             else -> detailsScreen()
         }
+    }
+
+    private fun fullScreenPermission() {
+        obsShowHeaderView.set(false)
     }
 
     private fun authScreenPermissions() { //hide all headers

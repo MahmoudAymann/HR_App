@@ -15,7 +15,7 @@ class MainViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsShowBottomBar = ObservableBoolean()
     var showProgressBar = ObservableBoolean()
     val obsShowHeaderView = ObservableBoolean()
-    val bottomBarMenuItems = MainModel.getBottomNavBarList(app)
+    val bottomBarMenuItems = MainModel.getBottomNavBarList(app.applicationContext)
 
     fun onSalaryClick() {
         setValue(Codes.SALARY_SCREEN)

@@ -1,6 +1,12 @@
 package com.gsgroup.hrapp.ui.fragment.login
 
-data class LoginRequest(var email: String? = null, var password: String? = null) {
+import com.google.gson.annotations.SerializedName
+
+data class LoginRequest(
+    @SerializedName("email")
+    var email: String? = null,
+    @SerializedName("password")
+    var password: String? = null) {
 
     fun isValid(): Boolean {
         return !email.isNullOrEmpty() &&

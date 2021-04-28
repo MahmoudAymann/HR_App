@@ -1,10 +1,15 @@
 package com.gsgroup.hrapp.base.network
 
+import android.app.Application
 import com.google.gson.GsonBuilder
 import com.gsgroup.hrapp.BuildConfig
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.remote.ApiService
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mabaat.androidapp.base.network.NetworkResponseAdapterFactory
+import com.gsgroup.hrapp.base.network.response.NetworkResponseAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,22 +24,25 @@ private const val BASE_URL =
 /*
 *add this if you want a static header in all requests
 **/
-fun getHeaderInterceptor(): Interceptor {
+fun getHeaderInterceptor(app: Application): Interceptor {
     return Interceptor { chain ->
+        val token by app.applicationContext.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
+
         val request =
             chain.request().newBuilder()
-                .header("jwt", "")
-                .header("lang", "")
+                .header("Authorization", "Bearer ${token?.token!!}")
+                .header("lang", app.getPrefLanguage())
                 .build()
         chain.proceed(request)
     }
 }
 
-private fun createOkHttpClient(): OkHttpClient {
+private fun createOkHttpClient(app: Application): OkHttpClient {
     return OkHttpClient.Builder()
         .apply {
             if (BuildConfig.DEBUG) {
                 this.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                this.addInterceptor(getHeaderInterceptor(app))
             }
             readTimeout(120, TimeUnit.SECONDS)
             connectTimeout(120, TimeUnit.SECONDS)
@@ -44,17 +52,15 @@ private fun createOkHttpClient(): OkHttpClient {
 }
 
 
-private val retrofitBuilder = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
+private fun retrofitBuilder(app: Application) = Retrofit.Builder()
+    .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .addCallAdapterFactory(NetworkResponseAdapterFactory())
     .baseUrl(BASE_URL)
-    .client(createOkHttpClient())
+    .client(createOkHttpClient(app))
     .build()
 
-
-object RetrofitBuilder {
-    val API_SERVICE: ApiService by lazy {
-        retrofitBuilder.create(ApiService::class.java)
+class RetrofitBuilder(val app: Application) {
+    val apiService: ApiService by lazy {
+         retrofitBuilder(app).create(ApiService::class.java)
     }
 }

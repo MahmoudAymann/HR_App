@@ -9,6 +9,8 @@ import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentSettingsBinding
 import com.gsgroup.hrapp.ui.fragment.home.HomeFragmentDirections
 import com.gsgroup.hrapp.util.*
+import com.gsgroup.hrapp.util.SharedPrefUtil.deleteAllSharedPrefData
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
     override fun pageTitle(): String = getString(R.string.settings)
@@ -22,11 +24,17 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
                     Codes.RESTART_APP -> activity?.restartApp()
                     Codes.CHANGE_LANG -> activity?.showDialog(getString(R.string.ask_change_language)){ mViewModel.changeLang() }
                     Codes.CHANGE_PASSWORD_SCREEN -> showDetailsActivity(R.id.changePasswordFragment)
-                    Codes.LOG_OUT -> activity?.showLogoutDialog {
-                        showDetailsActivity(R.id.loginFragment)
-                    }
+                    Codes.LOG_OUT -> logout()
                 }
             }
+        }
+    }
+
+    private fun logout() {
+        activity?.showLogoutDialog {
+            showDetailsActivity(R.id.loginFragment)
+            activity?.deleteAllSharedPrefData()
+            activity?.finishAffinity()
         }
     }
 }

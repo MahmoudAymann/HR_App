@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.direct_manager.DirectManagerViewModel"
+            />
+    </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +23,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/_6sdp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_margin="@dimen/_2sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibleGone="@{viewModel.isLoading()}">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -31,9 +39,10 @@
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         app:civ_border="false"
+                        loadImage="@{viewModel.data.image}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/app_background" />
+                        tools:src="@drawable/app_background" />
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -42,7 +51,8 @@
                         tools:text="@tools:sample/full_names"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:textStyle="bold"
-                        android:text="Mahmoud"
+                        android:text="@{viewModel.data.userName}"
+                        android:textColor="@color/black"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/img_profile"
                         />
@@ -53,7 +63,8 @@
                         android:layout_height="wrap_content"
                         tools:text="@tools:sample/full_names"
                         android:textStyle="bold"
-                        android:text="Android"
+                        android:textColor="@color/black"
+                        android:text="@{viewModel.data.jobTitle}"
                         android:layout_marginTop="@dimen/_8sdp"
                         app:layout_constraintTop_toBottomOf="@+id/tv_name"
                         app:layout_constraintStart_toStartOf="@+id/tv_name"
@@ -66,7 +77,8 @@
                         android:layout_height="wrap_content"
                         tools:text="@tools:sample/full_names"
                         android:textStyle="bold"
-                        android:text="Aman"
+                        android:textColor="@color/black"
+                        android:text="@{viewModel.data.company}"
                         android:layout_marginTop="@dimen/_8sdp"
                         app:layout_constraintTop_toBottomOf="@+id/tv_job_title"
                         app:layout_constraintStart_toStartOf="@+id/tv_name"
@@ -79,6 +91,7 @@
                         android:layout_marginTop="@dimen/_24sdp"
                         app:backgroundTint="@color/call_green"
                         app:fabSize="mini"
+                        android:onClick="@{()->viewModel.onPhoneCall(true)}"
                         app:srcCompat="@drawable/ic_call"
                         app:tint="@color/white"
                         app:layout_constraintStart_toStartOf="@id/img_profile"
@@ -88,14 +101,29 @@
                     <TextView
                         android:id="@+id/tv_private_num"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:textStyle="bold"
-
-                        app:layout_constraintBottom_toBottomOf="@+id/fab_private_num"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toTopOf="@id/tv_private_num_static"
                         app:layout_constraintStart_toEndOf="@+id/fab_private_num"
                         app:layout_constraintTop_toTopOf="@+id/fab_private_num"
-                        android:text="011111111" />
+                        android:text="@{viewModel.data.privateMobile}"
+                        tools:text="123444"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_private_num_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8ssp"
+                        android:gravity="top"
+                        app:layout_constraintBottom_toBottomOf="@+id/fab_private_num"
+                        app:layout_constraintStart_toStartOf="@+id/tv_private_num"
+                        app:layout_constraintTop_toBottomOf="@id/tv_private_num"
+                        android:text="@string/private_number" />
 
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -104,9 +132,10 @@
                         android:layout_height="wrap_content"
                         app:backgroundTint="@color/call_green"
                         app:fabSize="mini"
-                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
                         app:srcCompat="@drawable/ic_call"
                         app:tint="@color/white"
+                        android:onClick="@{()->viewModel.onPhoneCall(false)}"
                         app:layout_constraintStart_toStartOf="@id/img_profile"
                         app:layout_constraintTop_toBottomOf="@+id/fab_private_num"
                         tools:ignore="ContentDescription" />
@@ -114,13 +143,30 @@
                     <TextView
                         android:id="@+id/tv_business_num"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/fab_business_num"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        tools:text="123123"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_business_num_static"
                         app:layout_constraintStart_toEndOf="@+id/fab_business_num"
                         app:layout_constraintTop_toTopOf="@+id/fab_business_num"
-                        android:text="011111111" />
+                        android:text="@{viewModel.data.bussniessMobile}"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_business_num_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8ssp"
+                        android:gravity="top"
+                        app:layout_constraintBottom_toBottomOf="@+id/fab_business_num"
+                        app:layout_constraintStart_toStartOf="@+id/tv_business_num"
+                        app:layout_constraintTop_toBottomOf="@id/tv_business_num"
+                        android:text="@string/business_number" />
+
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fab_mail"
@@ -128,8 +174,9 @@
                         android:layout_height="wrap_content"
                         app:backgroundTint="@color/black"
                         app:fabSize="mini"
-                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
                         app:srcCompat="@drawable/ic_mail"
+                        android:onClick="@{()->viewModel.onEmailClick()}"
                         app:tint="@color/white"
                         app:layout_constraintStart_toStartOf="@id/img_profile"
                         app:layout_constraintTop_toBottomOf="@+id/fab_business_num"
@@ -141,10 +188,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
                         android:textStyle="bold"
+                        android:textColor="@color/black"
+                        tools:text="email"
                         app:layout_constraintBottom_toBottomOf="@+id/fab_mail"
                         app:layout_constraintStart_toEndOf="@+id/fab_mail"
                         app:layout_constraintTop_toTopOf="@+id/fab_mail"
-                        android:text="w@w.com" />
+                        android:text="@{viewModel.data.email}" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>

@@ -5,7 +5,7 @@ import androidx.room.Room
 
 object DatabaseBuilder {
     private var INSTANCE: AppDatabase? = null
-
+    private const val DB_NAME = "hr-app-data"
     fun getInstance(context: Context): AppDatabase {
         if (INSTANCE == null) {
             synchronized(AppDatabase::class) {
@@ -19,6 +19,6 @@ object DatabaseBuilder {
         Room.databaseBuilder(
             context.applicationContext,
             AppDatabase::class.java,
-            "hr-app-data"
+            DB_NAME
         ).build()
 }

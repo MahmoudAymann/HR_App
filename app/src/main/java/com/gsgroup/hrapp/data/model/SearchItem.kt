@@ -8,7 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class SearchItem(val id: Int = 0, val name: String? = null) : Parcelable, SearchItemInterface {
     override fun id(): Int = id
     override fun name(): String? = name
-    override fun unique(): Any = id
 
     companion object {
         fun getDummyData() = arrayOf<SearchItemInterface>(
@@ -21,6 +20,7 @@ data class SearchItem(val id: Int = 0, val name: String? = null) : Parcelable, S
 }
 
 interface SearchItemInterface : Parcelable, BaseParcelable {
-    fun id(): Int?
+    fun id(): Int
     fun name(): String?
+    override fun unique() = id()
 }

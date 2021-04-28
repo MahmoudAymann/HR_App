@@ -1,4 +1,4 @@
-package com.mabaat.androidapp.base.network.response
+package com.gsgroup.hrapp.base.network.response
 
 import okhttp3.Headers
 import java.io.IOException

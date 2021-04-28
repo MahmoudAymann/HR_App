@@ -1,6 +1,5 @@
-package com.mabaat.androidapp.base.network
+package com.gsgroup.hrapp.base.network.response
 
-import com.mabaat.androidapp.base.network.response.NetworkResponse
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Response

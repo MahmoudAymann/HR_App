@@ -1,7 +1,6 @@
-package com.mabaat.androidapp.base.network
+package com.gsgroup.hrapp.base.network.response
 
 
-import com.mabaat.androidapp.base.network.response.NetworkResponse
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
@@ -56,7 +55,8 @@ internal class DeferredNetworkResponseAdapter<T : Any, U : Any>(
             }
 
             override fun onResponse(call: Call<T>, response: Response<T>) {
-                val networkResponse = ResponseHandler.handle(response, successBodyType, errorConverter)
+                val networkResponse =
+                    ResponseHandler.handle(response, successBodyType, errorConverter)
                 deferred.complete(networkResponse)
             }
         })

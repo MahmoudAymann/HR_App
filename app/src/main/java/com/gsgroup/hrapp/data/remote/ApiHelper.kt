@@ -1,9 +1,8 @@
 package com.gsgroup.hrapp.data.remote
 
-import com.gsgroup.hrapp.data.remote.ApiService
+import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
+import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
-import com.gsgroup.hrapp.ui.fragment.login.LoginResponse
-import com.mabaat.androidapp.base.network.response.NetworkResponse
 
 
 /**
@@ -11,6 +10,21 @@ import com.mabaat.androidapp.base.network.response.NetworkResponse
  **/
 
 class ApiHelper(private val apiService: ApiService) : ApiService {
-    override suspend fun login(request: LoginRequest): NetworkResponse<LoginResponse, ErrorResponse> = apiService.login(request)
+    override  fun loginAsync(request: LoginRequest) =
+        apiService.loginAsync(request)
 
+    override  fun getNewsDetailsAsync(id: Int) = apiService.getNewsDetailsAsync(id)
+
+    override  fun getNewsAsync() = apiService.getNewsAsync()
+    override  fun getFaqsAsync() = apiService.getFaqsAsync()
+
+    override  fun getPoliciesAsync()  = apiService.getPoliciesAsync()
+    override  fun getDirectHrAsync() = apiService.getDirectHrAsync()
+
+    override  fun getDirectManagerAsync() = apiService.getDirectManagerAsync()
+
+    override  fun changePasswordAsync(request: ChangePasswordRequest) = apiService.changePasswordAsync(request)
+    override  fun checkInAsync(request: AttendanceRequest) = apiService.checkInAsync(request)
+
+    override  fun checkOutAsync() = apiService.checkOutAsync()
 }

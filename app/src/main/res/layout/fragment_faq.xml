@@ -33,6 +33,12 @@
             app:layout_constraintTop_toBottomOf="@+id/materialButton"
             app:adapter="@{viewModel.adapter}"
             />
+        <include
+            layout="@layout/no_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visibleGone="@{viewModel.obsShowEmptyView}"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

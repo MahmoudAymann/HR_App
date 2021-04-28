@@ -35,6 +35,7 @@
                         android:layout_height="@dimen/_120sdp"
                         tools:src="@tools:sample/backgrounds/scenic"
                         android:scaleType="fitXY"
+                        loadImage="@{viewModel.data.source}"
                         app:layout_constraintTop_toTopOf="parent"
                         />
 
@@ -49,6 +50,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/black"
                         android:textAlignment="viewStart"
+                        android:text="@{viewModel.data.title}"
                         android:textStyle="bold"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +68,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/black"
+                        android:text="@{viewModel.data.description}"
                         android:textAlignment="viewStart"
                         android:lineSpacingExtra="1.2dp"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -86,6 +89,12 @@
 
 
     </ScrollView>
+<data>
 
+    <variable
+        name="viewModel"
+        type="com.gsgroup.hrapp.ui.fragment.news.details.NewsDetailsViewModel"
+        />
+</data>
 
 </layout>

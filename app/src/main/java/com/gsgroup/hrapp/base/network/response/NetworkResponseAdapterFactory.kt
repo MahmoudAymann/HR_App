@@ -1,6 +1,5 @@
-package com.mabaat.androidapp.base.network
+package com.gsgroup.hrapp.base.network.response
 
-import com.mabaat.androidapp.base.network.response.NetworkResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.CallAdapter

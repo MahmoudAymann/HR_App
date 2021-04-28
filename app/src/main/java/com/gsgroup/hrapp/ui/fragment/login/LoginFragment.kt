@@ -27,9 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 when (it?.status) {
                     Status.SUCCESS -> {
                         showProgress(false)
-                        activity?.showSuccessfulDialog(it.message) {
-                                showMainActivity()
-                        }
+                        showMainActivity()
                     }
                     Status.MESSAGE -> {
                         showProgress(false)
@@ -43,7 +41,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     override val mViewModel: LoginViewModel by viewModels()
-
-
-
 }

@@ -14,8 +14,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.constants.Codes
+import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.data.model.SearchItemInterface
 import com.gsgroup.hrapp.databinding.FragmentBottomSheetBinding
 import com.gsgroup.hrapp.util.observe
+import com.gsgroup.hrapp.util.setResultToFragment
 
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -43,10 +46,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             observe(mutableLiveData) {
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> dismiss()
+                    is SearchItemInterface -> {
+                        setResultToFragment(ConstString.RESULT_FROM_BOTTOMSHEET_LIST, it)
+                    }
                 }
             }
         }
     }
+
+
 
     private val callBack = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {

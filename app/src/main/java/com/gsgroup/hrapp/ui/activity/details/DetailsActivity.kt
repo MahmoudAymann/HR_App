@@ -11,6 +11,7 @@ import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.databinding.ActivityDetailsBinding
 import com.gsgroup.hrapp.util.observe
+import com.gsgroup.hrapp.util.showExitDialog
 import timber.log.Timber
 
 class DetailsActivity : BaseActivity<ActivityDetailsBinding, DetailsViewModel>(),
@@ -23,7 +24,7 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding, DetailsViewModel>()
         super.onCreate(savedInstanceState)
         setupNavController()
         mViewModel.apply {
-            showProgressBar = showProgress
+            showProgressBar = baseShowProgress
             observe(mutableLiveData) {
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> onBackPressed()
@@ -32,17 +33,14 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding, DetailsViewModel>()
         }
     }
 
-    fun showBottomSheet(show: Boolean){
-        mViewModel.obsShowSheet.set(show)
-    }
-
     private fun setupNavController() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.navController
         val destination = intent.getIntExtra(ConstString.DESTINATION_NAME, R.id.splashFragment)
         val navGraph = navController?.navInflater?.inflate(R.navigation.details_nav_graph)
+        val bundle: Bundle? = intent.getBundleExtra(ConstString.BUNDLE_FRAGMENT) ?: intent.extras
         navGraph?.startDestination = destination
-        navController?.setGraph(navGraph!!, intent.extras)
+        navController?.setGraph(navGraph!!, bundle)
         navController?.addOnDestinationChangedListener(this)
     }
 
@@ -59,6 +57,19 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding, DetailsViewModel>()
     ) {
         destination.id.let { id ->
             mViewModel.setScreenPermissions(id)
+        }
+    }
+
+    override fun onBackPressed() {
+        when (navController?.currentDestination?.id) {
+            R.id.loginFragment -> {
+                showExitDialog()
+            }
+            R.id.splashFragment -> {
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
     }
 

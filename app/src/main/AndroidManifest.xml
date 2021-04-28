@@ -35,7 +35,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.fragment.map.MapActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

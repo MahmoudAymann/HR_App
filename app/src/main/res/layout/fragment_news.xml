@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,9 +15,23 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_news_view"
+            app:adapter="@{viewModel.adapter}"
+            />
+
+        <include
+            layout="@layout/no_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visibleGone="@{viewModel.obsShowEmptyView}"
             />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.news.NewsViewModel"
+            />
+    </data>
 </layout>

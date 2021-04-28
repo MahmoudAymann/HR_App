@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -38,12 +40,11 @@ android {
         }
     }
     compileOptions {
-        // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled true
         // Sets Java compatibility to Java 8
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 
     // To inline the bytecode built with JVM target 1.8 into
     // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
@@ -58,11 +59,8 @@ android {
 
 dependencies {
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation project(path: ':sweetdialoglibrary')
     //Main Libs, key: main
-    implementation(main.kotlin)
     implementation (main.kotlinCore)
     implementation (main.appCompat)
     implementation (main.materialDesign)
@@ -74,13 +72,15 @@ dependencies {
     implementation (main.lifecycleLivedataKtx)
     implementation (main.lifecycleViewmodelSavedstateKtx)
     implementation (main.lifecycleJava8)
-    implementation (main.navigationKtx)
-    implementation (main.navigationFragmentKtx)
+    implementation ("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation(main.room)
     kapt (main.roomCompiler)
     implementation (main.roomKtx)
     implementation (main.retrofit)
     implementation (main.retrofitCoroutinesAdapter)
+    implementation (main.gMap)
+    implementation (main.gLocation)
 
     //External Libs, key: external
     implementation (external.bottomNav)
@@ -96,11 +96,13 @@ dependencies {
     kapt (external.glideCompiler)
     implementation (external.swipeRefresh)
     implementation (external.circularImage)
+    implementation (external.autofitTV)
 
-    implementation 'com.github.AndroidDeveloperLB:AutoFitTextView:8'
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //For Lite devices
+    implementation (lite.multidex)
 
 
-
-
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

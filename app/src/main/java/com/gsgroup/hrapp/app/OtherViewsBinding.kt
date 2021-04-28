@@ -14,16 +14,15 @@ import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.text.HtmlCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
-import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.target.ImageViewTarget
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -45,11 +44,34 @@ import timber.log.Timber
 
 class OtherViewsBinding {
 
+
     @BindingAdapter("setCardBackgroundColor")
     fun setCardViewBg(cv: MaterialCardView, color: Int?) {
         color?.let {
             cv.setCardBackgroundColor(color)
         }
+    }
+
+    @BindingAdapter("loadGif")
+    fun loadGifImage(cv: ImageView, image: Any?) {
+        image?.let {
+            when (image) {
+                is Int, is String -> {
+                    Glide.with(cv.context)
+                        .asGif()
+                        .load(image)
+                        .error(R.drawable.ic_broken_image)
+                        .into(object : ImageViewTarget<GifDrawable>(cv) {
+                            override fun setResource(resource: GifDrawable?) {
+                                cv.setImageDrawable(resource)
+                            }
+                        })
+                }
+                else -> Timber.e("not supported type")
+            }
+
+        }
+
     }
 
     @BindingAdapter("drawableEnd")
@@ -162,7 +184,7 @@ class OtherViewsBinding {
                     imageView.loadImageFromURL("")
                 }
             }
-        } ?: imageView.setImageResource(R.drawable.ic_broken_image)
+        } ?: imageView.loadImageFromURL("")
     }
 
     @BindingAdapter("app:checkForEquality", "app:observer", requireAll = true)
@@ -202,7 +224,6 @@ class OtherViewsBinding {
             recyclerView.adapter = it
             divider?.let { div ->
                 if (div) {
-                    Timber.e("set divider")
                     val decoration =
                         DividerItemDecoration(recyclerView.context, LinearLayoutManager.VERTICAL)
                     recyclerView.addItemDecoration(decoration)

@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.databinding.FragmentChangePasswordBinding
+import com.gsgroup.hrapp.util.*
 
 class ChangePasswordFragment :
     BaseFragment<FragmentChangePasswordBinding, ChangePasswordViewModel>() {
@@ -14,6 +15,28 @@ class ChangePasswordFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewModel.apply {
+            observe(mutableLiveData) {
+                when (it) {
+
+                }
+            }
+            observe(resultLiveData) {
+                when (it?.status) {
+                    Status.SUCCESS -> {
+                        showProgress(false)
+                        activity?.showSuccessfulDialog(it.message) {
+                            closeFragment()
+                        }
+                    }
+                    Status.MESSAGE -> {
+                        showProgress(false)
+                        activity?.showErrorDialog(it.message)
+                    }
+                    Status.LOADING -> showProgress()
+                }
+            }
+        }
 
     }
 }

@@ -15,7 +15,7 @@ open class BaseViewModel : ViewModel(), Observable {
     val mutableLiveData = MutableLiveData<Any?>()
     var isLoading = ObservableBoolean()
     //for network
-    val resultLiveData = MutableLiveData<Resource<Any?>>()
+    val resultLiveData = MutableLiveData<Resource<Any?>?>()
     override fun onCleared() {
         super.onCleared()
     }
