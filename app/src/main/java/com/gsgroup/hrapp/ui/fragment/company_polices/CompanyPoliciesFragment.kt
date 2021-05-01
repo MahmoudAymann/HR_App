@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.databinding.FragmentCompanyPoliciesBinding
-import com.gsgroup.hrapp.ui.fragment.news.ItemNews
+import com.gsgroup.hrapp.ui.fragment.news.NewsItem
 import com.gsgroup.hrapp.ui.fragment.news.NewsFragmentDirections
 import com.gsgroup.hrapp.util.Status
 import com.gsgroup.hrapp.util.navigateSafe

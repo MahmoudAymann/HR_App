@@ -1,6 +1,7 @@
 package com.gsgroup.hrapp.constants
 
 object ConstString {
+    val PREF_FIREBASE_TOKEN: String="PREF_FIREBASE_TOKEN"
     val RESULT_FROM_BOTTOMSHEET_LIST: String ="RESULT_FROM_FRAGMENT_BOTTOMSHEET_LIST"
     val BUNDLE_FRAGMENT: String = "BUNDLE_FRAGMENT"
     val PREF_USER_DATA: String = "USER_DATA"

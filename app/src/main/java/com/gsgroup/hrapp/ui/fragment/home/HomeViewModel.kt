@@ -2,6 +2,7 @@ package com.gsgroup.hrapp.ui.fragment.home
 
 import android.app.Application
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.viewModelScope
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.data.model.HomeItem
@@ -18,7 +19,6 @@ class HomeViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     }
 
-
     init {
         adapter.setList(HomeItem.getHomeList(app))
     }
@@ -31,10 +31,7 @@ class HomeViewModel(app: Application) : AndroidBaseViewModel(app) {
             setValue(Codes.CHECK_OUT)
     }
 
-
-    fun checkForCheckIn(){
-        userData?.attendance?.timeIn?.let {
-            obsIsCheckedIn.set(true)
-        }?:obsIsCheckedIn.set(false)
+    fun hideCheckInButton() {
+        obsIsCheckedIn.set(!userData?.attendance?.timeIn.isNullOrBlank())
     }
 }

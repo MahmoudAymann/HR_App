@@ -23,10 +23,10 @@ import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.SearchItemInterface
 import com.gsgroup.hrapp.databinding.FragmentMapBinding
 import com.gsgroup.hrapp.util.*
-import com.gsgroup.hrapp.util.AppUtil.goToSettingsPermissions
 import com.gsgroup.hrapp.util.MapUtil.isGPSEnabled
 import com.gsgroup.hrapp.util.MapUtil.openGPSDialog
 import com.gsgroup.hrapp.util.PermissionUtil.AppPermissionResult.*
+import com.gsgroup.hrapp.util.PermissionUtil.goToSettingsPermissions
 import com.gsgroup.hrapp.util.PermissionUtil.requestAppPermissions
 import com.gsgroup.hrapp.util.Status.*
 import timber.log.Timber
@@ -53,6 +53,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             gotArgs(args)
             observe(mutableLiveData) {
                 when (it) {
+                    Codes.SHARE_LOCATION_CLICK->openShareLocationScreen()
                     Codes.OPEN_CITY_LIST -> navigateSafe(
                         MapFragmentDirections.actionMapFragmentToBottomSheetFragment(
                             citiesList
@@ -82,6 +83,27 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         }
     }
 
+    private fun openShareLocationScreen() {
+        if (PermissionUtil.hasAllPhoneCriticalPermissions(requireActivity())) {
+            navigateToShareLocationScreen()
+        }else{
+            requireActivity().requestAppPermissions(PermissionUtil.getPhoneCriticalPermissions()){
+                when(it){
+                    ALL_GOOD -> navigateToShareLocationScreen()
+                    OPEN_SETTING -> requireActivity().goToSettingsPermissions(getString(R.string.please_allow_permission_phone_critical))
+                }
+            }
+        }
+    }
+
+    private fun navigateToShareLocationScreen(){
+        navigateSafe(
+            MapFragmentDirections.actionMapFragmentToShareLocationFragment(
+                mViewModel.request.currentLatLng?.latitude.toString(),
+                mViewModel.request.currentLatLng?.longitude.toString()
+            )
+        )
+    }
 
     private fun handleFragRes() {
         listenForResult<SearchItemInterface>(ConstString.RESULT_FROM_BOTTOMSHEET_LIST) {
@@ -89,10 +111,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        askForLocationPermissions()
-    }
+
 
     private fun startGetLocation() {
         //this fun will not be called unless i have the permissions first
@@ -133,6 +152,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        askForLocationPermissions()
     }
 
     private fun askForLocationPermissions() {
@@ -145,7 +165,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                     ALL_GOOD -> {
                         startGetLocation()
                     }
-                    OPEN_SETTING -> requireActivity().goToSettingsPermissions(
+                    OPEN_SETTING -> activity?.goToSettingsPermissions(
                         getString(R.string.allow_location_permission),
                         register
                     )
@@ -167,18 +187,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     override fun onActivityResult(result: ActivityResult?) {
         askForLocationPermissions()
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        data?.let {
-//            val states = LocationSettingsStates.fromIntent(it)
-            if (requestCode == Codes.REQUEST_CHECK_SETTINGS) {
-                if (resultCode == Activity.RESULT_OK) {
-                    startGetLocation()
-                }
-            }
-        } ?: Timber.e("data is null")
-    }
-
 }
 
 

@@ -21,7 +21,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
-                    is ItemNews -> navigateSafe(
+                    is NewsItem -> navigateSafe(
                         NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(it.id)
                     )
                 }

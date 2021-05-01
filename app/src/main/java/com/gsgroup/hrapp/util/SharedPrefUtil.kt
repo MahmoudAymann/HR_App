@@ -6,6 +6,7 @@ import android.os.Parcelable
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.util.MapUtil.isGPSEnabled
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -25,6 +26,16 @@ object SharedPrefUtil {
     }
 
     fun Context.setPrefLanguage(value: String) {
+        sharedPrefs<String>(ConstString.PREF_LANG).setData(value)
+    }
+
+
+    fun Context.getPrefFirebaseToken(): String {
+        val token by sharedPrefs(ConstString.PREF_FIREBASE_TOKEN, "n/a")
+        return token!!
+    }
+
+    fun Context.setPrefFirebaseToken(value: String) {
         sharedPrefs<String>(ConstString.PREF_LANG).setData(value)
     }
 
@@ -87,6 +98,7 @@ object SharedPrefUtil {
 
 
     fun Context.deleteAllSharedPrefData() = getAppPrefs().edit().clear().apply()
+
     fun Context.deleteSharedPrefData(key: String) = getAppPrefs().edit().remove(key).apply()
 
 }

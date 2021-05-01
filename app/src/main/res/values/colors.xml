@@ -19,6 +19,7 @@
     <color name="disabled_text_color_material_dark">#80999999</color>
     <color name="transparent">#00000000</color>
     <color name="half_white">#80FFFFFF</color>
+    <color name="half_black">#80000000</color>
     <color name="elevation_color">#BDBDBD</color>
 
     <color name="button_color_green">#3CA827</color>

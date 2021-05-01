@@ -143,10 +143,16 @@
     <string name="submit">Submit</string>
     <string name="invalid_area_selected">please choose area first</string>
     <string name="out_of_area_range">out of area range</string>
-    <string name="getting_your_location">getting your location first, please wait...</string>
+    <string name="getting_your_location">getting your location first, please wait…</string>
     <string name="allow_location_permission">please allow location permission</string>
     <string name="please_select_city_first">please select city first</string>
-    <string name="get_location_settings_failed">sorry we cant get the location, please check the location settings</string>
+    <string name="get_location_settings_failed">sorry we can\'t get the location, please check the location settings</string>
     <string name="private_number">Private Number</string>
     <string name="business_number">Business Number</string>
+    <string name="location_info">Location Info:</string>
+    <string name="coordinates_">Coordinates:</string>
+    <string name="serial_num_">Serial Num:</string>
+    <string name="date_time_">Date-Time:</string>
+    <string name="get_serial">Get Serial</string>
+    <string name="please_allow_permission_phone_critical">please allow permission phone status to proceed</string>
 </resources>

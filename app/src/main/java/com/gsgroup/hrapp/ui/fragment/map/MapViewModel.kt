@@ -11,9 +11,12 @@ import com.google.android.gms.maps.model.Marker
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.SearchItemInterface
 import com.gsgroup.hrapp.ui.fragment.login.AreasItem
+import com.gsgroup.hrapp.ui.fragment.login.Attendance
 import com.gsgroup.hrapp.ui.fragment.login.City
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.MapUtil
 import com.gsgroup.hrapp.util.MapUtil.animateCameraOnMarkers
 import com.gsgroup.hrapp.util.MapUtil.animateCameraToPosition
@@ -21,6 +24,8 @@ import com.gsgroup.hrapp.util.MapUtil.drawRadiusAroundMarker
 import com.gsgroup.hrapp.util.MapUtil.getAreaMarker
 import com.gsgroup.hrapp.util.MapUtil.getCurrentMarker
 import com.gsgroup.hrapp.util.Resource
+import com.gsgroup.hrapp.util.SharedPrefUtil.setData
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import com.gsgroup.hrapp.util.isNull
 import com.gsgroup.hrapp.util.requestNewCallDeferred
 import timber.log.Timber
@@ -71,7 +76,7 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
             if (request.isValid()) {
                 if (!isInArea()) {
                     requestNewCallDeferred({ checkInCallAsync(request) }) {
-                        //update user data prefs here to make him signed in
+                        updateUserDataPrefs(it.response?.data)
                         postResult(Resource.success(msg = it.message))
                     }
                 }
@@ -83,6 +88,12 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
                 postResult(Resource.success(msg = it.message))
             }
         }
+    }
+
+    private fun updateUserDataPrefs(attendance: Attendance?) {
+        val newUserData = userData
+        newUserData?.attendance = attendance
+        app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData(newUserData)
     }
 
     private  fun checkInCallAsync(request: AttendanceRequest) = apiHelper.checkInAsync(request)

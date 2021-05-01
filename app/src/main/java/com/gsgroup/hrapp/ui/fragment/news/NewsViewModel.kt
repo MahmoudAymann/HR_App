@@ -10,7 +10,7 @@ class NewsViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val adapter = NewsAdapter(::onItemClick)
     val obsShowEmptyView = ObservableBoolean()
-    private fun onItemClick(itemNews: ItemNews) {
+    private fun onItemClick(itemNews: NewsItem) {
         setValue(itemNews)
     }
 

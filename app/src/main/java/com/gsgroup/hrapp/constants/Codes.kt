@@ -1,6 +1,8 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val OPEN_PERMISSION_SETTING: Int = 1023
+    val ALLOW_PERMISSION: Int = 1022
     val EMAIL_CLICK: Int = 1021
     val PRIVATE_PHONE: Int = 1020
     val BUSINESS_PHONE: Int = 1019

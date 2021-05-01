@@ -1,8 +1,11 @@
 package com.gsgroup.hrapp.util
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -12,14 +15,20 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefFirebaseToken
+import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -29,6 +38,72 @@ import kotlin.collections.ArrayList
 
 object AppUtil {
 
+    @SuppressLint("MissingPermission", "HardwareIds")
+    fun getDeviceSerial(applicationContext: Context): String {
+
+        var serialNumber: String
+
+        try {
+            val c = Class.forName("android.os.SystemProperties")
+            val get = c.getMethod("get", String::class.java)
+
+            serialNumber = get.invoke(c, "gsm.sn1") as String
+
+            when (serialNumber) {
+                "" -> serialNumber = get.invoke(c, "ril.serialnumber") as String
+            }
+
+            when (serialNumber) {
+                "" -> serialNumber = get.invoke(c, "ro.serialno") as String
+            }
+
+            when (serialNumber) {
+                "" -> serialNumber = get.invoke(c, "sys.serialnumber") as String
+            }
+
+            when (serialNumber) {
+                "" -> serialNumber = Build.SERIAL
+            }
+
+            when (serialNumber) {
+                "" -> serialNumber = applicationContext.getPrefFirebaseToken()
+            }
+
+        } catch (e: Exception) {
+            Timber.e(e)
+            serialNumber = applicationContext.getPrefFirebaseToken()
+        }
+
+        if (serialNumber == "unknown") {
+            try {
+                val c = Class.forName("android.os.SystemProperties")
+                val get = c.getMethod(
+                    "get",
+                    String::class.java,
+                    String::class.java
+                )
+                serialNumber = get.invoke(c, "ril.serialnumber", "unknown") as String
+            } catch (ignored: Exception) {
+                Timber.d("BuildSerialException getDeviceSerial: $ignored")
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && serialNumber == "unknown") {
+            if (PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PHONE_STATE)) {
+                serialNumber = Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && serialNumber == "unknown") {
+            if (PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PHONE_STATE)
+                && PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PRECISE_PHONE_STATE)
+            ) {
+                serialNumber = Build.getSerial()
+            }
+        }
+        if (serialNumber == "unknown"){
+            serialNumber =  applicationContext.getPrefFirebaseToken()
+        }
+        return serialNumber
+    }
 
     fun Context.getDrawableForLiteVersions(@DrawableRes drawableRes: Int): Drawable? {
         return if (isOldDevice())
@@ -127,17 +202,5 @@ object AppUtil {
         }
     }
 
-    fun FragmentActivity.goToSettingsPermissions(
-        msg: String,
-        register: ActivityResultLauncher<Intent>
-    ) {
-        showDialog(msg) {
-            val myAppSettings = Intent(
-                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.parse("package:$packageName")
-            )
-            myAppSettings.addCategory(Intent.CATEGORY_DEFAULT)
-            register.launch(myAppSettings)
-        }
-    }
+
 }

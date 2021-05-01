@@ -12,6 +12,7 @@ import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
 import com.gsgroup.hrapp.ui.fragment.news.NewsResponse
 import com.gsgroup.hrapp.ui.fragment.news.details.NewsDetailsResponse
 import com.gsgroup.hrapp.base.network.response.NetworkResponse
+import com.gsgroup.hrapp.ui.fragment.map.AttendanceResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.Body
@@ -55,10 +56,10 @@ interface ApiService {
 
 
     @POST("$keyMobile/check_in")
-     fun checkInAsync(@Body request: AttendanceRequest): Deferred<BaseObjectResponse>
+     fun checkInAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
 
     @POST("$keyMobile/check_out")
-     fun checkOutAsync(): Deferred<BaseObjectResponse>
+     fun checkOutAsync(): Deferred<AttendanceResponse>
 
 
 }

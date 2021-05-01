@@ -50,5 +50,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
 
+    override fun onResume() {
+        mViewModel.hideCheckInButton()
+        super.onResume()
+    }
+
 }
 

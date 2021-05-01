@@ -130,5 +130,5 @@ data class DataUser(
 	val email: String? = null,
 
 	@field:SerializedName("attendance")
-	val attendance: Attendance? = null
+	var attendance: Attendance? = null
 ) : Parcelable

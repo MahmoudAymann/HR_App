@@ -2,14 +2,19 @@ package com.gsgroup.hrapp.util
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
+import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.FragmentActivity
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import timber.log.Timber
 
 object PermissionUtil {
     fun isGranted(activity: Context, permission: String): Boolean {
@@ -26,7 +31,6 @@ object PermissionUtil {
         permissions: List<String>,
         callBack: (AppPermissionResult) -> Unit
     ) {
-
         Dexter.withContext(this)
             .withPermissions(permissions).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
@@ -47,6 +51,7 @@ object PermissionUtil {
                     list: List<PermissionRequest>,
                     token: PermissionToken
                 ) {
+                    Timber.e("hg")
                     token.continuePermissionRequest()
                 }
             }).check()
@@ -60,6 +65,19 @@ object PermissionUtil {
         runDexter(list, callBack)
     }
 
+    fun Context.goToSettingsPermissions(
+        msg: String,
+        register: ActivityResultLauncher<Intent>?=null
+    ) {
+        showDialog(msg) {
+            val myAppSettings = Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:$packageName")
+            )
+            myAppSettings.addCategory(Intent.CATEGORY_DEFAULT)
+            register?.launch(myAppSettings)
+        }
+    }
 
     fun Context.requestAppPermissions(
         permissions: List<String>,
@@ -107,6 +125,25 @@ object PermissionUtil {
                 permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION)
             }
         return permissionList
+    }
+
+    fun getPhoneCriticalPermissions(): List<String> {
+        val permissionList = mutableListOf(Manifest.permission.READ_PHONE_STATE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            permissionList.add(Manifest.permission.READ_PRECISE_PHONE_STATE)
+        }
+        return permissionList
+    }
+
+    fun hasAllPhoneCriticalPermissions(context: Context): Boolean {
+        return if (isGranted(context, Manifest.permission.READ_PHONE_STATE)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                isGranted(context, Manifest.permission.READ_PRECISE_PHONE_STATE)
+            }
+            true
+        } else {
+            false
+        }
     }
 
 }

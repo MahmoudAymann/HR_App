@@ -24,7 +24,7 @@ class DetailsViewModel(app: Application) : AndroidBaseViewModel(app) {
     fun setScreenPermissions(id: Int) {
         when (id) {
             R.id.splashFragment, R.id.loginFragment -> authScreenPermissions()
-            R.id.mapFragment, R.id.bottomSheetFragment-> fullScreenPermission()
+            R.id.mapFragment, R.id.bottomSheetFragment, R.id.shareLocationFragment-> fullScreenPermission()
             else -> detailsScreen()
         }
     }

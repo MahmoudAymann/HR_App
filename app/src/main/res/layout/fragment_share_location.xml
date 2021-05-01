@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.map.share.ShareLocationFragment"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_24sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="@dimen/_8sdp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_16sdp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_location_static"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_info"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_latlng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/coordinates_ + ` ` + viewModel.obsLatLng.latitude + ` Lat - ` + viewModel.obsLatLng.longitude + ` Long`}"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_location_static"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:textAlignment="viewStart"
+                    tools:text="latlng"
+                    />
+                <TextView
+                    android:id="@+id/tv_date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@{@string/date_time_ + ` ` + viewModel.obsDateTime}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_latlng"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:textAlignment="viewStart"
+                    tools:text="@tools:sample/date/ddmmyy"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_device_serial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@{@string/serial_num_ + ` ` + viewModel.obsSerial}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_date_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:textAlignment="viewStart"
+                    tools:text="serial"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/TextButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_serial"
+                    android:textColor="@color/black"
+                    android:onClick="@{()->viewModel.onAllowPermissionClick()}"
+                    android:id="@+id/btn_get_permission"
+                    app:visibleInVisible="@{!viewModel.isGranted()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_device_serial"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send"
+                    style="@style/SubmitButton"
+                    android:id="@+id/btn_send"
+                    app:backgroundTint="@color/black"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_get_permission"
+                    />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    style="@style/TextButtonStyle"
+                    android:onClick="@{()->viewModel.onCancelClick()}"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_get_permission"
+                    />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationViewModel"
+            />
+    </data>
+
+</layout>
