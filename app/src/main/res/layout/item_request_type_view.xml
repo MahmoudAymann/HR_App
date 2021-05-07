@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <com.lb.auto_fit_textview.AutoResizeTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:background="@drawable/tv_item_request_type_bg"
+        android:elevation="@dimen/_8sdp"
+        android:text="@{item.title}"
+        android:maxLines="1"
+        app:drawableEndCompat="@drawable/ic_enter_arrow"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        tools:text="@string/my_hr"
+        />
+
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.gsgroup.hrapp.ui.fragment.requests.types.ItemRequestType"
+            />
+    </data>
+</layout>

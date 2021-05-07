@@ -107,6 +107,7 @@
                     android:id="@+id/btn_send"
                     app:backgroundTint="@color/black"
                     android:textColor="@color/white"
+                    android:onClick="@{()->viewModel.onSubmitClick()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/btn_get_permission"
                     />

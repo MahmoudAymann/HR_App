@@ -10,6 +10,8 @@ import com.gsgroup.hrapp.util.AppUtil
 import com.gsgroup.hrapp.util.PermissionUtil
 import com.gsgroup.hrapp.util.PermissionUtil.AppPermissionResult.ALL_GOOD
 import com.gsgroup.hrapp.util.PermissionUtil.AppPermissionResult.OPEN_SETTING
+import com.gsgroup.hrapp.util.Resource
+import com.gsgroup.hrapp.util.requestNewCallDeferred
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,14 +21,21 @@ class ShareLocationViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsSerial = ObservableField<String>()
     val obsDateTime = ObservableField<String>()
     val isGranted = ObservableBoolean()
+    val request = ShareLocationRequest()
     fun gotData(args: ShareLocationFragmentArgs) {
-        obsLatLng.set(LatLng(args.lat.toDouble(), args.lng.toDouble()))
-        val serial = AppUtil.getDeviceSerial(app.applicationContext)
+        val lat = args.lat
+        val lng = args.lng
+        obsLatLng.set(LatLng(lat.toDouble(), lng.toDouble()))
+        request.lat = lat
+        request.lng = lng
+
+
+        val serial = userData?.serial ?: AppUtil.getDeviceSerial(app.applicationContext)
         obsSerial.set(serial)
+
+
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.ENGLISH)
         obsDateTime.set(sdf.format(Calendar.getInstance().time))
-
-
         if (PermissionUtil.hasAllPhoneCriticalPermissions(app.applicationContext)) {
             isGranted.set(true)
         }
@@ -42,8 +51,11 @@ class ShareLocationViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun onSubmitClick(){
-
+        requestNewCallDeferred({ shareLocationCallAsync() }) {
+            postResult(Resource.success(it))
+        }
     }
+    private fun shareLocationCallAsync() = apiHelper.shareLocationAsync(request)
 
 
     fun permissionResult(it: PermissionUtil.AppPermissionResult) {

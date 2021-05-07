@@ -28,9 +28,6 @@ object ExceptionUtil {
                     app.getString(R.string.server_error)
                 }
             }
-           is ConnectException->{
-               app.getString(R.string.network_error)
-           }
            else -> this.toString()
        }
     }

@@ -46,4 +46,9 @@
     <string name="yes">نعم</string>
     <string name="no">لا</string>
     <string name="ask_change_language">هل انت متأكد من تغيير اللغة؟</string>
+    <string name="network_error">تحقق من شبكة الاتصال بالانترنت وحاول مرة اخرى</string>
+    <string name="new_medical_card_notes">- يمكنك طلب بطاقة طبية جديدة بعد مرور 3 أشهر من تاريخ تعيينك.</string>
+
+    <string name="replacement_medical_card_notes">- سيتم خصم مبلغ ١٥٠ جنيه مصري من راتبك لمرة واحدة فقط وهي مصاريف إصدار كارت بدل فاقد.\n
+    - يمكنك استلام الكارت من قسم الموارد البشرية بعد مرور ٢٠ يوم من تاريخ عمل الطلب.</string>
 </resources>

@@ -52,6 +52,13 @@ class OtherViewsBinding {
         }
     }
 
+    @BindingAdapter("setButtonBackground")
+    fun setButtonBg(cv: MaterialButton, color: Int?) {
+        color?.let {
+            cv.setBackgroundColor(color)
+        }
+    }
+
     @BindingAdapter("loadGif")
     fun loadGifImage(cv: ImageView, image: Any?) {
         image?.let {

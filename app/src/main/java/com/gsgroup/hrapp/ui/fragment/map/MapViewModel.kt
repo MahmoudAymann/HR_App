@@ -17,17 +17,14 @@ import com.gsgroup.hrapp.ui.fragment.login.AreasItem
 import com.gsgroup.hrapp.ui.fragment.login.Attendance
 import com.gsgroup.hrapp.ui.fragment.login.City
 import com.gsgroup.hrapp.ui.fragment.login.DataUser
-import com.gsgroup.hrapp.util.MapUtil
+import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.MapUtil.animateCameraOnMarkers
 import com.gsgroup.hrapp.util.MapUtil.animateCameraToPosition
 import com.gsgroup.hrapp.util.MapUtil.drawRadiusAroundMarker
 import com.gsgroup.hrapp.util.MapUtil.getAreaMarker
 import com.gsgroup.hrapp.util.MapUtil.getCurrentMarker
-import com.gsgroup.hrapp.util.Resource
 import com.gsgroup.hrapp.util.SharedPrefUtil.setData
 import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
-import com.gsgroup.hrapp.util.isNull
-import com.gsgroup.hrapp.util.requestNewCallDeferred
 import timber.log.Timber
 
 class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
@@ -43,6 +40,7 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
     var areasList: Array<SearchItemInterface>? = arrayOf()
     private var currentMarker: Marker? = null
     private var areaMarker: Marker? = null
+    private val serial = userData?.serial ?: AppUtil.getDeviceSerial(app.applicationContext)
 
     init {
         isLoading.set(true)
@@ -75,7 +73,8 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
         if (obsIsCheckIn.get()) {
             if (request.isValid()) {
                 if (!isInArea()) {
-                    requestNewCallDeferred({ checkInCallAsync(request) }) {
+                    request.serial = serial
+                    requestNewCallDeferred({ checkInCallAsync() }) {
                         updateUserDataPrefs(it.response?.data)
                         postResult(Resource.success(msg = it.message))
                     }
@@ -96,8 +95,8 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
         app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData(newUserData)
     }
 
-    private  fun checkInCallAsync(request: AttendanceRequest) = apiHelper.checkInAsync(request)
-    private  fun checkOutCallAsync() = apiHelper.checkOutAsync()
+    private  fun checkInCallAsync() = apiHelper.checkInAsync(request)
+    private  fun checkOutCallAsync() = apiHelper.checkOutAsync(request)
 
     fun onCityClick() {
         setValue(Codes.OPEN_CITY_LIST)

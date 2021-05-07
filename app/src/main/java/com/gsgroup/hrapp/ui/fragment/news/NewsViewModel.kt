@@ -15,7 +15,7 @@ class NewsViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     init {
-        requestNewCallDeferred({ newsCall() }) {
+        requestNewCallDeferred({ newsCallAsync() }) {
             it.response?.data?.let { list ->
                 if(list.isEmpty()){
                  obsShowEmptyView.set(true)
@@ -29,7 +29,7 @@ class NewsViewModel(app: Application) : AndroidBaseViewModel(app) {
         }
     }
 
-    private fun newsCall() = apiHelper.getNewsAsync()
+    private fun newsCallAsync() = apiHelper.getNewsAsync()
 
 
 }

@@ -78,6 +78,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="iconTint">@color/black</item>
         <item name="iconGravity">end</item>
+        <item name="icon">@drawable/ic_enter_arrow</item>
     </style>
 
 

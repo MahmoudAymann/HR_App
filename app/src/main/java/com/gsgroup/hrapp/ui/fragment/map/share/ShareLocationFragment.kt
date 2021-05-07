@@ -15,10 +15,10 @@ import androidx.navigation.fragment.navArgs
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentShareLocationBinding
-import com.gsgroup.hrapp.util.PermissionUtil
+import com.gsgroup.hrapp.ui.activity.details.DetailsActivity
+import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.PermissionUtil.goToSettingsPermissions
 import com.gsgroup.hrapp.util.PermissionUtil.requestAppPermissions
-import com.gsgroup.hrapp.util.observe
 
 class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityResult> {
 
@@ -46,7 +46,7 @@ class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityR
             gotData(args)
             observe(mutableLiveData) {
                 when (it) {
-                    Codes.BACK_BUTTON_PRESSED->dismiss()
+                    Codes.BACK_BUTTON_PRESSED -> dismiss()
                     Codes.ALLOW_PERMISSION -> activity?.requestAppPermissions(PermissionUtil.getPhoneCriticalPermissions()) {
                         mViewModel.permissionResult(it)
                     }
@@ -57,10 +57,27 @@ class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityR
                 }
             }
             observe(resultLiveData) {
-
+                when (it?.status) {
+                    Status.SUCCESS -> {
+                        showProgress(false)
+                        dismiss()
+                    }
+                    Status.MESSAGE -> {
+                        showProgress(false)
+                        activity?.showErrorDialog(it.message)
+                    }
+                    Status.LOADING -> showProgress()
+                }
             }
+
         }
         return binding.root
+    }
+
+    private fun showProgress(b: Boolean = true) {
+        castToActivity<DetailsActivity> {
+            it?.baseShowProgress?.set(b)
+        }
     }
 
 

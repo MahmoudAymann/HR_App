@@ -98,7 +98,8 @@ data class DataUser(
 
 	@field:SerializedName("image")
 	val image: String? = null,
-
+	@field:SerializedName("serial_mobile")
+	val serial: String? = null,
 	@field:SerializedName("code")
 	val code: String? = null,
 

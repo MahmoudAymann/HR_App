@@ -5,9 +5,11 @@ import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -15,22 +17,18 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefFirebaseToken
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import timber.log.Timber
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 /**
  * Created by MahmoudAyman on 8/25/2020.
@@ -90,11 +88,17 @@ object AppUtil {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && serialNumber == "unknown") {
             if (PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PHONE_STATE)) {
-                serialNumber = Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+                serialNumber = Settings.Secure.getString(
+                    applicationContext.contentResolver,
+                    Settings.Secure.ANDROID_ID
+                )
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && serialNumber == "unknown") {
             if (PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PHONE_STATE)
-                && PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PRECISE_PHONE_STATE)
+                && PermissionUtil.isGranted(
+                    applicationContext,
+                    Manifest.permission.READ_PRECISE_PHONE_STATE
+                )
             ) {
                 serialNumber = Build.getSerial()
             }
@@ -139,14 +143,14 @@ object AppUtil {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
     }
 
-    fun Context.getFont(@FontRes fontRes:Int) : Typeface? {
+    fun Context.getFont(@FontRes fontRes: Int) : Typeface? {
         return ResourcesCompat.getFont(this, fontRes)
     }
 
     private fun getMinDate(date: String): Calendar {
         val day = date.split("-").toTypedArray()
         val c: Calendar = getCurrentCalInstance()
-        c.set(day[0].toInt(), day[1].toInt()-1, day[2].toInt())
+        c.set(day[0].toInt(), day[1].toInt() - 1, day[2].toInt())
         return c
     }
 
@@ -161,7 +165,11 @@ object AppUtil {
         return mCalendar
     }
 
-    fun <T> setSpinner(spinner:Spinner, list: ArrayList<T> = ArrayList(), liveData: MutableLiveData<T?>) {
+    fun <T> setSpinner(
+        spinner: Spinner,
+        list: ArrayList<T> = ArrayList(),
+        liveData: MutableLiveData<T?>
+    ) {
         val adapter = ArrayAdapter(
             spinner.context,
             android.R.layout.simple_spinner_dropdown_item,
@@ -202,5 +210,24 @@ object AppUtil {
         }
     }
 
+    @Suppress("DEPRECATION")
+     fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val nw      = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+            return when {
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                //for other device how are able to connect with Ethernet
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                //for check internet over Bluetooth
+                actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
+                else -> false
+            }
+        } else {
+            return connectivityManager.activeNetworkInfo?.isConnected ?: false
+        }
+    }
 
 }

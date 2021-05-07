@@ -11,7 +11,33 @@ data class NewsResponse(
 
 	@field:SerializedName("response")
 	val response: Response? = null,
-) : Parcelable,BaseObjectResponse()
+) : Parcelable, BaseObjectResponse()
+
+@Parcelize
+data class Company(
+
+	@field:SerializedName("image")
+	val image: String? = null,
+
+	@field:SerializedName("code")
+	val code: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null
+) : Parcelable
+
+@Parcelize
+data class Category(
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null
+) : Parcelable
 
 @Parcelize
 data class NewsItem(
@@ -26,7 +52,7 @@ data class NewsItem(
 	val createdAt: String? = null,
 
 	@field:SerializedName("company")
-	val company: List<Int?>? = null,
+	val company: Company? = null,
 
 	@field:SerializedName("id")
 	val id: Int = 0,
@@ -35,7 +61,7 @@ data class NewsItem(
 	val title: String? = null,
 
 	@field:SerializedName("category")
-	val category: List<Int?>? = null
+	val category: Category? = null
 ) : Parcelable, BaseParcelable{
 	override fun unique() = id
 }
@@ -44,5 +70,5 @@ data class NewsItem(
 data class Response(
 
 	@field:SerializedName("data")
-	val data: List<NewsItem?>? = null,
+	val data: List<NewsItem?>? = null
 ) : Parcelable

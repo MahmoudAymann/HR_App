@@ -50,7 +50,7 @@
     <string name="total_num_of_employees">Total Num of Employees</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="server_error">Server Error</string>
+    <string name="server_error" translatable="false">Server Error</string>
     <string name="network_error">please check your network and try again…</string>
     <string name="ask_change_language">are you sure you want to change language?</string>
     <string name="log_out_check_message">are you sure you want to logout?</string>
@@ -80,8 +80,8 @@
     <string name="medical_approval_to_treat_a_chronic_disease">Medical approval to treat a chronic disease</string>
     <string name="normal_medical_approval">Normal Medical Approval</string>
     <string name="my_requests">My Requests</string>
-    <string name="hr_request">Request to HR</string>
-    <string name="requests_to_direct_manager">Requests to Direct Manager</string>
+    <string name="hr_request">HR Requests</string>
+    <string name="direct_manager_requests">Direct Manager Requests</string>
     <string name="audit_request">Audit Request</string>
     <string name="details">Details</string>
     <string name="less_than_3">Less Than 3</string>
@@ -138,7 +138,6 @@
     <string name="select_year">Select Year</string>
     <string name="select_month">Select Month</string>
     <string name="colors_table">Colors Table</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="submit">Submit</string>
     <string name="invalid_area_selected">please choose area first</string>
@@ -155,4 +154,25 @@
     <string name="date_time_">Date-Time:</string>
     <string name="get_serial">Get Serial</string>
     <string name="please_allow_permission_phone_critical">please allow permission phone status to proceed</string>
+    <string name="complain">Complain</string>
+    <string name="phone_issue_request">Issue in Business Number</string>
+    <string name="salary_info_request">Salary Info</string>
+    <string name="complain_request">Send Complain</string>
+    <string name="print_insurance_request">Print Insurance</string>
+    <string name="medical_card_request">Medical Card</string>
+    <string name="medical_approval_request">Medical Approval</string>
+    <string name="auth_area_request">Authorize Area</string>
+    <string name="borrow_request">Borrow Request</string>
+    <string name="exp_certificate_request">Exp. Certificate</string>
+    <string name="hire_emp_request">Hire Employee (New - Replace)</string>
+    <string name="resign_request">Resign</string>
+    <string name="penalty_request">Penalty</string>
+    <string name="vacation_request">Vacation</string>
+    <string name="excuse_request">Excuse</string>
+    <string name="mission_request">Mission</string>
+    <string name="replacement_medical_card">Replacement</string>
+    <string name="new_">New</string>
+    <string name="new_medical_card_notes">- You can request a new medical card after passing 3 months from your joining date.</string>
+    <string name="replacement_medical_card_notes">- An amount of EGP 150 will be deducted from your salary for one time only, which is the expenses of issuing a lost card.\n
+    - You can receive the card from the Human Resources department after 20 days have passed from the date the application was made.</string>
 </resources>

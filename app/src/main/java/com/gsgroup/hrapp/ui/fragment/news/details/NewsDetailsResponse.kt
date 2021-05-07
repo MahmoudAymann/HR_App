@@ -8,9 +8,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class NewsDetailsResponse(
 
-	@field:SerializedName("errors")
-	val errors: String? = null,
-
 	@field:SerializedName("response")
 	val response: Response? = null,
 
@@ -19,9 +16,7 @@ data class NewsDetailsResponse(
 @Parcelize
 data class Response(
 	@field:SerializedName("data")
-	val data: NewsData? = null,
-	@field:SerializedName("meta")
-	val meta: String? = null
+	val data: NewsData? = null
 ) : Parcelable
 
 @Parcelize
@@ -38,9 +33,6 @@ data class NewsData(
 
 	@field:SerializedName("id")
 	val id: Int? = null,
-
-	@field:SerializedName("source")
-	val source: String? = null,
 
 	@field:SerializedName("title")
 	val title: String? = null,

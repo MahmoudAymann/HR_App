@@ -13,6 +13,8 @@ import com.gsgroup.hrapp.ui.fragment.news.NewsResponse
 import com.gsgroup.hrapp.ui.fragment.news.details.NewsDetailsResponse
 import com.gsgroup.hrapp.base.network.response.NetworkResponse
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceResponse
+import com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationRequest
+import com.gsgroup.hrapp.ui.fragment.requests.complain.ComplainRequest
 import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.http.Body
@@ -59,7 +61,15 @@ interface ApiService {
      fun checkInAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
 
     @POST("$keyMobile/check_out")
-     fun checkOutAsync(): Deferred<AttendanceResponse>
+     fun checkOutAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
+
+     @POST("$keyMobile/share_location")
+     fun shareLocationAsync(@Body request: ShareLocationRequest): Deferred<AttendanceResponse>
+
+
+     //requests
+    @POST("$keyMobile/Complains")
+    fun complainAsync(@Body request: ComplainRequest): Deferred<BaseObjectResponse>
 
 
 }

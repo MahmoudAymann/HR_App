@@ -67,7 +67,7 @@ object PermissionUtil {
 
     fun Context.goToSettingsPermissions(
         msg: String,
-        register: ActivityResultLauncher<Intent>?=null
+        register: ActivityResultLauncher<Intent>?
     ) {
         showDialog(msg) {
             val myAppSettings = Intent(

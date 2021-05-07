@@ -35,7 +35,6 @@
                         android:layout_height="@dimen/_120sdp"
                         tools:src="@tools:sample/backgrounds/scenic"
                         android:scaleType="fitXY"
-                        loadImage="@{viewModel.data.source}"
                         app:layout_constraintTop_toTopOf="parent"
                         />
 

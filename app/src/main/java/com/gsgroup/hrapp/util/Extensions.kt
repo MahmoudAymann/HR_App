@@ -121,16 +121,19 @@ fun AppCompatActivity.findFragmentById(id: Int): Fragment? {
     }
 }
 
+//this usually used when supporting apis below 21
 fun <T : Any> AndroidBaseViewModel.requestNewCallDeferred(
     networkCall: () -> Deferred<T>,
     successCallBack: (T) -> Unit
 ) {
-    //this usually used when supporting apis below 21
+    if(!AppUtil.isNetworkAvailable(app.applicationContext)){
+        postResult(Resource.message(getString(R.string.network_error)))
+        return
+    }
     viewModelScope.launch {
         postResult(Resource.loading())
         try {
             val res = networkCall().await() // execute
-            Timber.tag("response").d("$res")
             successCallBack(res)
         } catch (e: Exception) {
             Timber.e(e)
@@ -263,7 +266,7 @@ fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
             ): Boolean {
                 Timber.e("$e")
                 setImageResource(R.drawable.ic_broken_image)
-                setPadding(200, 50, 200, 50)
+//                setPadding(200, 50, 200, 50)
                 return true
             }
 

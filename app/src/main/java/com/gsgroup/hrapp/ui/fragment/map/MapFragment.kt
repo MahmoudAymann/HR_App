@@ -90,7 +90,10 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             requireActivity().requestAppPermissions(PermissionUtil.getPhoneCriticalPermissions()){
                 when(it){
                     ALL_GOOD -> navigateToShareLocationScreen()
-                    OPEN_SETTING -> requireActivity().goToSettingsPermissions(getString(R.string.please_allow_permission_phone_critical))
+                    OPEN_SETTING -> requireActivity().goToSettingsPermissions(getString(R.string.please_allow_permission_phone_critical),registerForActivityResult(
+                        ActivityResultContracts.StartActivityForResult()) {
+                        openShareLocationScreen()
+                    })
                 }
             }
         }
@@ -158,7 +161,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
     private fun askForLocationPermissions() {
         if (PermissionUtil.hasAllLocationPermissions(requireContext())) {
             startGetLocation()
-
         } else {
             requireActivity().requestAppPermissions(PermissionUtil.getAllLocationPermissions()) {
                 when (it) {

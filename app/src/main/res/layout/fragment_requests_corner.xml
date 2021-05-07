@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.corner.RequestsCornerViewModel"
+            />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/my_requests"
+                android:onClick="@{()->viewModel.onMyRequestsClick()}"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="@dimen/_8sdp"
                 />
@@ -34,6 +42,7 @@
                 android:layout_height="@dimen/_80sdp"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:text="@string/hr_request"
+                android:onClick="@{()->viewModel.onRequestClick(true)}"
                 android:layout_marginEnd="@dimen/_8sdp"
                 app:layout_constraintEnd_toStartOf="@+id/btn_dm"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +55,8 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_80sdp"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:text="@string/requests_to_direct_manager"
+                android:onClick="@{()->viewModel.onRequestClick(false)}"
+                android:text="@string/direct_manager_requests"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_hr"
                 app:layout_constraintTop_toBottomOf="@+id/btn_my_requests"
@@ -61,6 +71,7 @@
                 android:text="@string/audit_request"
                 app:icon="@drawable/ic_audit"
                 app:iconGravity="end"
+                android:onClick="@{()->viewModel.onAuditClick()}"
                 android:layout_marginTop="@dimen/_16sdp"
                 app:layout_constraintTop_toBottomOf="@+id/btn_hr"
                 />

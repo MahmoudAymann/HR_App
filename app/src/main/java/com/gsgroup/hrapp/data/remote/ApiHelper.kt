@@ -1,8 +1,13 @@
 package com.gsgroup.hrapp.data.remote
 
+import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
+import com.gsgroup.hrapp.ui.fragment.map.AttendanceResponse
+import com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationRequest
+import com.gsgroup.hrapp.ui.fragment.requests.complain.ComplainRequest
+import kotlinx.coroutines.Deferred
 
 
 /**
@@ -26,5 +31,10 @@ class ApiHelper(private val apiService: ApiService) : ApiService {
     override  fun changePasswordAsync(request: ChangePasswordRequest) = apiService.changePasswordAsync(request)
     override  fun checkInAsync(request: AttendanceRequest) = apiService.checkInAsync(request)
 
-    override  fun checkOutAsync() = apiService.checkOutAsync()
+    override  fun checkOutAsync(request: AttendanceRequest) = apiService.checkOutAsync(request)
+    override fun shareLocationAsync(request: ShareLocationRequest) = apiService.shareLocationAsync(request)
+
+    override fun complainAsync(request: ComplainRequest) = apiService.complainAsync(request)
+
+
 }

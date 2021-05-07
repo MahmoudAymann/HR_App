@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/btn_filter"
-                tools:listitem="@layout/item_request_view"
+                tools:listitem="@layout/item_my_request_view"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

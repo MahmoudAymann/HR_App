@@ -23,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
-                app:icon="@drawable/ic_enter_arrow"
                 android:text="@{viewModel.obsMonth}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

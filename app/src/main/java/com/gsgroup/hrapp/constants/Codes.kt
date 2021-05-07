@@ -1,6 +1,11 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val AUDIT_SCREEN: Int = 1027
+    val MY_REQUESTS_SCREEN: Int = 1026
+
+    val HR_REQUESTS_SCREEN: Int = 1025
+    val DM_REQUESTS_SCREEN: Int = 1024
     val OPEN_PERMISSION_SETTING: Int = 1023
     val ALLOW_PERMISSION: Int = 1022
     val EMAIL_CLICK: Int = 1021
