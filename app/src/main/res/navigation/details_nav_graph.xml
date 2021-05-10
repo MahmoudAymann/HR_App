@@ -79,7 +79,12 @@
         android:name="com.gsgroup.hrapp.ui.fragment.sign_in_out_logs.SignInOutLogFragment"
         android:label="SignInOutLog"
         tools:layout="@layout/fragment_sign_in_out_log"
-        />
+        >
+        <action
+            android:id="@+id/action_signInOutLogFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/requestsCornerFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.corner.RequestsCornerFragment"

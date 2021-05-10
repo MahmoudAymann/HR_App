@@ -52,10 +52,13 @@ class OtherViewsBinding {
         }
     }
 
-    @BindingAdapter("setButtonBackground")
-    fun setButtonBg(cv: MaterialButton, color: Int?) {
-        color?.let {
-            cv.setBackgroundColor(color)
+    @BindingAdapter("setButtonBackground", "setButtonTextColor",requireAll = false)
+    fun setButtonBg(cv: MaterialButton, bgColor: Int?, tvColor: Int?) {
+        bgColor?.let {
+            cv.setBackgroundColor(bgColor)
+        }
+        tvColor?.let {
+            cv.setTextColor(tvColor)
         }
     }
 

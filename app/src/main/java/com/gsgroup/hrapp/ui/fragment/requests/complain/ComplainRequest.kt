@@ -10,7 +10,7 @@ data class ComplainRequest(
     @SerializedName("details")
     var details: String? = null,
     @SerializedName("is_urgent")
-    var isUrgent: Boolean = false,
+    var isUrgent: Int = 0,
     var imageFile: File? = null,
     var type: String = HR_REQUEST,
 ) : Parcelable {

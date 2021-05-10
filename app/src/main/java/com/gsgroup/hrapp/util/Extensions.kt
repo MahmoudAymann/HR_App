@@ -1,6 +1,7 @@
 package com.gsgroup.hrapp.util
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -60,6 +61,9 @@ import com.gsgroup.hrapp.util.ExceptionUtil.getErrorFromException
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.HttpException
@@ -83,6 +87,24 @@ fun <T : Any> Fragment.listenForResult(key: String, callback: (T?) -> Unit) {
             callback(result)
         })
 }
+fun String.stringPathToFile(app:Application): File? {
+    FileManager(app.applicationContext.cacheDir).extractAndCompress(this)?.let {
+        return it
+    }?:return null
+}
+
+fun File.toMultiPart(key: String): MultipartBody.Part {
+    val reqFile = RequestBody.create(MediaType.parse("image/*"), this)
+    return MultipartBody.Part.createFormData(
+        key,
+        name, // filename, this is optional
+        reqFile
+    )
+}
+
+
+fun <T : Any> T.toRequestBodyParam(): RequestBody =
+    RequestBody.create(MediaType.parse("text/plain"), this.toString())
 
 fun Fragment.setResultToFragment(key: String, it: SearchItemInterface?) {
     val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle

@@ -15,14 +15,19 @@ import java.net.ContentHandler
 object ExceptionUtil {
 
 
+    val USER_ERROR :Int = 422
+
     fun Exception.getErrorFromException(app: Context): String? {
        return when(this){
             is HttpException->{
                 val body = response()?.errorBody()
                 val adapter = Gson().getAdapter(ErrorResponse::class.java)
                 try {
-                    val error: ErrorResponse = adapter.fromJson(body?.string())
-                    error.errors?.get(0)
+                    val res: ErrorResponse = adapter.fromJson(body?.string())
+                    return when(res.status){
+                        USER_ERROR->res.errors?.get(0)
+                        else -> res.message
+                    }
                 } catch (e: IOException) {
                     Timber.e(e)
                     app.getString(R.string.server_error)
@@ -31,6 +36,8 @@ object ExceptionUtil {
            else -> this.toString()
        }
     }
+
+
 
 
 }

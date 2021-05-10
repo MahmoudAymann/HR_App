@@ -1,6 +1,9 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val SELECT_MONTH: Int = 1030
+    val SELECT_YEAR: Int = 1029
+    val PICK_IMAGE_CODE: Int = 1028
     val AUDIT_SCREEN: Int = 1027
     val MY_REQUESTS_SCREEN: Int = 1026
 

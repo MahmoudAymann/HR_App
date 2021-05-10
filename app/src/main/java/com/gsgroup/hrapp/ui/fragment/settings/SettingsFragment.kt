@@ -6,11 +6,15 @@ import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.constants.Codes
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.databinding.FragmentSettingsBinding
 import com.gsgroup.hrapp.ui.fragment.home.HomeFragmentDirections
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.SharedPrefUtil.deleteAllSharedPrefData
+import com.gsgroup.hrapp.util.SharedPrefUtil.deleteSharedPrefData
 import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import timber.log.Timber
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
     override fun pageTitle(): String = getString(R.string.settings)
@@ -33,7 +37,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
     private fun logout() {
         activity?.showLogoutDialog {
             showDetailsActivity(R.id.loginFragment)
-            activity?.deleteAllSharedPrefData()
+            requireActivity().deleteSharedPrefData(ConstString.PREF_USER_DATA)
+            val userData by requireActivity().sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
+            Timber.e("${userData}")
             activity?.finishAffinity()
         }
     }

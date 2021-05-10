@@ -4,11 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.salaryinfo.SalaryInfoViewModel"
+            />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -41,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="top"
+                    android:text="@={viewModel.request.to}"
                     android:inputType="textMultiLine"
                     android:minHeight="@dimen/_80sdp"
                     />
@@ -63,8 +73,9 @@
                 style="@style/SubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_24sdp"
                 android:text="@string/send"
+                android:onClick="@{()->viewModel.onSubmitClick()}"
                 app:layout_constraintTop_toBottomOf="@+id/tv_notes"
                 tools:layout_editor_absoluteX="21dp"
                 />

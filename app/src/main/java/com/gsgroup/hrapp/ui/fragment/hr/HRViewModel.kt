@@ -25,7 +25,7 @@ class HRViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     init {
         isLoading.set(true)
-        requestNewCallDeferred({ hrCall() }) {
+        requestNewCallDeferred({ hrCallAsync() }) {
             postResult(Resource.success(it))
             data = it.response?.data
             isLoading.set(false)
@@ -33,7 +33,7 @@ class HRViewModel(app: Application) : AndroidBaseViewModel(app) {
         }
     }
 
-    private fun hrCall() = apiHelper.getDirectHrAsync()
+    private fun hrCallAsync() = apiHelper.getDirectHrAsync()
 
 
 

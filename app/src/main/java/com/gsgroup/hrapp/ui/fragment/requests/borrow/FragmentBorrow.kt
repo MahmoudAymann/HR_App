@@ -11,7 +11,10 @@ import com.gsgroup.hrapp.app.BaseApplication
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentBorrowBinding
+import com.gsgroup.hrapp.util.Status
 import com.gsgroup.hrapp.util.observe
+import com.gsgroup.hrapp.util.showErrorDialog
+import com.gsgroup.hrapp.util.showSuccessfulDialog
 
 /**
  * Created by MahmoudAyman on 8/23/2020.
@@ -19,16 +22,26 @@ import com.gsgroup.hrapp.util.observe
 class FragmentBorrow : BaseFragment<FragmentBorrowBinding, BorrowViewModel>() {
 
 
-    override fun pageTitle(): String = ""
+    override fun pageTitle(): String = getString(R.string.borrow_request)
 
     override val mViewModel: BorrowViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.apply {
-            observe(mutableLiveData) {
-                when (it) {
-
+            observe(resultLiveData) {
+                when (it?.status) {
+                    Status.SUCCESS -> {
+                        showProgress(false)
+                        activity?.showSuccessfulDialog(it.message){
+                            closeFragment()
+                        }
+                    }
+                    Status.MESSAGE -> {
+                        showProgress(false)
+                        activity?.showErrorDialog(it.message)
+                    }
+                    Status.LOADING -> showProgress()
                 }
             }
         }

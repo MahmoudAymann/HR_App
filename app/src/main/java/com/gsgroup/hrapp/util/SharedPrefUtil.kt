@@ -6,6 +6,7 @@ import android.os.Parcelable
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.MapUtil.isGPSEnabled
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -99,7 +100,7 @@ object SharedPrefUtil {
 
     fun Context.deleteAllSharedPrefData() = getAppPrefs().edit().clear().apply()
 
-    fun Context.deleteSharedPrefData(key: String) = getAppPrefs().edit().remove(key).apply()
+     fun  Context.deleteSharedPrefData(key: String) = getAppPrefs().edit().remove(key).apply()
 
 }
 

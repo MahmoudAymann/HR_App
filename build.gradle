@@ -2,14 +2,14 @@
 apply from: 'dependencies.gradle'
 
 buildscript {
-    ext.kotlin_version = "1.4.32"
+    ext.kotlin_version = '1.5.0'
     ext.nav_version = "2.3.4"
     ext.g_service = "4.3.5"
     repositories {
         google()
-        jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url 'https://jcenter.bintray.com/' }
         maven { url 'https://maven.google.com/' }
     }
     dependencies {
@@ -24,8 +24,8 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
+        maven { url 'https://jcenter.bintray.com/' }
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com/' }
     }

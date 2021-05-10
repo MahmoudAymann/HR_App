@@ -51,4 +51,84 @@
 
     <string name="replacement_medical_card_notes">- سيتم خصم مبلغ ١٥٠ جنيه مصري من راتبك لمرة واحدة فقط وهي مصاريف إصدار كارت بدل فاقد.\n
     - يمكنك استلام الكارت من قسم الموارد البشرية بعد مرور ٢٠ يوم من تاريخ عمل الطلب.</string>
+
+
+    <string-array name="months">
+        <item>يناير</item>
+        <item>فبراير</item>
+        <item>مارس</item>
+        <item>ابريل</item>
+        <item>مايو</item>
+        <item>يونيه</item>
+        <item>يوليو</item>
+        <item>اغسطس</item>
+        <item>سبتمبر</item>
+        <item>اكتوبر</item>
+        <item>نوفمبر</item>
+        <item>ديسمبر</item>
+    </string-array>
+
+    <string-array name="week_days">
+        <item>السبت</item>
+        <item>الاحد</item>
+        <item>الاثنين</item>
+        <item>الثلاثاء</item>
+        <item>الاربعاء</item>
+        <item>الخميس</item>
+        <item>الجمعه</item>
+    </string-array>
+    <string name="log_out_check_message">هل انت متأكد من تسجيل الخروج؟</string>
+    <string name="latest_virus_news">أخر أخبار الفيروس</string>
+    <string name="i_ve_infected_by_virus">لقد أصبت بالفيروس</string>
+    <string name="old_password">كلمة المرور القديمة</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="confirm_new_password">تأكيد كلمة المرور</string>
+    <string name="password_helper_text">ليس أقل من 8 حروف او أرقام</string>
+    <string name="infect_date">تاريخ الاصابة</string>
+    <string name="date_of_symptoms_appeared">تاريخ ظهور الأعراض</string>
+    <string name="exam_date">تاريخ الفحص</string>
+    <string name="isolation_starting_date">تاريخ العزل</string>
+    <string name="isolation_period">مدة العزل</string>
+    <string name="what_is_symptoms">ما هى الأعراض</string>
+    <string name="attachments">مرفقات</string>
+    <string name="add_image">اضف صورة</string>
+    <string name="send">ارسال</string>
+    <string name="enter_phone_number">ادخل رقم الموبايل</string>
+    <string name="what_problem_details">تفاصيل المشكلة</string>
+    <string name="phone_notes">من فضلك ادخل رقم الموبايل الخاص بالشركة</string>
+    <string name="directed_to">مرسل إلى</string>
+    <string name="describe_ur_issue">ما هى مشكلتك</string>
+    <string name="urgent_problem">مشكلة طارئة؟</string>
+    <string name="normal_medical_approval">موافقة طبية عادية</string>
+    <string name="my_requests">طلباتى</string>
+    <string name="hr_request">طلبات قسم الموارد البشرية</string>
+    <string name="direct_manager_requests">طلبات المدير المباشر</string>
+    <string name="audit_request">طلب تدقيق</string>
+    <string name="details">التفاصيل</string>
+    <string name="resign_request">إستقالة</string>
+    <string name="penalty_request">جزاء</string>
+    <string name="vacation_request">أجازة</string>
+    <string name="excuse_request">إذن</string>
+    <string name="mission_request">مهمة</string>
+    <string name="replacement_medical_card">بدل فاقد</string>
+    <string name="new_">جديد</string>
+    <string name="print_insurance_request">برينت تأمينى</string>
+    <string name="medical_card_request">كارت تأمينى</string>
+    <string name="medical_approval_request">موافقة طبية</string>
+    <string name="auth_area_request">تفويض وحدة عمل او مركز</string>
+    <string name="borrow_request">طلب سلفة</string>
+    <string name="exp_certificate_request">شهادة خبرة</string>
+    <string name="hire_emp_request">تعيين موظف (جديد - بديل)</string>
+    <string name="complain_request">ارسال شكوى</string>
+    <string name="salary_info_request">مفردات مرتب</string>
+    <string name="phone_issue_request">مشكلة فى خط التليفون</string>
+    <string name="complain">شكوى</string>
+    <string name="please_allow_permission_phone_critical">من فضلك اعط تصريحات الهاتف للمتابعة</string>
+    <string name="get_serial">جلب السيريال</string>
+    <string name="serial_num_">السريال:</string>
+    <string name="date_time_">التاريخ و الوقت:</string>
+    <string name="coordinates_">الاحداثيات:</string>
+    <string name="location_info">معلومات الموقع:</string>
+    <string name="business_number">خط الشركة</string>
+    <string name="private_number">الرقم الشخصى</string>
 </resources>

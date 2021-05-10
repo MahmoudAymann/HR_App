@@ -19,21 +19,22 @@
 
             <TextView
                 android:id="@+id/tv_notes"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/salary_info_notes"
+                android:text="@string/exp_certificate_notes"
                 android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="21dp"
                 />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/SubmitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_24sdp"
                 android:text="@string/send"
+                android:onClick="@{()->viewModel.onSendClick()}"
                 app:layout_constraintTop_toBottomOf="@+id/tv_notes"
                 tools:layout_editor_absoluteX="21dp"
                 />
@@ -45,5 +46,12 @@
 
     </ScrollView>
 
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.exp_certificate.ExpCertificateViewModel"
+            />
+    </data>
 
 </layout>

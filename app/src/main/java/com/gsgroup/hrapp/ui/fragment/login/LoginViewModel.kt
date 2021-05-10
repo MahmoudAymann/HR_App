@@ -12,12 +12,14 @@ import com.gsgroup.hrapp.util.SharedPrefUtil.setData
 import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefLanguage
 import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import com.gsgroup.hrapp.util.requestNewCallDeferred
-import timber.log.Timber
 
 class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsIsArabic = ObservableBoolean(app.getPrefLanguage() == ConstString.LANG_AR)
     private var selectedLang = ""
     val request = LoginRequest()
+    val obsIsRememberMe = ObservableBoolean()
+    val rememberMeRequest by app.sharedPrefs<RememberMeRequest>(ConstString.PREF_USER_LOGIN_SECURITY_DATA)
+
 
     fun onLangClick(isArabic: Boolean) {
         selectedLang = if (isArabic) ConstString.LANG_AR else ConstString.LANG_EN
@@ -26,19 +28,21 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
         }
     }
 
+    init {
+        request.email = rememberMeRequest?.email
+        request.password = rememberMeRequest?.password
+        notifyChange()
+    }
+
     fun changeLang() {
         app.setPrefLanguage(selectedLang)
         setValue(Codes.RESTART_APP)
     }
 
     fun onLoginClick() {
-        request.email = "user@test.com"
-        request.password = "12345678"
         if (request.isValid()) {
             requestNewCallDeferred({ loginCallAsync() }) {
-                app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
-                    .setData((it.response?.dataUser))
-                Timber.e("$userData")
+                saveUserDataInPrefs(it.response?.dataUser)
                 postResult(Resource.success(it))
             }
         } else {
@@ -46,6 +50,24 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
         }
     }
 
+    private fun saveUserDataInPrefs(data: DataUser?) {
+        app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData((data))
+        if (obsIsRememberMe.get()) {
+            rememberMeRequest?.email = request.email
+            rememberMeRequest?.password = request.password
+            app.sharedPrefs<RememberMeRequest>(ConstString.PREF_USER_LOGIN_SECURITY_DATA).setData((rememberMeRequest))
+        }
+    }
+
     private fun loginCallAsync() = apiHelper.loginAsync(request)
+
+
+    fun onRememberMeClick(){
+        if(obsIsRememberMe.get()){
+            obsIsRememberMe.set(false)
+        }else{
+            obsIsRememberMe.set(true)
+        }
+    }
 
 }

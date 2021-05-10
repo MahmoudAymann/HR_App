@@ -5,18 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.IdRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.fxn.pix.Options
+import com.fxn.pix.Pix
 import com.gsgroup.hrapp.BR
+import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.ui.activity.MainActivity
 import com.gsgroup.hrapp.ui.activity.details.DetailsActivity
 import com.gsgroup.hrapp.util.*
+import com.gsgroup.hrapp.util.PermissionUtil.goToSettingsPermissions
+import com.gsgroup.hrapp.util.PermissionUtil.requestAppPermissions
 import timber.log.Timber
 
 /**
@@ -91,6 +93,25 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> :
         }
     }
 
+
+    fun pickImage(requestCode: Int) {
+        val options = Options.init()
+            .setRequestCode(requestCode) //Request code for activity results
+            .setFrontfacing(false) //Front Facing camera on start
+            .setExcludeVideos(true) //Option to exclude videos
+        if (PermissionUtil.hasImagePermission(requireActivity())) {
+            Pix.start(this, options)
+        } else {
+            activity?.requestAppPermissions(PermissionUtil.getAllImagePermissions()) {
+                when (it) {
+                    PermissionUtil.AppPermissionResult.ALL_GOOD -> Pix.start(this, options)
+                    PermissionUtil.AppPermissionResult.OPEN_SETTING -> activity?.goToSettingsPermissions(getString(R.string.allow_image_permissions),
+                        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { pickImage(requestCode) })
+                }
+            }
+
+        }
+    }
 
     override fun onPause() {
         super.onPause()

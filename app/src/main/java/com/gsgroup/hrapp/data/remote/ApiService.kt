@@ -2,25 +2,24 @@ package com.gsgroup.hrapp.data.remote
 
 import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.data.model.DirectManagerOrHrResponse
-import com.gsgroup.hrapp.data.model.ErrorResponse
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.company_polices.PolicesResponse
 import com.gsgroup.hrapp.ui.fragment.faq.FAQsResponse
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginResponse
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
-import com.gsgroup.hrapp.ui.fragment.news.NewsResponse
-import com.gsgroup.hrapp.ui.fragment.news.details.NewsDetailsResponse
-import com.gsgroup.hrapp.base.network.response.NetworkResponse
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceResponse
 import com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationRequest
+import com.gsgroup.hrapp.ui.fragment.news.NewsResponse
+import com.gsgroup.hrapp.ui.fragment.news.details.NewsDetailsResponse
+import com.gsgroup.hrapp.ui.fragment.requests.autharea.AuthAreaRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.complain.ComplainRequest
+import com.gsgroup.hrapp.ui.fragment.requests.phoneissue.PhoneIssueRequestRequest
+import com.gsgroup.hrapp.ui.fragment.requests.salaryinfo.SalaryInfoRequestRequest
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 /**
  * Created by MahmoudAyman on 6/24/2020.
@@ -54,22 +53,44 @@ interface ApiService {
 
 
     @POST("$keyMobile/change_password")
-     fun changePasswordAsync(@Body request: ChangePasswordRequest): Deferred<BaseObjectResponse>
+    fun changePasswordAsync(@Body request: ChangePasswordRequest): Deferred<BaseObjectResponse>
 
 
     @POST("$keyMobile/check_in")
-     fun checkInAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
+    fun checkInAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
 
     @POST("$keyMobile/check_out")
-     fun checkOutAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
+    fun checkOutAsync(@Body request: AttendanceRequest): Deferred<AttendanceResponse>
 
-     @POST("$keyMobile/share_location")
-     fun shareLocationAsync(@Body request: ShareLocationRequest): Deferred<AttendanceResponse>
+    @POST("$keyMobile/share_location")
+    fun shareLocationAsync(@Body request: ShareLocationRequest): Deferred<AttendanceResponse>
 
 
-     //requests
+    //requests
+    @Multipart
     @POST("$keyMobile/Complains")
-    fun complainAsync(@Body request: ComplainRequest): Deferred<BaseObjectResponse>
+    fun complainRequestAsync(@Part("details") details:RequestBody?,
+                             @Part("is_urgent") isUrgent:RequestBody?,
+                             @Part("type") type:RequestBody?,
+                             @Part image: MultipartBody.Part?): Deferred<BaseObjectResponse>
 
+    @POST("$keyMobile/hrRequest/insuranceCertificate")
+    fun printInsuranceRequestAsync(): Deferred<BaseObjectResponse>
+
+    @POST("$keyMobile/hrRequest/workAuthorization")
+    fun authAreaRequestAsync(@Body request: AuthAreaRequestRequest): Deferred<BaseObjectResponse>
+
+
+    @POST("$keyMobile/hrRequest/experienceCertificate")
+    fun expCertificateRequestAsync(): Deferred<BaseObjectResponse>
+
+    @POST("$keyMobile/hrRequest/problemInLine")
+    fun phoneNumberRequestAsync(@Body request:PhoneIssueRequestRequest): Deferred<BaseObjectResponse>
+
+    @POST("$keyMobile/hrRequest/extractSalarySlip")
+    fun salaryInfoRequestAsync(@Body request:SalaryInfoRequestRequest): Deferred<BaseObjectResponse>
+
+    @GET("$keyMobile/attendance_record")
+    fun getAttendanceLogsAsync(@Query("day") date:String): Deferred<BaseObjectResponse>
 
 }

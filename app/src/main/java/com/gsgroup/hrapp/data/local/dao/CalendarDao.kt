@@ -8,9 +8,9 @@ import com.gsgroup.hrapp.data.local.entity.CalendarItem
 
 @Dao
 interface CalendarDao {
-    @Query("SELECT * FROM calendaritem")
-    suspend fun getAll(): List<CalendarItem>
-
-    @Insert
-    suspend fun insertAll(calendarItems: List<CalendarItem>)
+//    @Query("SELECT * FROM calendaritem")
+//    suspend fun getAll(): List<CalendarItem>
+//
+//    @Insert
+//    suspend fun insertAll(calendarItems: List<CalendarItem>)
 }

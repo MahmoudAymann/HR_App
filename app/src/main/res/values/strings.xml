@@ -73,10 +73,12 @@
     <string name="what_problem_details">Problem Details</string>
     <string name="phone_notes">- please enter the business phone number provided by the company</string>
     <string name="directed_to">Directed To</string>
-    <string name="salary_info_notes">- notes</string>
+    <string name="salary_info_notes">- You can request the insurance print once every 3 months.\n
+    - you can receive it from HR department after 2 working days from the request.</string>
     <string name="describe_ur_issue">Describe Your Issue</string>
     <string name="urgent_problem">Urgent Problem?</string>
-    <string name="print_insurance_notes">- print insurance notes</string>
+    <string name="print_insurance_notes">- You can request the insurance print once every 3 months.\n
+    - you can receive it from HR department after 10 working days from the request.</string>
     <string name="medical_approval_to_treat_a_chronic_disease">Medical approval to treat a chronic disease</string>
     <string name="normal_medical_approval">Normal Medical Approval</string>
     <string name="my_requests">My Requests</string>
@@ -175,4 +177,41 @@
     <string name="new_medical_card_notes">- You can request a new medical card after passing 3 months from your joining date.</string>
     <string name="replacement_medical_card_notes">- An amount of EGP 150 will be deducted from your salary for one time only, which is the expenses of issuing a lost card.\n
     - You can receive the card from the Human Resources department after 20 days have passed from the date the application was made.</string>
+    <string name="exp_certificate_notes">
+        - You can request the exp. certificate once every 3 months.\n
+        - You can receive it from HR department after 10 working days from the request.
+    </string>
+    <string name="allow_image_permissions">please allow image permissions to continue</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string-array name="week_days">
+        <item>Sat</item>
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+    </string-array>
+
+
+    <string-array name="years">
+        <item>2020</item>
+        <item>2021</item>
+    </string-array>
+
 </resources>
