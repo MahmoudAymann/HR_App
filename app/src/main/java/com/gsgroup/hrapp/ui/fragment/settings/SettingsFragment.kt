@@ -36,10 +36,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
     private fun logout() {
         activity?.showLogoutDialog {
-            showDetailsActivity(R.id.loginFragment)
             requireActivity().deleteSharedPrefData(ConstString.PREF_USER_DATA)
-            val userData by requireActivity().sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
-            Timber.e("${userData}")
+            showDetailsActivity(R.id.loginFragment)
             activity?.finishAffinity()
         }
     }

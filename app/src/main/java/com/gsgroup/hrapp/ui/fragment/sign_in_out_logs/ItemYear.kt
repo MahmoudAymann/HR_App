@@ -15,9 +15,9 @@ data class ItemYear(val id: Int = 0, val name: String? = null) : Parcelable, Sea
     companion object {
         fun getYearsList(ctx: Context): Array<SearchItemInterface> {
             val myList = arrayListOf<ItemYear>()
-            val stringMonths = ctx.resources.getStringArray(R.array.years)
-            for (i in stringMonths.indices) {
-                myList.add(ItemYear(i + 1, stringMonths[i]))
+            val years = ctx.resources.getStringArray(R.array.years)
+            for (i in years.indices) {
+                myList.add(ItemYear(i + 1, years[i]))
             }
 
             return myList.toTypedArray()

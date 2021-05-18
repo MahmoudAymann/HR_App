@@ -131,4 +131,54 @@
     <string name="location_info">معلومات الموقع:</string>
     <string name="business_number">خط الشركة</string>
     <string name="private_number">الرقم الشخصى</string>
+    <string name="exp_certificate_notes">
+        - يمكنك طلب شهادة الخبرة مرة كل ۳ أشهر.\n
+        - يمكنك استلامه من قسم الموارد البشرية بعد ۱۰ أيام عمل من تاريخ الطلب.
+    </string>
+    <string name="salary_info_notes">- يمكنك طلب البرينت التأمينى مرة كل ۳ أشهر.\n
+    - يمكنك استلامه من قسم الموارد البشرية بعد يومين عمل من تاريخ الطلب.</string>
+    <string name="print_insurance_notes">- يمكنك طلب البرينت التأمينى مرة كل 3 أشهر.\n
+    - يمكنك استلامه من قسم الموارد البشرية بعد ۱۰ أيام عمل من تاريخ الطلب.</string>
+    <string name="medical_approval_to_treat_a_chronic_disease">موافقة طبية لعلاج مرض مزمن</string>
+    <string name="check_in">الحضور</string>
+    <string name="check_out">الانصراف</string>
+    <string name="hire_new_employee">تعيين موظف جديد</string>
+    <string name="hire_replacement_employee">تعيين موظف بديل</string>
+    <string name="select_company">اختر الشركة</string>
+    <string name="select_job_title">اختر المسمى الوظيفى</string>
+    <string name="appointing_the_employee_to_a_maximum">تعيين الموظف بحد أقصى</string>
+    <string name="filter">فرز</string>
+    <string name="date_">تاريخ:</string>
+    <string name="requested_from_">مطلوبة من:</string>
+    <string name="resign_date">تاريخ الاستقالة</string>
+    <string name="resign_details">تفاصيل الاستقالة</string>
+    <string name="select_vacation_type">اختر نوع الاجازة</string>
+    <string name="select_normal_vacation_type">اختر نوع الاجازة الاعتيادية</string>
+    <string name="from_date">من تاريخ</string>
+    <string name="to_date">الى تاريخ</string>
+    <string name="days">عدد الايام</string>
+    <string name="vacation_balance">رصيد اجازاتك</string>
+    <string name="the_employee">الموظف</string>
+    <string name="select_employee">اختر الموظف</string>
+    <string name="penalty_type">نوع الجزاء</string>
+    <string name="latest_news">آخر الاخبار</string>
+    <string name="all_data_required">ادخل جميع البيانات بطريقه صحيحة</string>
+    <string name="continue_">متابعة</string>
+    <string name="news">الأخبار</string>
+    <string name="colors_table">الألوان</string>
+    <string name="submit">ارسال</string>
+    <string name="invalid_area_selected">من فضلك اختر المنطقة اولا</string>
+    <string name="out_of_area_range">خارج نطاق المنطقة</string>
+    <string name="getting_your_location">جارى جلب موقعك برجاء الانتظار</string>
+    <string name="allow_location_permission">من فضلك اعطِ تصريحات الموقع للمتابعة</string>
+    <string name="please_select_city_first">من فضلك إختر المدينة أولاً</string>
+    <string name="get_location_settings_failed">عفوا لم نستطيع ايجاد موقعك من فضلك حاول مرة اخرى</string>
+    <string name="allow_image_permissions">من فضلك اعطِ تصريحات الملفات لجلب الصور</string>
+    <string name="filter_my_team">فرز فريق العمل</string>
+    <string name="employee_name">اسم الموظف...</string>
+    <string name="select_year">اختر السنة</string>
+    <string name="select_month">اختر الشهر</string>
+    <string name="rejected">مرفوضة</string>
+    <string name="accepted">مقبولة</string>
+    <string name="pinned">معلقة</string>
 </resources>

@@ -75,10 +75,10 @@
     <string name="directed_to">Directed To</string>
     <string name="salary_info_notes">- You can request the insurance print once every 3 months.\n
     - you can receive it from HR department after 2 working days from the request.</string>
-    <string name="describe_ur_issue">Describe Your Issue</string>
-    <string name="urgent_problem">Urgent Problem?</string>
     <string name="print_insurance_notes">- You can request the insurance print once every 3 months.\n
     - you can receive it from HR department after 10 working days from the request.</string>
+    <string name="describe_ur_issue">Describe Your Issue</string>
+    <string name="urgent_problem">Urgent Problem?</string>
     <string name="medical_approval_to_treat_a_chronic_disease">Medical approval to treat a chronic disease</string>
     <string name="normal_medical_approval">Normal Medical Approval</string>
     <string name="my_requests">My Requests</string>
@@ -133,14 +133,14 @@
     <string name="pinned">Pinned</string>
     <string name="accepted">Accepted</string>
     <string name="rejected">Rejected</string>
-    <string name="latest_news">News</string>
+    <string name="latest_news">Latest News</string>
     <string name="all_data_required">enter all data correctly</string>
     <string name="continue_">Continue</string>
     <string name="news">News</string>
     <string name="select_year">Select Year</string>
     <string name="select_month">Select Month</string>
     <string name="colors_table">Colors Table</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="submit">Submit</string>
     <string name="invalid_area_selected">please choose area first</string>
     <string name="out_of_area_range">out of area range</string>
@@ -182,6 +182,11 @@
         - You can receive it from HR department after 10 working days from the request.
     </string>
     <string name="allow_image_permissions">please allow image permissions to continue</string>
+    <string name="filter_my_team">Filter My Team</string>
+    <string name="employee_name">Employee name…</string>
+    <string name="area_">Area:</string>
+    <string name="check_in_time_">Check In:</string>
+    <string name="check_out_time_">Check Out:</string>
 
     <string-array name="months">
         <item>January</item>

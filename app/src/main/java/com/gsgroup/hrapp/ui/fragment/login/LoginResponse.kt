@@ -2,6 +2,8 @@ package com.gsgroup.hrapp.ui.fragment.login
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.gsgroup.hrapp.data.model.AreasItem
+import com.gsgroup.hrapp.data.model.CityItem
 import com.gsgroup.hrapp.data.model.SearchItemInterface
 import kotlinx.parcelize.Parcelize
 
@@ -19,32 +21,6 @@ data class Response(
 ) : Parcelable
 
 @Parcelize
-data class AreasItem(
-
-	@field:SerializedName("city")
-	val city: String? = null,
-
-	@field:SerializedName("latitude")
-	val latitude: Double = 0.0,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("id")
-	val id: Int = 0,
-
-	@field:SerializedName("radius")
-	val radius: String = "0.0",
-
-	@field:SerializedName("longitude")
-	val longitude: Double = 0.0
-) : Parcelable, SearchItemInterface {
-	override fun id() = id
-
-	override fun name() = name
-}
-
-@Parcelize
 data class Company(
 
 	@field:SerializedName("image")
@@ -60,19 +36,7 @@ data class Company(
 	val id: Int? = null
 ) : Parcelable
 
-@Parcelize
-data class City(
-	@field:SerializedName("id")
-	val id: Int = 0,
-	@field:SerializedName("name")
-	val name: String? = null,
-	@field:SerializedName("areas")
-	val areas: List<AreasItem>? = null,
 
-	) : SearchItemInterface, Parcelable {
-	override fun id() = id
-	override fun name() = name
-}
 
 @Parcelize
 data class Attendance(
@@ -107,7 +71,7 @@ data class DataUser(
 	val jobtitle: String? = null,
 
 	@field:SerializedName("cities")
-	val citities: List<City>? = null,
+	val citities: List<CityItem>? = null,
 
 	@field:SerializedName("token")
 	val token: String = "",

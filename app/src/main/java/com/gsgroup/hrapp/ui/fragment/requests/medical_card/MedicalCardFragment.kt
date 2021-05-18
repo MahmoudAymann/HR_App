@@ -9,6 +9,7 @@ import com.gsgroup.hrapp.databinding.FragmentMedicalCardBinding
 import com.gsgroup.hrapp.util.Status
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.showErrorDialog
+import com.gsgroup.hrapp.util.showSuccessfulDialog
 
 class MedicalCardFragment : BaseFragment<FragmentMedicalCardBinding, MedicalCardViewModel>() {
     override fun pageTitle(): String = getString(R.string.medical_card_request)
@@ -26,6 +27,9 @@ class MedicalCardFragment : BaseFragment<FragmentMedicalCardBinding, MedicalCard
                 when (it?.status) {
                     Status.SUCCESS -> {
                         showProgress(false)
+                        activity?.showSuccessfulDialog(it.message) {
+                            closeFragment()
+                        }
                     }
                     Status.MESSAGE -> {
                         showProgress(false)

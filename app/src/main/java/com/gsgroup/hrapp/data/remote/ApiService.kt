@@ -1,5 +1,6 @@
 package com.gsgroup.hrapp.data.remote
 
+import com.gsgroup.hrapp.data.model.AllCitiesAreaResponse
 import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.data.model.DirectManagerOrHrResponse
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
@@ -13,7 +14,7 @@ import com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationRequest
 import com.gsgroup.hrapp.ui.fragment.news.NewsResponse
 import com.gsgroup.hrapp.ui.fragment.news.details.NewsDetailsResponse
 import com.gsgroup.hrapp.ui.fragment.requests.autharea.AuthAreaRequestRequest
-import com.gsgroup.hrapp.ui.fragment.requests.complain.ComplainRequest
+import com.gsgroup.hrapp.ui.fragment.requests.medical_card.MedicalCardRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.phoneissue.PhoneIssueRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.salaryinfo.SalaryInfoRequestRequest
 import kotlinx.coroutines.Deferred
@@ -85,12 +86,20 @@ interface ApiService {
     fun expCertificateRequestAsync(): Deferred<BaseObjectResponse>
 
     @POST("$keyMobile/hrRequest/problemInLine")
-    fun phoneNumberRequestAsync(@Body request:PhoneIssueRequestRequest): Deferred<BaseObjectResponse>
+    fun phoneNumberRequestAsync(@Body request: PhoneIssueRequestRequest): Deferred<BaseObjectResponse>
 
     @POST("$keyMobile/hrRequest/extractSalarySlip")
-    fun salaryInfoRequestAsync(@Body request:SalaryInfoRequestRequest): Deferred<BaseObjectResponse>
+    fun salaryInfoRequestAsync(@Body request: SalaryInfoRequestRequest): Deferred<BaseObjectResponse>
+
+
+    @POST("$keyMobile/hrRequest/medicalCardRequest")
+    fun medicalCardRequestAsync(@Body request: MedicalCardRequestRequest): Deferred<BaseObjectResponse>
 
     @GET("$keyMobile/attendance_record")
-    fun getAttendanceLogsAsync(@Query("day") date:String): Deferred<BaseObjectResponse>
+    fun getAttendanceLogsAsync(@Query("day") date: String): Deferred<BaseObjectResponse>
+
+
+    @GET("$keyMobile/cities_with_areas")
+    fun getAllCitiesAsync(): Deferred<AllCitiesAreaResponse>
 
 }

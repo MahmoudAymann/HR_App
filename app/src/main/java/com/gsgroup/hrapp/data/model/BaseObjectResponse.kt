@@ -11,7 +11,6 @@ open class BaseObjectResponse(
 
 	@field:SerializedName("status")
 	val status: Int? = null,
-
 ) : Parcelable
 
 

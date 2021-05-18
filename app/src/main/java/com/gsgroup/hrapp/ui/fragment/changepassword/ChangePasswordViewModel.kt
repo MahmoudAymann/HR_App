@@ -12,10 +12,10 @@ class ChangePasswordViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val obsIsPassWrong = ObservableBoolean()
     val request = ChangePasswordRequest()
-
+    var userId : String? = null
     fun onSubmitClick() {
         if (request.isValid()) {
-            requestNewCallDeferred({ changePasswordCall(request) }) {
+            requestNewCallDeferred({ changePasswordCallAsync() }) {
                 postResult(Resource.success(it))
             }
         } else {
@@ -23,12 +23,22 @@ class ChangePasswordViewModel(app: Application) : AndroidBaseViewModel(app) {
         }
     }
 
-    private fun changePasswordCall(request: ChangePasswordRequest) =
-        apiHelper.changePasswordAsync(request)
+    private fun changePasswordCallAsync() = apiHelper.changePasswordAsync(request)
 
     fun onTextChange(): TextViewBindingAdapter.OnTextChanged {
         return TextViewBindingAdapter.OnTextChanged { s, _, _, _ ->
             obsIsPassWrong.set(s.length < 8)
         }
     }
+
+
+    fun gotData(args:ChangePasswordFragmentArgs){
+        args.userId?.let {
+            userId =  args.userId
+        }
+        notifyChange()
+    }
+
+
+
 }

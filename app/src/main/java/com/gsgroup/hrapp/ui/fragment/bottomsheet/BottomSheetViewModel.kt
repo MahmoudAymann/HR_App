@@ -7,7 +7,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.gsgroup.hrapp.base.BaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.data.model.SearchItemInterface
-import com.gsgroup.hrapp.ui.fragment.login.AreasItem
 import timber.log.Timber
 
 class BottomSheetViewModel : BaseViewModel() {

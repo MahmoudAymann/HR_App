@@ -12,10 +12,10 @@ import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.data.model.AreasItem
+import com.gsgroup.hrapp.data.model.CityItem
 import com.gsgroup.hrapp.data.model.SearchItemInterface
-import com.gsgroup.hrapp.ui.fragment.login.AreasItem
 import com.gsgroup.hrapp.ui.fragment.login.Attendance
-import com.gsgroup.hrapp.ui.fragment.login.City
 import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.MapUtil.animateCameraOnMarkers
@@ -132,14 +132,14 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     fun gotResultFromBottomSheet(it: SearchItemInterface?) {
         when (it) {
-            is City -> gotCity(it)
+            is CityItem -> gotCity(it)
             is AreasItem -> gotArea(it)
             else -> Timber.e("error type")
         }
     }
 
 
-    private fun gotCity(city: City?) {
+    private fun gotCity(city: CityItem?) {
         city?.let {
             obsCityName.set(it.name)
             areasList = it.areas?.toTypedArray()

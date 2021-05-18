@@ -1,6 +1,8 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    const val OPEN_JT_LIST: Int = 1032
+    val FILTER_SCREEN: Int = 1031
     val SELECT_MONTH: Int = 1030
     val SELECT_YEAR: Int = 1029
     val PICK_IMAGE_CODE: Int = 1028
@@ -22,8 +24,8 @@ object Codes {
     val CHECK_OUT: Int = 1015
 
     val CHECK_IN: Int = 1014
-    val OPEN_CITY_LIST: Int = 1013
-    val OPEN_AREA_LIST: Int = 1012
+    const val OPEN_CITY_LIST: Int = 1013
+    const val OPEN_AREA_LIST: Int = 1012
     val LOGIN_SCREEN: Int = 1011
     val CHANGE_PASSWORD_SCREEN: Int = 1010
     val INFECT_SCREEN: Int = 1009

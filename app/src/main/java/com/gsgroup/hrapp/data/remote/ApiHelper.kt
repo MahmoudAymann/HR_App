@@ -1,11 +1,13 @@
 package com.gsgroup.hrapp.data.remote
 
+import com.gsgroup.hrapp.data.model.AllCitiesAreaResponse
 import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
 import com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationRequest
 import com.gsgroup.hrapp.ui.fragment.requests.autharea.AuthAreaRequestRequest
+import com.gsgroup.hrapp.ui.fragment.requests.medical_card.MedicalCardRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.phoneissue.PhoneIssueRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.salaryinfo.SalaryInfoRequestRequest
 import com.gsgroup.hrapp.ui.fragment.sign_in_out_logs.AttendanceLogRequest
@@ -69,4 +71,8 @@ class ApiHelper(private val apiService: ApiService) : ApiService {
     override fun getAttendanceLogsAsync(date: String) = apiService.getAttendanceLogsAsync(date)
 
 
+    override fun medicalCardRequestAsync(request: MedicalCardRequestRequest) = apiService.medicalCardRequestAsync(request)
+
+
+    override fun getAllCitiesAsync() = apiService.getAllCitiesAsync()
 }

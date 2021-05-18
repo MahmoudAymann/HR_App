@@ -51,7 +51,7 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     private fun saveUserDataInPrefs(data: DataUser?) {
-        app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData((data))
+        app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData(data)
         if (obsIsRememberMe.get()) {
             rememberMeRequest?.email = request.email
             rememberMeRequest?.password = request.password

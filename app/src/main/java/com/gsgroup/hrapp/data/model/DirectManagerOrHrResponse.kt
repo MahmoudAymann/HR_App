@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class DirectManagerOrHrResponse(
 
 	@field:SerializedName("response")
-	val response: Response? = null,
+	val response: HRResponse? = null,
 ) : Parcelable, BaseObjectResponse()
 
 @Parcelize
@@ -40,7 +40,7 @@ data class DirectData(
 ) : Parcelable
 
 @Parcelize
-data class Response(
+data class HRResponse(
 
 	@field:SerializedName("data")
 	val data: DirectData? = null

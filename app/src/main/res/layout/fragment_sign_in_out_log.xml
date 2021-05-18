@@ -14,7 +14,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="@dimen/_8sdp">
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_16sdp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_month"
@@ -54,12 +57,150 @@
                 android:background="@drawable/days_logs_bg"
                 android:paddingBottom="@dimen/_8sdp"
                 app:adapter="@{viewModel.logsAdapter}"
-                app:visibleInVisible="@{viewModel.obsShowResult}"
+                app:visibleInVisible="@{viewModel.obsShowDays}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/btn_year"
                 app:spanCount="7"
                 tools:listitem="@layout/item_logs_view"
                 />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:visibleGone="@{viewModel.obsShowResult}"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="@+id/rv_days"
+                app:layout_constraintTop_toBottomOf="@id/rv_days"
+                app:layout_constraintStart_toStartOf="@id/rv_days"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/tv_date_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_"
+                        android:textColor="@color/black"
+                        android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_date_static"
+                        app:layout_constraintStart_toEndOf="@id/tv_date_static"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_area_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/area_"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/tv_date"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_area"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_"
+                        android:textColor="@color/black"
+
+                        android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_area_static"
+                        app:layout_constraintStart_toEndOf="@id/tv_date_static"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_check_in_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/check_in_time_"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/tv_area"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_check_in"
+                        android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_"
+                        android:textColor="@color/button_color_green"
+                        app:layout_constraintTop_toTopOf="@id/tv_check_in_static"
+                        app:layout_constraintStart_toEndOf="@id/tv_check_in_static"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_check_out_static"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/check_out_time_"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/tv_check_in"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_check_out"
+                        android:layout_width="0dp"
+                        android:textAlignment="viewStart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_"
+                        android:textColor="@color/button_color_red"
+                        app:layout_constraintTop_toTopOf="@id/tv_check_out_static"
+                        app:layout_constraintStart_toEndOf="@id/tv_check_out_static"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_check_log"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
 
             <TextView
                 android:id="@+id/tv_static"
@@ -69,7 +210,8 @@
                 android:text="@string/colors_table"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@+id/rv_days"
+                app:visibleGone="@{viewModel.obsShowDays}"
+                app:layout_constraintTop_toBottomOf="@+id/cv_result"
                 />
 
 
@@ -83,6 +225,7 @@
                 android:paddingTop="@dimen/_8sdp"
                 android:paddingEnd="@dimen/_8sdp"
                 app:adapter="@{viewModel.colorsAdapter}"
+                app:visibleGone="@{viewModel.obsShowDays}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/tv_static"
                 tools:listitem="@layout/item_colors_view"

@@ -49,7 +49,12 @@
         android:name="com.gsgroup.hrapp.ui.fragment.myteam.MyTeamFragment"
         android:label="MyTeamFragment"
         tools:layout="@layout/fragment_my_tem"
-        />
+        >
+        <action
+            android:id="@+id/action_myTeamFragment_to_teamFilterFragment"
+            app:destination="@id/teamFilterFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/companyPoliciesFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.company_polices.CompanyPoliciesFragment"
@@ -67,7 +72,13 @@
         android:name="com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordFragment"
         android:label="ChangePasswordFragment"
         tools:layout="@layout/fragment_change_password"
-        />
+        >
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true"
+            />
+    </fragment>
     <fragment
         android:id="@+id/covidFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.covid.CovidFragment"
@@ -290,46 +301,61 @@
         android:id="@+id/authAreaFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.autharea.AuthAreaFragment"
         android:label="AuthAreaFragment"
+        tools:layout="@layout/fragment_auth_area"
         />
     <fragment
         android:id="@+id/fragmentBorrow"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.borrow.FragmentBorrow"
         android:label="FragmentBorrow"
+        tools:layout="@layout/fragment_borrow"
         />
     <fragment
         android:id="@+id/expCertificateFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.exp_certificate.ExpCertificateFragment"
         android:label="ExpCertificateFragment"
+        tools:layout="@layout/fragment_exp_certificate"
         />
     <fragment
         android:id="@+id/hireEmployeeFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.hire.HireEmployeeFragment"
         android:label="HireEmployeeFragment"
+        tools:layout="@layout/fragment_hire_employee"
         />
     <fragment
         android:id="@+id/resignFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.resign.ResignFragment"
         android:label="ResignFragment"
+        tools:layout="@layout/fragment_resign"
         />
     <fragment
         android:id="@+id/penaltyFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.penalty.PenaltyFragment"
         android:label="PenaltyFragment"
+        tools:layout="@layout/fragment_penalty"
         />
     <fragment
         android:id="@+id/vacationFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.vacation.VacationFragment"
         android:label="VacationFragment"
+        tools:layout="@layout/fragment_vacation"
         />
     <fragment
         android:id="@+id/permissionFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.permission.PermissionFragment"
         android:label="PermissionFragment"
+        tools:layout="@layout/fragment_permission"
         />
     <fragment
         android:id="@+id/missionFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.mission.MissionFragment"
         android:label="MissionFragment"
+        tools:layout="@layout/fragment_mission"
+        />
+    <fragment
+        android:id="@+id/teamFilterFragment"
+        android:name="com.gsgroup.hrapp.ui.fragment.myteam.filter.TeamFilterFragment"
+        android:label="TeamFilterFragment"
+        tools:layout="@layout/fragment_team_filter"
         />
 
 
