@@ -8,4 +8,8 @@ data class AttendanceLogRequest(
     var day: String? = null,
     var month: String? = null,
     var year: String? = null,
-) : Parcelable
+) : Parcelable {
+    fun isValid(): Boolean {
+       return !year.isNullOrBlank() && !month.isNullOrBlank()
+    }
+}

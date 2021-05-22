@@ -5,8 +5,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentMyTemBinding
 import com.gsgroup.hrapp.util.Status
+import com.gsgroup.hrapp.util.navigateSafe
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.showErrorDialog
 
@@ -19,7 +21,8 @@ class MyTeamFragment : BaseFragment<FragmentMyTemBinding, MyTeamViewModel>() {
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
-
+                    Codes.CHANGE_PASSWORD_SCREEN->navigateSafe(MyTeamFragmentDirections.actionMyTeamFragmentToChangePasswordFragment(item.id.toString()))
+                    Codes.ATTENDANCE_LOGS_SCREEN->navigateSafe(MyTeamFragmentDirections.actionMyTeamFragmentToSignInOutLogFragment(item.id.toString()))
                 }
             }
             observe(resultLiveData) {

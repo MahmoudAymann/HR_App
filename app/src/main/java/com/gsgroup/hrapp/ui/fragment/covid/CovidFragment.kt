@@ -2,13 +2,18 @@ package com.gsgroup.hrapp.ui.fragment.covid
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
+import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentCovidBinding
+import com.gsgroup.hrapp.util.asUri
 import com.gsgroup.hrapp.util.observe
+import com.gsgroup.hrapp.util.openInBrowser
 
 class CovidFragment : BaseFragment<FragmentCovidBinding, CovidViewModel>() {
-    override fun pageTitle(): String = ""
+    override fun pageTitle(): String = getString(R.string.covid_19)
     override val mViewModel: CovidViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -16,7 +21,7 @@ class CovidFragment : BaseFragment<FragmentCovidBinding, CovidViewModel>() {
         mViewModel.apply {
             observe(mutableLiveData){
                 when(it){
-
+                    Codes.NEWS_SCREEN-> COVID_LINK.asUri().openInBrowser(requireActivity())
                 }
             }
 
@@ -27,6 +32,10 @@ class CovidFragment : BaseFragment<FragmentCovidBinding, CovidViewModel>() {
     }
 
 
+
+    companion object{
+        const val COVID_LINK = "https://www.care.gov.eg/EgyptCare/Index.aspx"
+    }
 
 
 }

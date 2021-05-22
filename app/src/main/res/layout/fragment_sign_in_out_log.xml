@@ -95,7 +95,7 @@
                     <TextView
                         android:id="@+id/tv_date"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_"
+                        android:text="@{viewModel.item.day}"
                         android:textColor="@color/black"
                         android:layout_width="0dp"
                         android:textAlignment="viewStart"
@@ -121,9 +121,8 @@
                     <TextView
                         android:id="@+id/tv_area"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_"
+                        android:text="@{viewModel.item.area}"
                         android:textColor="@color/black"
-
                         android:layout_width="0dp"
                         android:textAlignment="viewStart"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +151,7 @@
                         android:textAlignment="viewStart"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_"
+                        android:text="@{viewModel.item.timeIn}"
                         android:textColor="@color/button_color_green"
                         app:layout_constraintTop_toTopOf="@id/tv_check_in_static"
                         app:layout_constraintStart_toEndOf="@id/tv_check_in_static"
@@ -179,7 +178,7 @@
                         android:textAlignment="viewStart"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/date_"
+                        android:text="@{viewModel.item.timeOut}"
                         android:textColor="@color/button_color_red"
                         app:layout_constraintTop_toTopOf="@id/tv_check_out_static"
                         app:layout_constraintStart_toEndOf="@id/tv_check_out_static"

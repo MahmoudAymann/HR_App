@@ -41,9 +41,9 @@ private fun createOkHttpClient(app: Application): OkHttpClient {
     return OkHttpClient.Builder()
         .apply {
             if (BuildConfig.DEBUG) {
-                this.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                this.addInterceptor(getHeaderInterceptor(app))
+                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             }
+            addInterceptor(getHeaderInterceptor(app))
             readTimeout(120, TimeUnit.SECONDS)
             connectTimeout(120, TimeUnit.SECONDS)
             writeTimeout(120, TimeUnit.SECONDS)

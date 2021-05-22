@@ -2,20 +2,25 @@ package com.gsgroup.hrapp.util
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import android.widget.Spinner
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
@@ -24,8 +29,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefFirebaseToken
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -228,6 +235,76 @@ object AppUtil {
         } else {
             return connectivityManager.activeNetworkInfo?.isConnected ?: false
         }
+    }
+
+    fun openTimePicker(context: Context, callBack: (Calendar) -> Unit) {
+        val mCurrentTime = Calendar.getInstance()
+        val hour = mCurrentTime[Calendar.HOUR_OF_DAY]
+        val minute = mCurrentTime[Calendar.MINUTE]
+        val mTimePicker = TimePickerDialog(
+            context,
+            { _, selectedHrOfDay, selectedMin ->
+                val mC = Calendar.getInstance()
+                mC[Calendar.HOUR_OF_DAY] = selectedHrOfDay
+                mC[Calendar.MINUTE] = selectedMin
+                callBack(mC)
+            },
+            hour,
+            minute,
+            false
+        ) //Yes 24 hour time
+        mTimePicker.show()
+        setPickerButtonsStyle(context, mTimePicker)
+    }
+
+
+    fun openDatePicker(
+        context: Context,
+        startDate: String? = null,
+        resultCallBack: (String) -> Unit
+    ): DatePickerDialog {
+        val mCalendar = getCurrentCalInstance()
+        val year = mCalendar[Calendar.YEAR]
+        val month = mCalendar[Calendar.MONTH]
+        val day = mCalendar[Calendar.DAY_OF_MONTH]
+        val mDatePickerDialog = DatePickerDialog(
+            context,
+            { _: DatePicker?, year1: Int, month1: Int, dayOfMonth: Int ->
+                val format =
+                    SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+                val calendar = Calendar.getInstance()
+                calendar[year1, month1] = dayOfMonth
+                val strDate = format.format(calendar.time)
+                resultCallBack(strDate)
+            },
+            year, month, day
+        )
+        startDate?.let {
+            val format =
+                SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val calendar = Calendar.getInstance()
+            val date = format.parse(it)
+            date?.let {
+                calendar.time = date
+                calendar.add(Calendar.DAY_OF_MONTH, 1)
+                mDatePickerDialog.datePicker.minDate = calendar.timeInMillis - 10000
+            } ?: Timber.e("format date isn't correct")
+        }
+        mDatePickerDialog.show()
+        setPickerButtonsStyle(context, mDatePickerDialog)
+        return mDatePickerDialog
+    }
+
+    private fun setPickerButtonsStyle(context: Context, type: AlertDialog) {
+        type.getButton(DialogInterface.BUTTON_POSITIVE)
+            .setTextColor(context.getColorFromRes(R.color.white))
+        type.getButton(DialogInterface.BUTTON_POSITIVE).setBackgroundColor(
+            context.getColorFromRes(
+                R.color.colorPrimary
+            )
+        )
+        type.getButton(DialogInterface.BUTTON_NEGATIVE)
+            .setTextColor(Color.BLACK)
     }
 
 }

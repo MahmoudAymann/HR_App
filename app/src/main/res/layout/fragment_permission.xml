@@ -31,19 +31,35 @@
                     style="@style/EditText.WhiteStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/from_hour"
+                    android:hint="@string/select_date"
+                    android:focusable="false"
+                    android:onClick="@{()->viewModel.onDateClick()}"
+                    android:text="@={viewModel.request.permissionDay}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <TextView
-                android:id="@+id/tv_notes"
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="- Notes"
-                app:layout_constraintTop_toBottomOf="@+id/til_type"
+                android:text="@string/first_of_the_day"
+                app:layout_constraintTop_toBottomOf="@id/til_type"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:onClick="@{()->viewModel.onTimeSelect(true)}"
+                android:checked="@{viewModel.obsIsMorning == 1}"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/_16sdp"
+                />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_of_the_day"
+                android:onClick="@{()->viewModel.onTimeSelect(false)}"
+                android:checked="@{viewModel.obsIsMorning == 0}"
+                app:layout_constraintTop_toBottomOf="@id/rb_first"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="@id/rb_first"
                 />
 
 
@@ -53,7 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/send"
-                app:layout_constraintTop_toBottomOf="@id/tv_notes"
+                android:onClick="@{()->viewModel.onSubmitClick()}"
+                app:layout_constraintTop_toBottomOf="@id/rb_second"
                 android:layout_marginTop="@dimen/_32sdp"
                 />
 
@@ -62,5 +79,12 @@
 
     </ScrollView>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.permission.PermissionViewModel"
+            />
+    </data>
 
 </layout>

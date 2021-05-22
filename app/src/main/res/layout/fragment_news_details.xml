@@ -22,19 +22,21 @@
                 android:layout_margin="@dimen/_8sdp"
                 app:cardCornerRadius="@dimen/_8sdp"
                 app:layout_constraintTop_toTopOf="parent"
+                app:visibleGone="@{viewModel.data != null}"
                 >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/_8sdp"
-                    >
+                    android:paddingBottom="@dimen/_8sdp">
+
                     <ImageView
                         android:id="@+id/big_image"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_120sdp"
                         tools:src="@tools:sample/backgrounds/scenic"
                         android:scaleType="fitXY"
+                        loadImage="@{viewModel.data.image}"
                         app:layout_constraintTop_toTopOf="parent"
                         />
 

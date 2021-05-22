@@ -1,17 +1,15 @@
 package com.gsgroup.hrapp.data.remote
 
-import com.gsgroup.hrapp.data.model.AllCitiesAreaResponse
-import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
 import com.gsgroup.hrapp.ui.fragment.map.share.ShareLocationRequest
 import com.gsgroup.hrapp.ui.fragment.requests.autharea.AuthAreaRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.medical_card.MedicalCardRequestRequest
+import com.gsgroup.hrapp.ui.fragment.requests.mission.MissionRequestRequest
+import com.gsgroup.hrapp.ui.fragment.requests.permission.PermissionRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.phoneissue.PhoneIssueRequestRequest
 import com.gsgroup.hrapp.ui.fragment.requests.salaryinfo.SalaryInfoRequestRequest
-import com.gsgroup.hrapp.ui.fragment.sign_in_out_logs.AttendanceLogRequest
-import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Part
@@ -68,10 +66,14 @@ class ApiHelper(private val apiService: ApiService) : ApiService {
 
     override fun salaryInfoRequestAsync(request: SalaryInfoRequestRequest) = apiService.salaryInfoRequestAsync(request)
 
-    override fun getAttendanceLogsAsync(date: String) = apiService.getAttendanceLogsAsync(date)
+    override fun getAttendanceLogsAsync(date: String, userId:String?) = apiService.getAttendanceLogsAsync(date, userId)
+    override fun getMyTeamAsync() = apiService.getMyTeamAsync()
 
 
     override fun medicalCardRequestAsync(request: MedicalCardRequestRequest) = apiService.medicalCardRequestAsync(request)
+    override fun permissionRequestAsync(request: PermissionRequestRequest) = apiService.permissionRequestAsync(request)
+
+    override fun missionRequestAsync(request: MissionRequestRequest) = apiService.missionRequestAsync(request)
 
 
     override fun getAllCitiesAsync() = apiService.getAllCitiesAsync()

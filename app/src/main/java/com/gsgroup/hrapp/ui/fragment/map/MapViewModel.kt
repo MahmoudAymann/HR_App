@@ -40,7 +40,7 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
     var areasList: Array<SearchItemInterface>? = arrayOf()
     private var currentMarker: Marker? = null
     private var areaMarker: Marker? = null
-    private val serial = userData?.serial ?: AppUtil.getDeviceSerial(app.applicationContext)
+    private val serial =  AppUtil.getDeviceSerial(app.applicationContext)
 
     init {
         isLoading.set(true)
@@ -70,11 +70,10 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun onLoginClick() {
-        if (obsIsCheckIn.get()) {
             if (request.isValid()) {
-                if (!isInArea()) {
+                if (isInArea()) {
                     request.serial = serial
-                    requestNewCallDeferred({ checkInCallAsync() }) {
+                    requestNewCallDeferred({ if (obsIsCheckIn.get()) checkInCallAsync() else checkOutCallAsync() }) {
                         updateUserDataPrefs(it.response?.data)
                         postResult(Resource.success(msg = it.message))
                     }
@@ -82,11 +81,6 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
             } else {
                 postResult(Resource.message(app.getString(R.string.invalid_area_selected)))
             }
-        } else {
-            requestNewCallDeferred({ checkOutCallAsync() }) {
-                postResult(Resource.success(msg = it.message))
-            }
-        }
     }
 
     private fun updateUserDataPrefs(attendance: Attendance?) {

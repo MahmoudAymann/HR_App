@@ -12,8 +12,7 @@ import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.showErrorDialog
 
 class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
-    override fun pageTitle(): String = getString(
-        R.string.news)
+    override fun pageTitle(): String = getString(R.string.news)
     override val mViewModel: NewsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

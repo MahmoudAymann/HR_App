@@ -25,16 +25,16 @@ class HRViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     init {
         isLoading.set(true)
-        requestNewCallDeferred({ hrCallAsync() }) {
+        requestNewCallDeferred({hrCallAsync() }) {
             postResult(Resource.success(it))
-            data = it.response?.data
-            isLoading.set(false)
-            notifyChange()
+            it.response?.data?.let {
+                data = it
+                notifyChange()
+                isLoading.set(false)
+            }
         }
     }
 
     private fun hrCallAsync() = apiHelper.getDirectHrAsync()
-
-
 
 }

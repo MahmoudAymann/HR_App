@@ -32,6 +32,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/from_date"
+                    android:focusable="false"
+                    android:onClick="@{()->viewModel.onDateClick(Codes.OPEN_DATE_FROM)}"
+                    android:text="@={viewModel.request.fromDate}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +54,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/to_date"
+                    android:focusable="false"
+                    android:onClick="@{()->viewModel.onDateClick(Codes.OPEN_DATE_TO)}"
+                    android:text="@={viewModel.request.toDate}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,6 +76,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/from_hour"
+                    android:enabled="@{!viewModel.obsFullDay}"
+                    android:focusable="false"
+                    android:onClick="@{()->viewModel.onTimeClick(Codes.OPEN_TIME_FROM)}"
+                    android:text="@={viewModel.request.fromTime}"
+                    android:background="@{viewModel.obsFullDay? @color/default_inactive: @color/transparent}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +100,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/to_hour"
+                    android:enabled="@{!viewModel.obsFullDay}"
+                    android:focusable="false"
+                    android:onClick="@{()->viewModel.onTimeClick(Codes.OPEN_TIME_TO)}"
+                    android:text="@={viewModel.request.toTime}"
+                    android:background="@{viewModel.obsFullDay? @color/default_inactive: @color/transparent}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,6 +116,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/til_to_hour"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:checked="@{viewModel.obsFullDay}"
+                android:onClick="@{()->viewModel.onFullDayClick()}"
                 />
 
 
@@ -129,6 +147,7 @@
                     android:gravity="top"
                     android:inputType="textMultiLine"
                     android:minHeight="@dimen/_80sdp"
+                    android:text="@={viewModel.request.details}"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,7 +156,7 @@
                 android:id="@+id/tv_notes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="- Notes"
+                android:text="@string/mission_notes"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_details"
@@ -150,10 +169,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/send"
+                android:onClick="@{()->viewModel.onSubmitClick()}"
                 app:layout_constraintTop_toBottomOf="@id/tv_notes"
                 android:layout_marginTop="@dimen/_48sdp"
                 />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,5 +180,14 @@
 
     </ScrollView>
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.mission.MissionViewModel"
+            />
+
+        <import type="com.gsgroup.hrapp.constants.Codes" />
+    </data>
 
 </layout>

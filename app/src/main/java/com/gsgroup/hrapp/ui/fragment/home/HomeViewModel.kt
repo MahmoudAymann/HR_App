@@ -33,5 +33,6 @@ class HomeViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     fun hideCheckInButton() {
         obsIsCheckedIn.set(!userData?.attendance?.timeIn.isNullOrBlank())
+        notifyChange()
     }
 }

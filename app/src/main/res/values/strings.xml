@@ -187,6 +187,11 @@
     <string name="area_">Area:</string>
     <string name="check_in_time_">Check In:</string>
     <string name="check_out_time_">Check Out:</string>
+    <string name="mission_notes">- Please check the selected Date and Time before sending the request.</string>
+    <string name="permission_notes">permission_notes</string>
+    <string name="first_of_the_day">First of the Day</string>
+    <string name="last_of_the_day">Last of the Day</string>
+    <string name="select_date">Select Date</string>
 
     <string-array name="months">
         <item>January</item>

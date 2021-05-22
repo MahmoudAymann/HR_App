@@ -26,7 +26,6 @@ class DirectManagerFragment : BaseFragment<FragmentDirectManagerBinding, DirectM
                     Codes.PRIVATE_PHONE->activity?.callPhoneNumber(data?.privateMobile)
                     Codes.EMAIL_CLICK->activity?.openMailIntent(data?.email)
                 }
-
             }
             observe(resultLiveData) {
                 when (it?.status) {

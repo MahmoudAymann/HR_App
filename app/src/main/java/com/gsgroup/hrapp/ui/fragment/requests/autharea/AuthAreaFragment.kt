@@ -18,27 +18,30 @@ class AuthAreaFragment : BaseFragment<FragmentAuthAreaBinding, AuthAreaViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         handleFragRes()
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
                     Codes.OPEN_CITY_LIST -> navigateSafe(
-                        MapFragmentDirections.actionMapFragmentToBottomSheetFragment(
+                        AuthAreaFragmentDirections.actionAuthAreaFragmentToBottomSheetFragment(
                             citiesList
                         )
                     )
                     Codes.OPEN_AREA_LIST -> navigateSafe(
-                        MapFragmentDirections.actionMapFragmentToBottomSheetFragment(
+                        AuthAreaFragmentDirections.actionAuthAreaFragmentToBottomSheetFragment(
                             areasList
                         )
                     )
+                    Codes.HIDE_PROGRESS->{ showProgress(false) }
                 }
             }
             observe(resultLiveData) {
                 when (it?.status) {
                     Status.SUCCESS -> {
                         showProgress(false)
+                        activity?.showSuccessfulDialog(it.message){
+                            closeFragment()
+                        }
                     }
                     Status.MESSAGE -> {
                         showProgress(false)

@@ -40,7 +40,6 @@ data class Company(
 
 @Parcelize
 data class Attendance(
-
 	@field:SerializedName("area")
 	val area: String? = null,
 

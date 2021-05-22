@@ -54,6 +54,14 @@
             android:id="@+id/action_myTeamFragment_to_teamFilterFragment"
             app:destination="@id/teamFilterFragment"
             />
+        <action
+            android:id="@+id/action_myTeamFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            />
+        <action
+            android:id="@+id/action_myTeamFragment_to_signInOutLogFragment"
+            app:destination="@id/signInOutLogFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/companyPoliciesFragment"
@@ -94,6 +102,12 @@
         <action
             android:id="@+id/action_signInOutLogFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment"
+            />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
             />
     </fragment>
     <fragment
@@ -302,7 +316,12 @@
         android:name="com.gsgroup.hrapp.ui.fragment.requests.autharea.AuthAreaFragment"
         android:label="AuthAreaFragment"
         tools:layout="@layout/fragment_auth_area"
-        />
+        >
+        <action
+            android:id="@+id/action_authAreaFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/fragmentBorrow"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.borrow.FragmentBorrow"

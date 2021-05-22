@@ -72,6 +72,9 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
                 when (it?.status) {
                     SUCCESS -> {
                         showProgress(false)
+                        activity?.showSuccessfulDialog(it.message){
+                            closeFragment()
+                        }
                     }
                     MESSAGE -> {
                         showProgress(false)

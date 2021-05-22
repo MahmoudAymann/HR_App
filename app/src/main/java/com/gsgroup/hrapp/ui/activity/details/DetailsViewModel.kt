@@ -34,13 +34,13 @@ class DetailsViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     private fun authScreenPermissions() { //hide all headers
-        obsShowBackButton.set(false)
         obsShowHeaderView.set(false)
     }
 
     private fun detailsScreen() {// show back button with logo in toolbar
         obsShowBackButton.set(true)
         obsShowHeaderView.set(true)
+        obsShowTitleBar.set(true)
     }
 
 

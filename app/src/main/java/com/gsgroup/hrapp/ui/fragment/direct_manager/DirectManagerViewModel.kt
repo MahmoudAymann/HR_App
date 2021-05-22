@@ -15,7 +15,6 @@ class DirectManagerViewModel(app:Application) : AndroidBaseViewModel(app) {
         setValue(if (isPrivate) Codes.PRIVATE_PHONE else Codes.BUSINESS_PHONE)
     }
 
-
     fun onEmailClick() {
         setValue(Codes.EMAIL_CLICK)
     }
@@ -25,9 +24,11 @@ class DirectManagerViewModel(app:Application) : AndroidBaseViewModel(app) {
         isLoading.set(true)
         requestNewCallDeferred({ managerCallAsync() }) {
             postResult(Resource.success(it))
-            data = it.response?.data
-            isLoading.set(false)
-            notifyChange()
+            it.response?.data?.let {
+                data = it
+                notifyChange()
+                isLoading.set(false)
+            }
         }
     }
 

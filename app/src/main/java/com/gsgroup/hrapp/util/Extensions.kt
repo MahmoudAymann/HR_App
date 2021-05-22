@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.JsonReader
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +23,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.contentValuesOf
+import androidx.core.net.toUri
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -41,35 +40,23 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
 import com.gsgroup.hrapp.BR
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.app.BaseApplication
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.base.BaseFragment
-import com.gsgroup.hrapp.base.network.response.NetworkResponse
-import com.gsgroup.hrapp.base.network.response.UNKNOWN_ERROR_RESPONSE_CODE
-import com.gsgroup.hrapp.base.network.response.extractNetworkResponse
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.ErrorResponse
 import com.gsgroup.hrapp.data.model.SearchItemInterface
-import com.gsgroup.hrapp.ui.activity.MainActivity
 import com.gsgroup.hrapp.ui.activity.details.DetailsActivity
 import com.gsgroup.hrapp.util.ExceptionUtil.getErrorFromException
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import retrofit2.Converter
-import retrofit2.HttpException
 import timber.log.Timber
 import java.io.File
-import java.io.IOException
 import java.lang.reflect.ParameterizedType
 
 
@@ -534,4 +521,16 @@ fun canNavigate(controller: NavController, view: View?): Boolean {
         Timber.e("May not navigate: current destination is not the current fragment.")
         false
     }
+
+}
+
+fun Uri?.openInBrowser(context: Context) {
+    this ?: return // Do nothing if uri is null
+
+    val browserIntent = Intent(Intent.ACTION_VIEW, this)
+    ContextCompat.startActivity(context, browserIntent, null)
+}
+
+fun String?.asUri(): Uri? {
+    return this?.toUri()
 }

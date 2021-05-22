@@ -8,14 +8,16 @@ import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.data.model.SearchItemInterface
+import com.gsgroup.hrapp.ui.fragment.login.Attendance
+import com.gsgroup.hrapp.ui.fragment.map.AttendanceResponse
 import com.gsgroup.hrapp.util.CalendarUtil
 import com.gsgroup.hrapp.util.Resource
+import com.gsgroup.hrapp.util.isNull
 import com.gsgroup.hrapp.util.requestNewCallDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @InternalCoroutinesApi
 class SignInOutLogViewModel(app: Application) : AndroidBaseViewModel(app) {
@@ -28,15 +30,12 @@ class SignInOutLogViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsShowDays = ObservableBoolean()
     val request = AttendanceLogRequest()
 
-
-    init {
-        showDays()
-    }
-
-
-    private fun showDays(){
+    var userId: String? = null
+    var item : Attendance?=null
+    private fun showCalendarView(year: Int?, month: Int?) {
+        if (year.isNull() || month.isNull()) return
         viewModelScope.launch(Dispatchers.Main) {
-            CalendarUtil(app.applicationContext, 2021,5).setupFlow().collect {
+            CalendarUtil(app.applicationContext, year!!, month!!).setupFlow().collect {
                 logsAdapter.setList(it)
                 obsShowDays.set(true)
             }
@@ -44,14 +43,32 @@ class SignInOutLogViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     private fun onDayClick(item: LogsItem) {
+        obsShowResult.set(false)
         request.day = item.dayNum.toString()
         requestNewCallDeferred({ getAttendanceCallAsync() }) {
             postResult(Resource.success())
+            this.item = it.response?.data
+            notifyChange()
+            obsShowResult.set(true)
         }
     }
 
     private fun getAttendanceCallAsync() =
-        apiHelper.getAttendanceLogsAsync("${request.year}-${request.month}-${request.day}")
+        apiHelper.getAttendanceLogsAsync(
+            "${request.year}-${editNumberToServerRequest(request.month)}-${
+                editNumberToServerRequest(request.day)
+            }",
+            userId
+    )
+
+    private fun editNumberToServerRequest(date: String?): String {
+        return date?.let {
+            if (it.length == 1) {
+                "0$it"
+            } else
+                it
+        } ?: "00"
+    }
 
 
     fun onMonthClick() {
@@ -63,6 +80,12 @@ class SignInOutLogViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     }
 
+    fun gotData(args: SignInOutLogFragmentArgs) {
+        args.userId?.let {
+            userId = it
+        }
+    }
+
     fun gotResultFromBottomSheet(it: SearchItemInterface?) {
         if (it is ItemMonth) {
             obsMonth.set(it.name)
@@ -70,6 +93,9 @@ class SignInOutLogViewModel(app: Application) : AndroidBaseViewModel(app) {
         } else if (it is ItemYear) {
             obsYear.set(it.name())
             request.year = it.name
+        }
+        if (request.isValid()) {
+            showCalendarView(request.year?.toInt(), request.month?.toInt())
         }
     }
 

@@ -23,6 +23,7 @@
                 style="@style/circular_image_view"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
+                loadImage="@{item.image}"
                 android:src="@drawable/app_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +50,7 @@
                 android:gravity="start"
                 android:textAlignment="viewStart"
                 android:textStyle="bold"
-                android:text="@{item.name}"
+                android:text="@{item.userName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_profile"
                 app:layout_constraintTop_toTopOf="@+id/img_profile"
@@ -90,7 +91,6 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:text="@{item.company}"
                 android:textAlignment="viewStart"
-
                 app:layout_constraintEnd_toStartOf="@+id/tv_location"
                 app:layout_constraintStart_toStartOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_code"
@@ -104,7 +104,6 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 android:text="Egypt"
                 android:textAlignment="viewStart"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_company"
                 app:layout_constraintTop_toTopOf="@+id/tv_company"

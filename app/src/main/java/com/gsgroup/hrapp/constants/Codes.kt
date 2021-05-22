@@ -1,6 +1,13 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val HIDE_PROGRESS: Int = 1039
+    val ATTENDANCE_LOGS_SCREEN: Int = 1038
+    val CHNAGE_PASSWORD_SCREEN: Int = 1037
+    const val OPEN_TIME_TO:Int = 1036
+    const val OPEN_TIME_FROM:Int = 1035
+    const val OPEN_DATE_TO: Int  = 1034
+    const val OPEN_DATE_FROM: Int  = 1033
     const val OPEN_JT_LIST: Int = 1032
     val FILTER_SCREEN: Int = 1031
     val SELECT_MONTH: Int = 1030

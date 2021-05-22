@@ -14,7 +14,6 @@ import timber.log.Timber
 
 class AuthAreaViewModel(app: Application) : AndroidBaseViewModel(app) {
 
-
     val request = AuthAreaRequestRequest()
 
     var citiesList: Array<SearchItemInterface>? = arrayOf()
@@ -25,7 +24,7 @@ class AuthAreaViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     init {
         requestNewCallDeferred({ getAllCitiesCallAsync() }) {
-            postResult(Resource.success())
+            setValue(Codes.HIDE_PROGRESS)
             it.response?.data?.let { list ->
                 citiesList = list.toTypedArray()
             }
@@ -35,6 +34,7 @@ class AuthAreaViewModel(app: Application) : AndroidBaseViewModel(app) {
     private fun gotCity(city: CityItem?) {
         city?.let {
             obsCityName.set(it.name)
+            areasList = it.areas?.toTypedArray()
         }
     }
 
@@ -54,11 +54,13 @@ class AuthAreaViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun onCityClick() {
-        setValue(Codes.OPEN_CITY_LIST)
+        if (!citiesList.isNullOrEmpty())
+            setValue(Codes.OPEN_CITY_LIST)
     }
 
     fun onAreaClick() {
-        setValue(Codes.OPEN_AREA_LIST)
+        if (!areasList.isNullOrEmpty())
+            setValue(Codes.OPEN_AREA_LIST)
     }
 
     fun onSubmitClick() {

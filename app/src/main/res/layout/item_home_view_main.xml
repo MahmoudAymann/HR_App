@@ -15,7 +15,7 @@
 
     <com.lb.auto_fit_textview.AutoResizeTextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_height="@dimen/_75sdp"
         android:layout_margin="@dimen/_6sdp"
         android:background="@drawable/tv_main_home_bg"
         android:drawablePadding="@dimen/_8sdp"

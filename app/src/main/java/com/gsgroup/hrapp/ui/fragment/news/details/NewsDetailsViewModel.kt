@@ -2,12 +2,13 @@ package com.gsgroup.hrapp.ui.fragment.news.details
 
 import android.app.Application
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
+import com.gsgroup.hrapp.ui.fragment.news.NewsItem
 import com.gsgroup.hrapp.util.Resource
 import com.gsgroup.hrapp.util.requestNewCallDeferred
 
 class NewsDetailsViewModel(app:Application) : AndroidBaseViewModel(app) {
 
-    var data : NewsData?=null
+    var data: NewsItem? = null
 
 
     fun getData(id: Int){

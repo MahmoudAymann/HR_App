@@ -3,6 +3,7 @@ package com.gsgroup.hrapp.ui.fragment.sign_in_out_logs
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.constants.Codes
@@ -16,11 +17,12 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class SignInOutLogFragment : BaseFragment<FragmentSignInOutLogBinding, SignInOutLogViewModel>() {
     override fun pageTitle(): String = getString(R.string.sign_in_out_logs)
     override val mViewModel: SignInOutLogViewModel by viewModels()
-
+    val args : SignInOutLogFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleFragRes()
         mViewModel.apply {
+            gotData(args)
             observe(mutableLiveData) {
                 when (it) {
                     Codes.SELECT_MONTH -> navigateSafe(
@@ -50,6 +52,7 @@ class SignInOutLogFragment : BaseFragment<FragmentSignInOutLogBinding, SignInOut
         }
 
     }
+
 
     private fun handleFragRes() {
         listenForResult<SearchItemInterface>(ConstString.RESULT_FROM_BOTTOMSHEET_LIST) {
