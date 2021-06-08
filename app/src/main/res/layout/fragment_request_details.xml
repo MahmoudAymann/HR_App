@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            tools:background="@drawable/app_background"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/_8sdp"
+                android:layout_margin="@dimen/_8sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_8sdp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_date_static"
+                        style="@style/RequestDetailsHeadTextViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/request_date_"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:layout_constraintStart_toEndOf="@id/tv_date_static"
+                        app:layout_constraintTop_toTopOf="@id/tv_date_static"
+                        tools:text="@tools:sample/date/ddmmyy"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_from_static"
+                        style="@style/RequestDetailsHeadTextViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/from_"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_date"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        app:layout_constraintStart_toEndOf="@id/tv_from_static"
+                        app:layout_constraintTop_toTopOf="@id/tv_from_static"
+                        tools:text="@tools:sample/date/ddmmyy"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_accept"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accept"
+                        style="@style/SubmitButton"
+                        app:backgroundTint="@color/button_color_green"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_from"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_decline"
+                        />
+
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_decline"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/decline"
+                        style="@style/SubmitButton"
+                        app:backgroundTint="@color/button_color_red"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_transfer"
+                        app:layout_constraintTop_toTopOf="@id/btn_accept"
+                        app:layout_constraintStart_toEndOf="@id/btn_accept"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_transfer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accept"
+                        style="@style/SubmitButton"
+                        app:backgroundTint="@color/black"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toEndOf="@id/btn_decline"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/btn_accept"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</layout>

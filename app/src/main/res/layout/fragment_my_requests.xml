@@ -14,94 +14,51 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             tools:background="@drawable/app_background"
-            android:padding="@dimen/_16sdp"
             >
 
-            <TextView
-                android:id="@+id/btn_pinned"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sent_to_me"
+                style="@style/SubmitButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="@{viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
-                android:gravity="center"
-                android:onClick="@{()->viewModel.onSelectClick(true)}"
-                android:text="@string/pinned"
-                android:textColor="@{viewModel.obsIsNewNow ? @color/button_color_green: @color/black}"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_48sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:text="@string/requests_sent_to_me"
+                app:cornerRadius="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:onClick="@{()->viewModel.onButtonClick(false)}"
+                app:layout_constraintEnd_toStartOf="@id/btn_my_requests"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_accepted"
-
                 />
 
-            <TextView
-                android:id="@+id/btn_accepted"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="@{!viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
-                android:gravity="center"
-                android:onClick="@{()->viewModel.onNotificationClick(false)}"
-                android:text="@string/accepted"
-                android:textColor="@{!viewModel.obsIsNewNow? @color/button_color_red: @color/black}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_pinned"
-                app:layout_constraintTop_toTopOf="@id/btn_pinned"
-                app:layout_constraintEnd_toStartOf="@id/btn_rejected"
-                />
-
-
-            <TextView
-                android:id="@+id/btn_rejected"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="@{!viewModel.obsChangeSelectedBackgroundToNew? @drawable/shadow_bg_white : null}"
-                android:gravity="center"
-                android:onClick="@{()->viewModel.onNotificationClick(false)}"
-                android:text="@string/rejected"
-                android:textColor="@{!viewModel.obsIsNewNow? @color/button_color_red: @color/black}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_accepted"
-                app:layout_constraintTop_toTopOf="@id/btn_pinned"
-                />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_filter"
+                android:id="@+id/btn_my_requests"
                 style="@style/SubmitButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/filter"
-                android:textColor="@color/default_normal_text_color_material"
-                app:icon="@drawable/ic_filter"
-                app:iconGravity="end"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:iconTint="@color/default_normal_text_color_material"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="@string/my_requests"
+                app:cornerRadius="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:onClick="@{()->viewModel.onButtonClick(true)}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_pinned"
+                app:layout_constraintStart_toEndOf="@+id/btn_sent_to_me"
+                app:layout_constraintTop_toTopOf="@id/btn_sent_to_me"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_items"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/btn_filter"
-                tools:listitem="@layout/item_my_request_view"
-                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.gsgroup.hrapp.ui.fragment.requests.myrequest.toreply.RequestsToReplyViewModel"
-            />
-    </data>
-
+<data>
+    <variable
+        name="viewModel"
+        type="com.gsgroup.hrapp.ui.fragment.requests.myrequest.MyRequestsViewModel"
+        />
+</data>
 </layout>

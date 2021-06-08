@@ -11,6 +11,7 @@ import com.gsgroup.hrapp.databinding.FragmentCovidBinding
 import com.gsgroup.hrapp.util.asUri
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.openInBrowser
+import com.gsgroup.hrapp.util.showWarningDialog
 
 class CovidFragment : BaseFragment<FragmentCovidBinding, CovidViewModel>() {
     override fun pageTitle(): String = getString(R.string.covid_19)
@@ -22,6 +23,7 @@ class CovidFragment : BaseFragment<FragmentCovidBinding, CovidViewModel>() {
             observe(mutableLiveData){
                 when(it){
                     Codes.NEWS_SCREEN-> COVID_LINK.asUri().openInBrowser(requireActivity())
+                    Codes.INFECT_SCREEN->requireActivity().showWarningDialog(getString(R.string.still_working_on_it))
                 }
             }
 

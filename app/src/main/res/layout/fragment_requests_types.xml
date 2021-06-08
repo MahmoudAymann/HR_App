@@ -20,12 +20,7 @@
             android:paddingBottom="@dimen/_8sdp"
             />
 
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <data>
         <variable

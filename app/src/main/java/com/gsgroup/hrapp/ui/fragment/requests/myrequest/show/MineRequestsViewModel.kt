@@ -3,11 +3,12 @@ package com.gsgroup.hrapp.ui.fragment.requests.myrequest.show
 import androidx.databinding.ObservableBoolean
 import com.gsgroup.hrapp.base.BaseViewModel
 
-class MyRequestsViewModel : BaseViewModel() {
+class MineRequestsViewModel : BaseViewModel() {
 
     val obsChangeSelectedBackgroundToNew = ObservableBoolean(true)
     val obsIsNewNow = ObservableBoolean(true)
     private var selectedNew = true
+
     fun onSelectClick(isNew: Boolean) {
         if (isNew) {
             if (!selectedNew) {
@@ -40,6 +41,10 @@ class MyRequestsViewModel : BaseViewModel() {
             }
         }
         val url = if (isNew) "get new" else "get old"
+    }
+
+    fun onFilterClick(){
+
     }
 
 }

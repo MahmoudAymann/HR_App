@@ -11,9 +11,9 @@ import com.gsgroup.hrapp.util.*
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun pageTitle(): String = getString(R.string.login)
-
-
+    override val mViewModel: LoginViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         mViewModel.apply {
             observe(mutableLiveData) {
@@ -21,13 +21,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Codes.HOME_SCREEN -> showMainActivity()
                     Codes.RESTART_APP -> activity?.restartApp()
                     Codes.CHANGE_LANG -> activity?.showDialog(getString(R.string.ask_change_language)) { mViewModel.changeLang() }
+                    Codes.SHOW_BIOMETRIC_ASK_DIALOG-> BiometricUtils.showAskToUseDialog(this@LoginFragment,{
+                        saveBiometricData()
+                        showMainActivity()
+                    }){
+                        showMainActivity()
+                    }
+                    Codes.LOGIN_WITH_BIOMETRIC-> BiometricUtils.showBiometric(requireActivity()){
+                        loginWithBiometricData()
+                    }
                 }
             }
             observe(resultLiveData) {
                 when (it?.status) {
                     Status.SUCCESS -> {
                         showProgress(false)
-                        showMainActivity()
                     }
                     Status.MESSAGE -> {
                         showProgress(false)
@@ -36,9 +44,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     Status.LOADING -> showProgress()
                 }
             }
-
         }
     }
 
-    override val mViewModel: LoginViewModel by viewModels()
+    override fun onResume() {
+        super.onResume()
+        checkForBiometricAvailability()
+    }
+
+
+    private fun checkForBiometricAvailability() {
+        BiometricUtils.isAvailable(requireActivity()) { mViewModel.isBiometricHardwareAvail(it) }
+    }
 }

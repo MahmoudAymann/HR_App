@@ -1,26 +1,22 @@
-package com.gsgroup.hrapp.ui.fragment.changepassword
+package com.gsgroup.hrapp.ui.fragment.requests.myrequest.details
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
-import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
-import com.gsgroup.hrapp.databinding.FragmentChangePasswordBinding
-import com.gsgroup.hrapp.util.*
+import com.gsgroup.hrapp.databinding.FragmentRequestDetailsBinding
+import com.gsgroup.hrapp.util.Status
+import com.gsgroup.hrapp.util.observe
+import com.gsgroup.hrapp.util.showErrorDialog
 
-class ChangePasswordFragment :
-    BaseFragment<FragmentChangePasswordBinding, ChangePasswordViewModel>() {
-    override fun pageTitle(): String = getString(R.string.change_password)
-    override val mViewModel: ChangePasswordViewModel by viewModels()
-    lateinit var args : ChangePasswordFragmentArgs
+class RequestDetailsFragment :
+    BaseFragment<FragmentRequestDetailsBinding, RequestDetailsViewModel>() {
+    override fun pageTitle(): String = ""
+    override val mViewModel: RequestDetailsViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel.apply {
-            arguments?.let {
-                args = ChangePasswordFragmentArgs.fromBundle(it)
-                gotData(args)
-            }
             observe(mutableLiveData) {
                 when (it) {
 
@@ -30,9 +26,6 @@ class ChangePasswordFragment :
                 when (it?.status) {
                     Status.SUCCESS -> {
                         showProgress(false)
-                        activity?.showSuccessfulDialog(it.message) {
-                            closeFragment()
-                        }
                     }
                     Status.MESSAGE -> {
                         showProgress(false)
@@ -42,6 +35,5 @@ class ChangePasswordFragment :
                 }
             }
         }
-
     }
 }

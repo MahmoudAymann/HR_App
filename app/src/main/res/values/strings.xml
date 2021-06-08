@@ -86,19 +86,19 @@
     <string name="direct_manager_requests">Direct Manager Requests</string>
     <string name="audit_request">Audit Request</string>
     <string name="details">Details</string>
-    <string name="less_than_3">Less Than 3</string>
-    <string name="more_than_3">More Than 3</string>
-    <string name="less_than_6">Less Than 6</string>
-    <string name="more_than_6">MoreThan 6</string>
-    <string name="are_you_employee">Are you Employee?</string>
-    <string name="are_you_representative">Are you Representative?</string>
-    <string name="work_period">Work Period</string>
-    <string name="payment_period">Payment Period</string>
-    <string name="from_monthly_salary">From Monthly Salary</string>
-    <string name="yearly_salary">Yearly</string>
-    <string name="salary">Salary</string>
-    <string name="amount_valid_from_company">Amount Valid From The Company</string>
-    <string name="working_days">Working Days</string>
+    <string name="less_than_3" translatable="false">Less Than 3</string>
+    <string name="more_than_3" translatable="false">More Than 3</string>
+    <string name="less_than_6" translatable="false">Less Than 6</string>
+    <string name="more_than_6" translatable="false">MoreThan 6</string>
+    <string name="are_you_employee" translatable="false">Are you Employee?</string>
+    <string name="are_you_representative" translatable="false">Are you Representative?</string>
+    <string name="work_period" translatable="false">Work Period</string>
+    <string name="payment_period" translatable="false">Payment Period</string>
+    <string name="from_monthly_salary" translatable="false">From Monthly Salary</string>
+    <string name="yearly_salary" translatable="false">Yearly</string>
+    <string name="salary" translatable="false">Salary</string>
+    <string name="amount_valid_from_company" translatable="false">Amount Valid From The Company</string>
+    <string name="working_days" translatable="false">Working Days</string>
     <string name="check_in">Check In</string>
     <string name="check_out">Check Out</string>
     <string name="hire_new_employee">Hire New Employee</string>
@@ -120,12 +120,12 @@
     <string name="the_employee">Employee</string>
     <string name="select_employee">Select Employee</string>
     <string name="penalty_type">Penalty Type</string>
-    <string name="select_penalty_type">Select Penalty Type</string>
-    <string name="penalty_repeat">Penalty Repeat</string>
-    <string name="select_penalty_repeat">Select Penalty Repeat</string>
-    <string name="penalty_value">Penalty Value</string>
-    <string name="select_penalty_value">Select Penalty Value</string>
-    <string name="reason_and_details_of_the_penalty">Reason and details of the penalty</string>
+    <string name="select_penalty_type" translatable="false">Select Penalty Type</string>
+    <string name="penalty_repeat" translatable="false">Penalty Repeat</string>
+    <string name="select_penalty_repeat" translatable="false">Select Penalty Repeat</string>
+    <string name="penalty_value" translatable="false">Penalty Value</string>
+    <string name="select_penalty_value" translatable="false">Select Penalty Value</string>
+    <string name="reason_and_details_of_the_penalty" translatable="false">Reason and details of the penalty</string>
     <string name="from_hour">From Hour</string>
     <string name="to_hour">To Hour</string>
     <string name="full_day">Full Day</string>
@@ -187,11 +187,24 @@
     <string name="area_">Area:</string>
     <string name="check_in_time_">Check In:</string>
     <string name="check_out_time_">Check Out:</string>
-    <string name="mission_notes">- Please check the selected Date and Time before sending the request.</string>
-    <string name="permission_notes">permission_notes</string>
+    <string name="mission_notes" translatable="false">- Please check the selected Date and Time before sending the request.</string>
+    <string name="permission_notes" translatable="false">permission_notes</string>
     <string name="first_of_the_day">First of the Day</string>
     <string name="last_of_the_day">Last of the Day</string>
     <string name="select_date">Select Date</string>
+    <string name="national_id">National Id</string>
+    <string name="requests_sent_to_me">Requests Sent To Me</string>
+    <string name="request_date_">Request Date:</string>
+    <string name="from_">From:</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="still_working_on_it">Still working on it</string>
+    <string name="biometric_dont_have">looks like you don\'t have a biometric initialized yet, want to create a new one ?</string>
+    <string name="dont_ask_again">Don\'t Ask Again</string>
+    <string name="biometric_login">Biometric Login</string>
+    <string name="login_fast">Log in fast and securely using your biometric credential</string>
+    <string name="not_now">Not Now</string>
+    <string name="biometric_ask_to_use_next_login">do you want to login using your fingerprint instead of password?</string>
 
     <string-array name="months">
         <item>January</item>

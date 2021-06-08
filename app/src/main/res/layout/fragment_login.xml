@@ -31,7 +31,8 @@
             android:textColor="@{viewModel.obsIsArabic? @color/black : @color/white}"
             android:layoutDirection="ltr"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_en"
@@ -66,8 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/EditText.WhiteStyle"
-                android:hint="@string/username"
-                android:text="@={viewModel.request.email}"
+                android:hint="@string/national_id"
+                android:text="@={viewModel.request.natId}"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,6 +103,7 @@
             android:checked="@{viewModel.obsIsRememberMe}"
             android:onClick="@{()->viewModel.onRememberMeClick()}"
             app:buttonTint="@color/white"
+            app:visibleGone="@{!viewModel.obsShowBiometricButton}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/til_password" />
 
@@ -131,11 +133,12 @@
             android:layout_marginStart="@dimen/_48sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/button_color_red"
+            android:onClick="@{()->viewModel.onBiometricClick()}"
+            app:visibleGone="@{viewModel.obsShowBiometricButton}"
             app:icon="@drawable/ic_fingerprint"
             app:iconTint="@color/button_color_red"
             app:layout_constraintVertical_bias="0.0"
             />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,6 +1,5 @@
 package com.gsgroup.hrapp.ui.fragment.bottomsheet
 
-import android.os.Bundle
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.adapters.TextViewBindingAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -30,7 +29,7 @@ class BottomSheetViewModel : BaseViewModel() {
             BottomSheetBehavior.STATE_COLLAPSED -> {
 
             }
-            BottomSheetBehavior.STATE_HALF_EXPANDED->{
+            BottomSheetBehavior.STATE_HALF_EXPANDED -> {
                 obsShowHeader.set(false)
             }
             BottomSheetBehavior.STATE_HIDDEN -> {

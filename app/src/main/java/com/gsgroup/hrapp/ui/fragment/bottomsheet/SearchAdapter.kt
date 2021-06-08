@@ -17,6 +17,8 @@ class SearchAdapter(itemCallback: (SearchItemInterface) -> Unit) : BaseAdapter<S
     override fun onViewHolderCreated(viewHolder: BaseViewHolder<SearchItemInterface>) {
 
     }
+
+
     var filteredItemsList = arrayListOf<SearchItemInterface?>()
     override fun getFilter(): Filter {
         return object : Filter() {

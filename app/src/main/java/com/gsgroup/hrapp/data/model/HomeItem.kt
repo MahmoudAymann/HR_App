@@ -42,11 +42,11 @@ data class HomeItem(
                     context.getString(R.string.direct_manger),
                     R.drawable.ic_direct_manager
                 ),
-                HomeItem(
-                    HomeIds.REQUESTS,
-                    context.getString(R.string.requests),
-                    R.drawable.ic_requests
-                ),
+//                HomeItem(
+//                    HomeIds.REQUESTS,
+//                    context.getString(R.string.requests),
+//                    R.drawable.ic_requests
+//                ),
                 HomeItem(
                     HomeIds.SIGN_IN_OUT_LOGS,
                     context.getString(R.string.sign_in_out_logs),

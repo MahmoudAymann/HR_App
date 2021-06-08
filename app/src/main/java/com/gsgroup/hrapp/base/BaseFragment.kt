@@ -81,11 +81,6 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> :
         } ?: Timber.e("cannot find activity")
     }
 
-    inline fun <reified T : BaseFragment<*,*>> replaceFragment(
-        bundle: Bundle? = null
-    ) {
-        activity?.replaceFragment<T>(bundle)
-    }
 
     fun showBottomBar(show: Boolean = true) {
         castToActivity<MainActivity> {

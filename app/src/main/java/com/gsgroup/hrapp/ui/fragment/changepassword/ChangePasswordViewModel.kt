@@ -32,13 +32,12 @@ class ChangePasswordViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
 
-    fun gotData(args:ChangePasswordFragmentArgs){
-        args.userId?.let {
-            userId =  args.userId
+    fun gotData(args: ChangePasswordFragmentArgs?) {
+        args?.userId?.let {
+            userId = args.userId
         }
         notifyChange()
     }
-
 
 
 }

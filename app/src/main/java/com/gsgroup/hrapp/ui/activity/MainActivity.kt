@@ -30,7 +30,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> onBackPressed()
                     Codes.COVID_SCREEN -> showActivityWithDestination<DetailsActivity>(R.id.covidFragment)
-                    Codes.SALARY_SCREEN -> showActivityWithDestination<DetailsActivity>(R.id.salaryFragment)
+                    Codes.SALARY_SCREEN -> {
+//                        showActivityWithDestination<DetailsActivity>(R.id.salaryFragment)
+                        showWarningDialog(getString(R.string.still_working_on_it))
+                    }
                     Codes.NEWS_SCREEN -> showActivityWithDestination<DetailsActivity>(R.id.newsFragment)
                 }
             }
@@ -56,8 +59,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
     override fun onTabSelected(position: Int) {
         when (position) {
             0 -> navigateSafe(R.id.homeFragment)
-            1 -> navigateSafe(R.id.chatFragment)
-            2 -> navigateSafe(R.id.notificationFragment)
+            1 -> {
+//                navigateSafe(R.id.chatFragment)
+                showWarningDialog(getString(R.string.still_working_on_it))
+            }
+            2 -> {
+//                navigateSafe(R.id.notificationFragment)
+                showWarningDialog(getString(R.string.still_working_on_it))
+            }
             3 -> navigateSafe(R.id.faqFragment)
             4 -> navigateSafe(R.id.settingsFragment)
         }
@@ -93,10 +102,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSe
                 super.onBackPressed()
             }
         }
-    }
-
-    fun showBottomSheet(show: Boolean) {
-
     }
 
 }

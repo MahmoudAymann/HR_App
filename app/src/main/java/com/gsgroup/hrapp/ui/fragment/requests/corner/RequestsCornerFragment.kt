@@ -22,6 +22,7 @@ class RequestsCornerFragment :
                 when (it) {
                     Codes.HR_REQUESTS_SCREEN -> showRequestTypesScreen(true)
                     Codes.DM_REQUESTS_SCREEN -> showRequestTypesScreen(false)
+                    Codes.MY_REQUESTS_SCREEN -> navigateSafe(RequestsCornerFragmentDirections.actionRequestsCornerFragmentToMyRequestsFragment())
                 }
             }
         }

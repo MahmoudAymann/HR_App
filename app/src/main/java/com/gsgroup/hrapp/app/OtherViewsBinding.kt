@@ -224,7 +224,7 @@ class OtherViewsBinding {
     }
 
     @BindingAdapter("android:onTextChanged")
-    fun bindViewInvisible(tie: EditText, textChanged: TextWatcher) {
+    fun bindOnTextChange(tie: EditText, textChanged: TextWatcher) {
         tie.addTextChangedListener(textChanged)
     }
 

@@ -85,6 +85,7 @@
             android:name="userId"
             app:argType="string"
             app:nullable="true"
+            android:defaultValue="@null"
             />
     </fragment>
     <fragment
@@ -119,6 +120,10 @@
         <action
             android:id="@+id/action_requestsCornerFragment_to_requestsTypesFragment"
             app:destination="@id/requestsTypesFragment"
+            />
+        <action
+            android:id="@+id/action_requestsCornerFragment_to_myRequestsFragment"
+            app:destination="@id/myRequestsFragment"
             />
     </fragment>
 
@@ -376,6 +381,28 @@
         android:label="TeamFilterFragment"
         tools:layout="@layout/fragment_team_filter"
         />
+    <fragment
+        android:id="@+id/myRequestsFragment"
+        android:name="com.gsgroup.hrapp.ui.fragment.requests.myrequest.MyRequestsFragment"
+        android:label="MyRequestsFragment"
+        tools:layout="@layout/fragment_my_requests"
+        >
+        <action
+            android:id="@+id/action_myRequestsFragment_to_mineRequestsFragment"
+            app:destination="@id/mineRequestsFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/mineRequestsFragment"
+        android:name="com.gsgroup.hrapp.ui.fragment.requests.myrequest.show.MineRequestsFragment"
+        android:label="MineRequestsFragment"
+        tools:layout="@layout/fragment_mine_requests"
+        >
+        <argument
+            android:name="isMine"
+            app:argType="boolean"
+            />
+    </fragment>
 
 
 </navigation>

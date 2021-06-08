@@ -1,6 +1,9 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val LOGIN_WITH_BIOMETRIC: Int = 1042
+    val SHOW_BIOMETRIC_ASK_DIALOG: Int = 1041
+    val REQUESTS_SENT_TO_ME_SCREEN: Int= 1040
     val HIDE_PROGRESS: Int = 1039
     val ATTENDANCE_LOGS_SCREEN: Int = 1038
     val CHNAGE_PASSWORD_SCREEN: Int = 1037

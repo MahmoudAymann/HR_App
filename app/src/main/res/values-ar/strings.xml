@@ -111,7 +111,6 @@
     <string name="excuse_request">إذن</string>
     <string name="mission_request">مهمة</string>
     <string name="replacement_medical_card">بدل فاقد</string>
-    <string name="new_">جديد</string>
     <string name="print_insurance_request">برينت تأمينى</string>
     <string name="medical_card_request">كارت تأمينى</string>
     <string name="medical_approval_request">موافقة طبية</string>
@@ -181,4 +180,22 @@
     <string name="rejected">مرفوضة</string>
     <string name="accepted">مقبولة</string>
     <string name="pinned">معلقة</string>
+    <string name="full_day">يوم كامل</string>
+    <string name="to_hour">الى الساعة</string>
+    <string name="from_hour">من الساعة</string>
+    <string name="mission_details">تفاصيل المهمة</string>
+    <string name="area_">المنطقة:</string>
+    <string name="check_in_time_">الحضور:</string>
+    <string name="check_out_time_">الانصراف:</string>
+    <string name="first_of_the_day">اول اليوم</string>
+    <string name="last_of_the_day">اخر اليوم</string>
+    <string name="select_date">اختار التاريخ</string>
+    <string name="national_id">رقم البطاقة</string>
+    <string name="requests_sent_to_me">طلبات المرسلة الى</string>
+    <string name="request_date_">تاريخ الطلب:</string>
+    <string name="from_">من:</string>
+    <string name="accept">قبول</string>
+    <string name="decline">رفض</string>
+    <string name="still_working_on_it">جارى العمل عليها</string>
+    <string name="new_">جديد</string>
 </resources>

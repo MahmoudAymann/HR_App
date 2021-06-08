@@ -74,6 +74,11 @@ fun <T : Any> Fragment.listenForResult(key: String, callback: (T?) -> Unit) {
             callback(result)
         })
 }
+fun Fragment.setResultToFragment(key: String, it: SearchItemInterface?) {
+    val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
+    savedStateHandle?.set(key, it)
+    findNavController().navigateUp()
+}
 fun String.stringPathToFile(app:Application): File? {
     FileManager(app.applicationContext.cacheDir).extractAndCompress(this)?.let {
         return it
@@ -93,11 +98,7 @@ fun File.toMultiPart(key: String): MultipartBody.Part {
 fun <T : Any> T.toRequestBodyParam(): RequestBody =
     RequestBody.create(MediaType.parse("text/plain"), this.toString())
 
-fun Fragment.setResultToFragment(key: String, it: SearchItemInterface?) {
-    val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
-    savedStateHandle?.set(key, it)
-    findNavController().navigateUp()
-}
+
 
 inline fun <reified T : AppCompatActivity> Activity.showActivity(
     intent: Intent = Intent()
@@ -162,70 +163,12 @@ fun Activity.restartApp() {
     finishAffinity()
 }
 
-fun FragmentActivity.showLogoutDialog(onClick: () -> Unit) {
-    val dialog = SweetAlertDialog(this)
-        .setContentText(getString(R.string.log_out_check_message))
-        .setConfirmButton(getString(R.string.yes)) {
-            it.closeDialog()
-            onClick()
-        }
-        .setCancelButton(getString(R.string.no)) { sDialog ->
-            sDialog.closeDialog()
-        }
-        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.red))
-        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
-        .setCancelButtonBackgroundColor(getColorFromRes(R.color.white))
-    dialog.show()
-}
-
-fun Activity.showExitDialog() {
-    val dialog = SweetAlertDialog(this)
-        .setContentText(getString(R.string.exit_app))
-        .setConfirmText(getString(R.string.exit))
-        .setConfirmClickListener { sDialog ->
-            sDialog.closeDialog()
-            finishAffinity()
-        }
-        .setCancelText(getString(R.string.cancel))
-        .setCancelClickListener { sDialog ->
-            sDialog.closeDialog()
-        }
-        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.colorPrimary))
-        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
-        .setCancelButtonBackgroundColor(getColorFromRes(R.color.white))
-    dialog.show()
-}
-
-fun Context.showDialog(msg: String?, type: Int? = null, okClick: () -> Unit = {}) {
-    SweetAlertDialog(
-        this,
-        type ?: SweetAlertDialog.NORMAL_TYPE
-    )
-        .setContentText(msg)
-        .setConfirmButton(getString(R.string.yes)) { sDialog ->
-            sDialog.closeDialog()
-            okClick()
-        }.setCancelButton(getString(R.string.no)) {
-            it.closeDialog()
-        }
-        .setConfirmButtonBackgroundColor(getColorFromRes(R.color.black))
-        .setConfirmButtonTextColor(getColorFromRes(R.color.white))
-        .show()
-}
-
 fun Context.getColorFromRes(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
 }
 
-fun SweetAlertDialog.closeDialog() {
-    if (!AppUtil.isOldDevice())
-        dismissWithAnimation()
-    else
-        dismiss()
-}
-
-
 fun <T : AndroidViewModel> T.app() = this.getApplication<BaseApplication>()
+
 fun String.uri(): Uri? {
     return try {
         Uri.fromFile(File(this))
@@ -294,21 +237,6 @@ fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
         .into(this)
 }
 
-
-inline fun <reified T : BaseFragment<*, *>> FragmentActivity.replaceFragment(
-    bundle: Bundle? = null
-) {
-    val fragment = T::class.java.newInstance()
-    fragment.let { myFrag ->
-        supportFragmentManager.commit {
-            if (!AppUtil.isOldDevice())
-                setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-            myFrag.arguments = bundle
-            replace(R.id.fragment_container_view, myFrag, myFrag.tag)
-            addToBackStack(myFrag::class.java.name)
-        }
-    }
-}
 
 
 fun String.removeSpaces(): String = this.replace(" ", "").trim()
@@ -521,7 +449,6 @@ fun canNavigate(controller: NavController, view: View?): Boolean {
         Timber.e("May not navigate: current destination is not the current fragment.")
         false
     }
-
 }
 
 fun Uri?.openInBrowser(context: Context) {
