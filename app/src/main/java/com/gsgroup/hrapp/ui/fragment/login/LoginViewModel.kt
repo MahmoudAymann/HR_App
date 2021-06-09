@@ -23,7 +23,7 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     private val rememberMeRequest by app.sharedPrefs<RememberMeRequest>(ConstString.PREF_USER_LOGIN_REMEMBER_ME_DATA)
     private val biometricRequest by app.sharedPrefs<BiometricRequest>(ConstString.PREF_USER_LOGIN_BIOMETRIC_DATA)
-    private val dontAskForBiometric by app.sharedPrefs<Boolean>(ConstString.PREF_DONT_ASK_AGAIN_BIO)
+    private val dontAskForBiometric by app.sharedPrefs<String>(ConstString.PREF_DONT_ASK_AGAIN_BIO, )
 
     fun onLangClick(isArabic: Boolean) {
         selectedLang = if (isArabic) ConstString.LANG_AR else ConstString.LANG_EN
@@ -98,7 +98,7 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     fun isBiometricHardwareAvail(code: Int) {
         when (code) {
             BiometricUtils.BiometricCodes.CAN_USE_BIOMETRIC -> {
-                if (dontAskForBiometric == true)
+                if (dontAskForBiometric == "true")
                     obsShowBiometricButton.set(false)
                 else
                     obsShowBiometricButton.set(true)

@@ -110,8 +110,8 @@ object BiometricUtils {
             }
             .setNeutralButton(fragment.getString(R.string.dont_ask_again)) {
                 it.closeDialog()
-                fragment.requireActivity().sharedPrefs<Boolean>(ConstString.PREF_DONT_ASK_AGAIN_BIO)
-                    .setData(true)
+                fragment.requireActivity().sharedPrefs<String>(ConstString.PREF_DONT_ASK_AGAIN_BIO)
+                    .setData("true")
                 continueCallBack.invoke()
             }
         dialog.show()
