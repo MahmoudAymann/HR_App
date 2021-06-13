@@ -17,8 +17,8 @@ import timber.log.Timber
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), OnTabSelectedListener,
     NavController.OnDestinationChangedListener {
 
-    override val mViewModel: MainViewModel by viewModels()
-    private var navController: NavController? = null
+    override val mViewModel : MainViewModel by viewModels()
+    private var navController : NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -133,7 +133,11 @@ object MapUtil {
         val cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding)
         animateCamera(cu)
     }
-
+    private fun getMarkerOptions(latLng: LatLng, cursorColor: Float): MarkerOptions {
+        return MarkerOptions()
+            .position(latLng)
+            .icon(BitmapDescriptorFactory.defaultMarker(cursorColor))
+    }
     fun GoogleMap.getCurrentMarker(latLng: LatLng, zoomIn: Boolean = false): Marker {
         if (zoomIn)
             animateCameraToPosition(latLng, false)
@@ -146,11 +150,7 @@ object MapUtil {
         return addMarker(markerOptions)
     }
 
-    private fun getMarkerOptions(latLng: LatLng, cursorColor: Float): MarkerOptions {
-        return MarkerOptions()
-            .position(latLng)
-            .icon(BitmapDescriptorFactory.defaultMarker(cursorColor))
-    }
+
 
     fun GoogleMap.animateCameraToPosition(
         latLng: LatLng,

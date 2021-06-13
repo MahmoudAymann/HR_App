@@ -6,6 +6,7 @@ import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.constants.ConstString
+import com.gsgroup.hrapp.util.AppUtil
 import com.gsgroup.hrapp.util.BiometricUtils
 import com.gsgroup.hrapp.util.Resource
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
@@ -66,9 +67,14 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
         requestNewCallDeferred({ loginCallAsync() }) {
             saveUserDataInPrefs(it.response?.dataUser)
             postResult(Resource.success())
+
             if(hasBiometricData()){
                postValue(Codes.HOME_SCREEN)
             }else{
+                if(AppUtil.isOldDevice()){
+                    postValue(Codes.HOME_SCREEN)
+                    return@requestNewCallDeferred
+                }
                 postValue(Codes.SHOW_BIOMETRIC_ASK_DIALOG)
             }
         }

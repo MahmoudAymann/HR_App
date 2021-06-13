@@ -23,7 +23,6 @@ import com.gsgroup.hrapp.util.PermissionUtil.requestAppPermissions
 import com.gsgroup.hrapp.util.observe
 import kotlin.properties.Delegates
 
-
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
     ActivityResultCallback<ActivityResult> {
     private var isCheckIn by Delegates.notNull<Boolean>()

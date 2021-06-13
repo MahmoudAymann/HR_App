@@ -1,11 +1,17 @@
 package com.gsgroup.hrapp.data.remote
 
+import android.content.Context
+import com.google.gson.GsonBuilder
+import com.gsgroup.hrapp.BuildConfig
+import com.gsgroup.hrapp.base.network.response.NetworkResponseAdapterFactory
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.AllCitiesAreaResponse
 import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.data.model.DirectManagerOrHrResponse
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.company_polices.PolicesResponse
 import com.gsgroup.hrapp.ui.fragment.faq.FAQsResponse
+import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginResponse
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest
@@ -35,25 +41,25 @@ interface ApiService {
     }
 
     @POST("$keyMobile/login")
-     fun loginAsync(@Body request: LoginRequest): Deferred<LoginResponse>
+    fun loginAsync(@Body request: LoginRequest): Deferred<LoginResponse>
 
     @GET("$keyMobile/news/{id}")
-     fun getNewsDetailsAsync(@Path("id") id: Int): Deferred<NewsDetailsResponse>
+    fun getNewsDetailsAsync(@Path("id") id: Int): Deferred<NewsDetailsResponse>
 
     @GET("$keyMobile/news")
-     fun getNewsAsync(): Deferred<NewsResponse>
+    fun getNewsAsync(): Deferred<NewsResponse>
 
     @GET("$keyMobile/faqs")
-     fun getFaqsAsync(): Deferred<FAQsResponse>
+    fun getFaqsAsync(): Deferred<FAQsResponse>
 
     @GET("$keyMobile/policies")
-     fun getPoliciesAsync(): Deferred<PolicesResponse>
+    fun getPoliciesAsync(): Deferred<PolicesResponse>
 
     @GET("$keyMobile/direct_hr")
-     fun getDirectHrAsync(): Deferred<DirectManagerOrHrResponse>
+    fun getDirectHrAsync(): Deferred<DirectManagerOrHrResponse>
 
     @GET("$keyMobile/direct_manager")
-     fun getDirectManagerAsync(): Deferred<DirectManagerOrHrResponse>
+    fun getDirectManagerAsync(): Deferred<DirectManagerOrHrResponse>
 
 
     @POST("$keyMobile/change_password")
@@ -73,10 +79,12 @@ interface ApiService {
     //requests
     @Multipart
     @POST("$keyMobile/Complains")
-    fun complainRequestAsync(@Part("details") details:RequestBody?,
-                             @Part("is_urgent") isUrgent:RequestBody?,
-                             @Part("type") type:RequestBody?,
-                             @Part image: MultipartBody.Part?): Deferred<BaseObjectResponse>
+    fun complainRequestAsync(
+        @Part("details") details: RequestBody?,
+        @Part("is_urgent") isUrgent: RequestBody?,
+        @Part("type") type: RequestBody?,
+        @Part image: MultipartBody.Part?
+    ): Deferred<BaseObjectResponse>
 
     @POST("$keyMobile/hrRequest/insuranceCertificate")
     fun printInsuranceRequestAsync(): Deferred<BaseObjectResponse>

@@ -6,8 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.data.model.HomeItem
+import com.gsgroup.hrapp.data.remote.ApiService
+import com.gsgroup.hrapp.util.isNull
+import timber.log.Timber
+import javax.inject.Inject
 
-class HomeViewModel(app: Application) : AndroidBaseViewModel(app) {
+class HomeViewModel (app: Application) : AndroidBaseViewModel(app) {
 
     val adapter = HomeAdapter(::onAdapterItemClick)
     val obsIsCheckedIn = ObservableBoolean()

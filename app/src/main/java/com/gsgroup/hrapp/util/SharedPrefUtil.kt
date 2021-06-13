@@ -6,8 +6,7 @@ import android.os.Parcelable
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.gsgroup.hrapp.constants.ConstString
-import com.gsgroup.hrapp.ui.fragment.login.DataUser
-import com.gsgroup.hrapp.util.MapUtil.isGPSEnabled
+import kotlinx.coroutines.flow.map
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -17,9 +16,63 @@ import kotlin.reflect.KProperty
  **/
 object SharedPrefUtil {
 
+    /*private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = ConstString.PREFS_FILE_NAME)
+
+    fun Context.readStringPrefValue(
+        key: String,
+        default: String? = null,
+        callback: (String?) -> Unit
+    ) {
+        dataStore.data.map { preferences ->
+            callback.invoke(preferences[stringPreferencesKey(key)] ?: default)
+        }
+    }
+
+    fun <T : Parcelable> Context.readPrefParcelable(
+        key: String,
+        clazz: Class<T>,
+        callback: (T?) -> Unit
+    ) {
+        dataStore.data.map { preferences ->
+            callback.invoke(Gson().fromJson(preferences[stringPreferencesKey(key)], clazz) ?: null)
+        }
+    }
+
+    suspend fun Context.writeParcelable(
+        key: String,
+        value: Parcelable?,
+        callback: () -> Unit={}
+    ) {
+        dataStore.edit { settings ->
+            settings[stringPreferencesKey(key)] = Gson().toJson(value) ?: ""
+            callback.invoke()
+        }
+    }
+
+
+    suspend fun Context.writeStringPrefValue(
+        key: String,
+        value: String?,
+        callback: () -> Unit = {}
+    ) {
+        dataStore.edit { settings ->
+            settings[stringPreferencesKey(key)] = value ?: ""
+            callback.invoke()
+        }
+    }
+
+    fun Context.readIntPrefValue(
+        key: String,
+        default: Int? = null,
+        callback: (Int?) -> Unit
+    ) {
+        dataStore.data.map { preferences ->
+            callback.invoke(preferences[intPreferencesKey(key)] ?: default)
+        }
+    }*/
 
     fun Context.getAppPrefs(): SharedPreferences =
-        getSharedPreferences(ConstString.Const_PREFS_NAME, Context.MODE_PRIVATE)
+        getSharedPreferences(ConstString.PREFS_FILE_NAME, Context.MODE_PRIVATE)
 
     fun Context.getPrefLanguage(): String {
         val language by sharedPrefs(ConstString.PREF_LANG, ConstString.DEFAULT_LANG)
@@ -100,7 +153,7 @@ object SharedPrefUtil {
 
     fun Context.deleteAllSharedPrefData() = getAppPrefs().edit().clear().apply()
 
-     fun  Context.deleteSharedPrefData(key: String) = getAppPrefs().edit().remove(key).apply()
+    fun Context.deleteSharedPrefData(key: String) = getAppPrefs().edit().remove(key).apply()
 
 }
 

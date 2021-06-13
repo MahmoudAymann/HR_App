@@ -6,7 +6,6 @@ import androidx.databinding.ObservableField
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
-
 class MainViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val obsTitle = ObservableField<String>()
