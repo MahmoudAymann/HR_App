@@ -23,8 +23,7 @@ import com.gsgroup.hrapp.util.MapUtil.animateCameraToPosition
 import com.gsgroup.hrapp.util.MapUtil.drawRadiusAroundMarker
 import com.gsgroup.hrapp.util.MapUtil.getAreaMarker
 import com.gsgroup.hrapp.util.MapUtil.getCurrentMarker
-import com.gsgroup.hrapp.util.SharedPrefUtil.setData
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefs
 import timber.log.Timber
 
 class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
@@ -40,7 +39,7 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
     var areasList: Array<SearchItemInterface>? = arrayOf()
     private var currentMarker: Marker? = null
     private var areaMarker: Marker? = null
-    private val serial =  AppUtil.getDeviceSerial(app.applicationContext)
+    private val serial = AppUtil.getDeviceSerial(app.applicationContext)
 
     init {
         isLoading.set(true)
@@ -52,7 +51,7 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     fun onCurrentLocationClick() {
         request.currentLatLng?.let {
-            mMap?.animateCameraToPosition(it,false)
+            mMap?.animateCameraToPosition(it, false)
         }
     }
 
@@ -70,27 +69,27 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun onLoginClick() {
-            if (request.isValid()) {
-                if (isInArea()) {
-                    request.serial = serial
-                    requestNewCallDeferred({ if (obsIsCheckIn.get()) checkInCallAsync() else checkOutCallAsync() }) {
-                        updateUserDataPrefs(it.response?.data)
-                        postResult(Resource.success(msg = it.message))
-                    }
+        if (request.isValid()) {
+            if (isInArea()) {
+                request.serial = serial
+                requestNewCallDeferred({ if (obsIsCheckIn.get()) checkInCallAsync() else checkOutCallAsync() }) {
+                    updateUserDataPrefs(it.response?.data)
+                    postResult(Resource.success(msg = it.message))
                 }
-            } else {
-                postResult(Resource.message(app.getString(R.string.invalid_area_selected)))
             }
+        } else {
+            postResult(Resource.message(app.getString(R.string.invalid_area_selected)))
+        }
     }
 
     private fun updateUserDataPrefs(attendance: Attendance?) {
         val newUserData = userData
         newUserData?.attendance = attendance
-        app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData(newUserData)
+        app.setPrefs(ConstString.PREF_USER_DATA, newUserData)
     }
 
-    private  fun checkInCallAsync() = apiHelper.checkInAsync(request)
-    private  fun checkOutCallAsync() = apiHelper.checkOutAsync(request)
+    private fun checkInCallAsync() = apiHelper.checkInAsync(request)
+    private fun checkOutCallAsync() = apiHelper.checkOutAsync(request)
 
     fun onCityClick() {
         setValue(Codes.OPEN_CITY_LIST)
@@ -185,7 +184,7 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
         //for circle radius
         circle?.apply {
             center = latLng
-        }?: run {
+        } ?: run {
             circle = areaMarker?.drawRadiusAroundMarker(mMap, request.areaRadius)
         }
 

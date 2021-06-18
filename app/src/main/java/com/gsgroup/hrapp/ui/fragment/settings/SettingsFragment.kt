@@ -13,7 +13,7 @@ import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.SharedPrefUtil.deleteAllSharedPrefData
 import com.gsgroup.hrapp.util.SharedPrefUtil.deleteSharedPrefData
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefs
 import timber.log.Timber
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {

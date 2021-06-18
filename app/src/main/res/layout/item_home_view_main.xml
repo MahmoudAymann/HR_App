@@ -26,10 +26,12 @@
             android:text="@{item.title}"
             setTvDrawableTopIcon="@{item.icon}"
             android:textAlignment="center"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
             tools:drawableTopCompat="@drawable/ic_requests"
             app:autoSizeTextType="uniform"
+            app:autoSizeMaxTextSize="@dimen/_16ssp"
             tools:text="@string/my_hr"
             />
 

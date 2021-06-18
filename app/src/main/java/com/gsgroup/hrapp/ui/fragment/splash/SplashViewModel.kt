@@ -6,13 +6,11 @@ import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.ui.fragment.login.DataUser
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import timber.log.Timber
 
 class SplashViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val obsHideChild = ObservableBoolean(false)
-
 
     fun startNavigation() {
         Timber.e("$userData")

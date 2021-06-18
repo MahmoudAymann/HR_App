@@ -15,12 +15,11 @@ import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.HomeIds
 import com.gsgroup.hrapp.data.model.HomeIds.*
 import com.gsgroup.hrapp.databinding.FragmentHomeBinding
-import com.gsgroup.hrapp.util.PermissionUtil
+import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.PermissionUtil.AppPermissionResult.ALL_GOOD
 import com.gsgroup.hrapp.util.PermissionUtil.AppPermissionResult.OPEN_SETTING
 import com.gsgroup.hrapp.util.PermissionUtil.goToSettingsPermissions
 import com.gsgroup.hrapp.util.PermissionUtil.requestAppPermissions
-import com.gsgroup.hrapp.util.observe
 import kotlin.properties.Delegates
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
@@ -47,9 +46,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
                     is HomeIds -> openScreens(it)
                     Codes.CHECK_IN -> navigateToMap(true)
                     Codes.CHECK_OUT -> navigateToMap(false)
+                    Codes.MISSED_DOCUMENT-> activity?.showWarningDialog(getString(R.string.missed_document))
                 }
             }
         }
+        activity?.showSuccessfulDialog("ss")
     }
 
     private fun navigateToMap(isCheckIn: Boolean) {
@@ -90,7 +91,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
     }
 
     override fun onResume() {
-        mViewModel.hideCheckInButton()
+        mViewModel.refreshData()
         super.onResume()
     }
 

@@ -11,7 +11,7 @@ class CompanyPoliciesViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsShowEmptyView = ObservableBoolean()
 
     private fun onItemClick(item: CompanyPolicyItem) {
-
+        setValue(item)
     }
 
     init {

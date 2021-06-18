@@ -11,7 +11,7 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('F:\\AndroidProjs\\HRApp\\gs_android_key.jks')
+            storeFile file('D:\\AndroidProjs\\HRApp\\gs_android_key.jks')
             storePassword '123456'
             keyAlias 'gs'
             keyPassword '123456'
@@ -72,8 +72,8 @@ dependencies {
     implementation (main.lifecycleLivedataKtx)
     implementation (main.lifecycleViewmodelSavedstateKtx)
     implementation (main.lifecycleJava8)
-    implementation ("androidx.navigation:navigation-ui-ktx:2.3.5")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation (main.navigationKtx)
+    implementation (main.navigationFragmentKtx)
     implementation(main.room)
     kapt (main.roomCompiler)
     implementation (main.roomKtx)

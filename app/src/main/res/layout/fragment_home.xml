@@ -1,48 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.gsgroup.hrapp.ui.fragment.home.HomeViewModel" />
+            type="com.gsgroup.hrapp.ui.fragment.home.HomeViewModel"
+            />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/_12sdp"
         tools:background="@drawable/app_background"
-        android:padding="@dimen/_12sdp">
+        >
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/info_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_6sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_8sdp">
+                android:padding="@dimen/_8sdp"
+                >
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/img_profile"
                     style="@style/circular_image_view"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:onClick="@{()->viewModel.onImageClick()}"
-                    app:civ_border="false"
                     loadImage="@{viewModel.userData.image}"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:onClick="@{()->viewModel.onImageClick()}"
+                    android:src="@drawable/app_background"
+                    app:civ_border="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/app_background" />
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:onClick="@{()->viewModel.onErrorClick()}"
+                    app:layout_constraintEnd_toEndOf="@id/img_profile"
+                    app:layout_constraintTop_toTopOf="@id/img_profile"
+                    android:src="@{viewModel.obsIsFullDocument ? @drawable/ic_check : @drawable/ic_error_check}"
+                    tools:ignore="ContentDescription"
+                    />
 
 
                 <ProgressBar
@@ -54,7 +71,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/img_profile"
                     app:layout_constraintEnd_toEndOf="@+id/img_profile"
                     app:layout_constraintStart_toStartOf="@+id/img_profile"
-                    app:layout_constraintTop_toTopOf="@id/img_profile" />
+                    app:layout_constraintTop_toTopOf="@id/img_profile"
+                    />
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -62,14 +80,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:gravity="start"
+                    android:text="@{viewModel.userData.name}"
                     android:textAlignment="viewStart"
                     android:textStyle="bold"
-                    android:text="@{viewModel.userData.name}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_profile"
                     app:layout_constraintTop_toTopOf="@+id/img_profile"
-                    tools:text="@tools:sample/full_names" />
+                    tools:text="@tools:sample/full_names"
+                    />
 
                 <TextView
                     android:id="@+id/tv_code"
@@ -79,149 +99,159 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@{viewModel.userData.code}"
                     android:textAlignment="viewStart"
+                    app:autoSizeTextType="uniform"
                     app:layout_constraintEnd_toStartOf="@+id/tv_job_title"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                    tools:text="AM_123" />
+                    tools:text="AM_123"
+                    />
 
                 <TextView
                     android:id="@+id/tv_job_title"
+                    style="@style/BlackTextColor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    style="@style/BlackTextColor"
+                    android:maxLines="2"
+                    android:text="@{viewModel.userData.jobtitle}"
                     android:textAlignment="viewStart"
+                    app:autoSizeTextType="uniform"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_code"
                     app:layout_constraintTop_toTopOf="@+id/tv_code"
                     tools:text="AndroidDev"
-                    android:maxLines="2"
-                    app:autoSizeTextType="uniform"
-                    android:text="@{viewModel.userData.jobtitle}"/>
+                    />
 
                 <TextView
                     android:id="@+id/tv_company"
+                    style="@style/BlackTextColor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/BlackTextColor"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@{viewModel.userData.company.name}"
                     android:textAlignment="viewStart"
                     app:layout_constraintEnd_toStartOf="@+id/tv_location"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_code"
-                    tools:text="Aman" />
+                    tools:text="Aman"
+                    />
 
                 <TextView
                     android:id="@+id/tv_location"
+                    style="@style/BlackTextColor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    style="@style/BlackTextColor"
                     android:text="Egypt"
                     android:textAlignment="viewStart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_company"
                     app:layout_constraintTop_toTopOf="@+id/tv_company"
-                    tools:text="Egypt" />
+                    tools:text="Egypt"
+                    />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/login_info_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_company"
                     android:layout_marginTop="@dimen/_24sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_company"
                     >
 
 
-                <TextView
-                    android:id="@+id/tv_last_logout_static"
-                    style="@style/BlackTextColor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/last_logout"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    app:visibleGone="@{viewModel.userData.attendance.timeOut != null}"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_login_static"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                        android:id="@+id/tv_last_logout_static"
+                        style="@style/BlackTextColor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/last_logout"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_login_static"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:visibleGone="@{viewModel.userData.attendance.timeOut != null}"
+                        />
 
-                <TextView
-                    android:id="@+id/tv_last_logout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    app:visibleGone="@{viewModel.userData.attendance.timeOut != null}"
-                    android:textColor="@color/button_color_red"
-                    app:layout_constraintEnd_toEndOf="@id/tv_last_logout_static"
-                    app:layout_constraintStart_toStartOf="@id/tv_last_logout_static"
-                    app:layout_constraintTop_toBottomOf="@id/tv_last_logout_static"
-                    tools:text="14/02/2020"
-                    android:text="@{viewModel.userData.attendance.timeOut}"
-                    />
+                    <TextView
+                        android:id="@+id/tv_last_logout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:gravity="center"
+                        android:text="@{viewModel.userData.attendance.timeOut}"
+                        android:textAlignment="center"
+                        android:textColor="@color/button_color_red"
+                        app:layout_constraintEnd_toEndOf="@id/tv_last_logout_static"
+                        app:layout_constraintStart_toStartOf="@id/tv_last_logout_static"
+                        app:layout_constraintTop_toBottomOf="@id/tv_last_logout_static"
+                        app:visibleGone="@{viewModel.userData.attendance.timeOut != null}"
+                        tools:text="14/02/2020"
+                        />
 
-                <TextView
-                    android:id="@+id/tv_login_static"
-                    style="@style/BlackTextColor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/first_login"
-                    android:textAlignment="center"
-                    app:visibleGone="@{viewModel.userData.attendance.timeIn != null}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/tv_date_static"
-                    app:layout_constraintStart_toEndOf="@+id/tv_last_logout_static"
-                    app:layout_constraintTop_toTopOf="@+id/tv_last_logout_static" />
+                    <TextView
+                        android:id="@+id/tv_login_static"
+                        style="@style/BlackTextColor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/first_login"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/tv_date_static"
+                        app:layout_constraintStart_toEndOf="@+id/tv_last_logout_static"
+                        app:layout_constraintTop_toTopOf="@+id/tv_last_logout_static"
+                        app:visibleGone="@{viewModel.userData.attendance.timeIn != null}"
+                        />
 
-                <TextView
-                    android:id="@+id/tv_login"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    android:text="@{viewModel.userData.attendance.timeIn}"
-                    app:visibleGone="@{viewModel.userData.attendance.timeIn != null}"
+                    <TextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:gravity="center"
+                        android:text="@{viewModel.userData.attendance.timeIn}"
+                        android:textAlignment="center"
+                        android:textColor="@color/button_color_green"
 
-                    android:textColor="@color/button_color_green"
-                    app:layout_constraintEnd_toEndOf="@id/tv_login_static"
-                    app:layout_constraintStart_toStartOf="@id/tv_login_static"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_login_static"
-                    tools:text="@tools:sample/date/day_of_week" />
+                        app:layout_constraintEnd_toEndOf="@id/tv_login_static"
+                        app:layout_constraintStart_toStartOf="@id/tv_login_static"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_login_static"
+                        app:visibleGone="@{viewModel.userData.attendance.timeIn != null}"
+                        tools:text="@tools:sample/date/day_of_week"
+                        />
 
-                <TextView
-                    android:id="@+id/tv_date_static"
-                    style="@style/BlackTextColor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/date"
-                    app:visibleGone="@{viewModel.userData.attendance.day != null}"
-                    android:textAlignment="center"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/tv_login_static"
-                    app:layout_constraintTop_toTopOf="@+id/tv_last_logout_static" />
+                    <TextView
+                        android:id="@+id/tv_date_static"
+                        style="@style/BlackTextColor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/date"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_login_static"
+                        app:layout_constraintTop_toTopOf="@+id/tv_last_logout_static"
+                        app:visibleGone="@{viewModel.userData.attendance.day != null}"
+                        />
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    style="@style/BlackTextColor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:gravity="center"
-                    android:textAlignment="center"
-                    app:visibleGone="@{viewModel.userData.attendance.day != null}"
-                    android:text="@{viewModel.userData.attendance.day}"
-                    app:layout_constraintEnd_toEndOf="@id/tv_date_static"
-                    app:layout_constraintStart_toStartOf="@id/tv_date_static"
-                    app:layout_constraintTop_toBottomOf="@id/tv_date_static"
-                    tools:text="@tools:sample/date/ddmmyy" />
+                    <TextView
+                        android:id="@+id/tv_date"
+                        style="@style/BlackTextColor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:gravity="center"
+                        android:text="@{viewModel.userData.attendance.day}"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="@id/tv_date_static"
+                        app:layout_constraintStart_toStartOf="@id/tv_date_static"
+                        app:layout_constraintTop_toBottomOf="@id/tv_date_static"
+                        app:visibleGone="@{viewModel.userData.attendance.day != null}"
+                        tools:text="@tools:sample/date/ddmmyy"
+                        />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -230,7 +260,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             app:adapter="@{viewModel.adapter}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/btn_attend"
@@ -238,40 +268,41 @@
             app:spanCount="3"
             tools:itemCount="4"
             tools:listitem="@layout/item_home_view_main"
-            android:layout_marginBottom="@dimen/_8sdp"
             />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_attend"
+            style="@style/SubmitButton"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:onClick="@{()->viewModel.onLoginLogsClick(true)}"
             android:text="@string/check_in"
-            style="@style/SubmitButton"
-            app:backgroundTint="@color/button_color_green"
             android:textColor="@color/white"
+            app:backgroundTint="@color/button_color_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_out"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:visibleInVisible="@{!viewModel.obsIsCheckedIn}"
-            android:onClick="@{()->viewModel.onLoginLogsClick(true)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_out"
-            android:layout_marginEnd="@dimen/_8sdp" />
+            />
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_out"
+            style="@style/SubmitButton"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:text="@string/check_out"
-            style="@style/SubmitButton"
-            app:backgroundTint="@color/red"
-            android:textColor="@color/white"
-            app:visibleInVisible="@{viewModel.obsIsCheckedIn}"
             android:layout_marginStart="@dimen/_8sdp"
             android:onClick="@{()->viewModel.onLoginLogsClick(false)}"
+            android:text="@string/check_out"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_attend"/>
+            app:layout_constraintStart_toEndOf="@id/btn_attend"
+            app:visibleInVisible="@{viewModel.obsIsCheckedIn}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

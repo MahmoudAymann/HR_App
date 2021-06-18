@@ -205,6 +205,7 @@
     <string name="login_fast">Log in fast and securely using your biometric credential</string>
     <string name="not_now">Not Now</string>
     <string name="biometric_ask_to_use_next_login">do you want to login using your fingerprint instead of password?</string>
+    <string name="missed_document">some of your documents is missed, please contact HR</string>
 
     <string-array name="months">
         <item>January</item>

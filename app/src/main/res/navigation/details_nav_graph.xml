@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/details_nav_graph"
-    tools:ignore="InvalidNavigation"
     app:startDestination="@id/bottomSheetFragment"
+    tools:ignore="InvalidNavigation"
     >
 
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.splash.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash">
+        tools:layout="@layout/fragment_splash"
+        >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -22,8 +23,8 @@
         android:id="@+id/loginFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
-    </fragment>
+        tools:layout="@layout/fragment_login"
+        ></fragment>
 
     <fragment
         android:id="@+id/directManagerFragment"
@@ -68,7 +69,12 @@
         android:name="com.gsgroup.hrapp.ui.fragment.company_polices.CompanyPoliciesFragment"
         android:label="CompanyPoliciesFragment"
         tools:layout="@layout/fragment_company_policies"
-        />
+        >
+        <action
+            android:id="@+id/action_companyPoliciesFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/salaryFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.salary.SalaryFragment"
@@ -83,9 +89,9 @@
         >
         <argument
             android:name="userId"
+            android:defaultValue="@null"
             app:argType="string"
             app:nullable="true"
-            android:defaultValue="@null"
             />
     </fragment>
     <fragment
@@ -106,9 +112,9 @@
             />
         <argument
             android:name="userId"
+            android:defaultValue="@null"
             app:argType="string"
             app:nullable="true"
-            android:defaultValue="@null"
             />
     </fragment>
     <fragment
@@ -154,7 +160,8 @@
         android:id="@+id/bottomSheetFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.bottomsheet.BottomSheetFragment"
         android:label="fragment_bottom_sheet"
-        tools:layout="@layout/fragment_bottom_sheet">
+        tools:layout="@layout/fragment_bottom_sheet"
+        >
         <argument
             android:name="data"
             app:argType="com.gsgroup.hrapp.data.model.SearchItemInterface[]"
@@ -173,8 +180,8 @@
             />
         <argument
             android:name="isCheckIn"
-            app:argType="boolean"
             android:defaultValue="true"
+            app:argType="boolean"
             />
         <action
             android:id="@+id/action_mapFragment_to_shareLocationFragment"
@@ -401,6 +408,22 @@
         <argument
             android:name="isMine"
             app:argType="boolean"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.gsgroup.hrapp.ui.fragment.webview.WebViewFragment"
+        tools:layout="@layout/fragment_web_view"
+        >
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            />
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="true"
             />
     </fragment>
 

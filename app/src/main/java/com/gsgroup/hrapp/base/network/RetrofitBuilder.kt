@@ -7,9 +7,9 @@ import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.remote.ApiService
 import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.gsgroup.hrapp.base.network.response.NetworkResponseAdapterFactory
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefs
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,11 +26,10 @@ private const val BASE_URL =
 **/
 fun getHeaderInterceptor(app: Application): Interceptor {
     return Interceptor { chain ->
-        val token by app.applicationContext.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
-
+        val token = app.getPrefs<DataUser?>(ConstString.PREF_USER_DATA)?.token
         val request =
             chain.request().newBuilder()
-                .header("Authorization", "Bearer ${token?.token!!}")
+                .header("Authorization", "Bearer $token")
                 .header("lang", app.getPrefLanguage())
                 .build()
         chain.proceed(request)

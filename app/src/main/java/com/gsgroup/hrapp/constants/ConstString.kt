@@ -1,6 +1,7 @@
 package com.gsgroup.hrapp.constants
 
 object ConstString {
+    const val GOOGLE_PDF_VIEWER: String = "https://docs.google.com/gview?embedded=true&url="
     const val BASE_URL =
         "http://142.93.226.68/api"
     const val PREF_DONT_ASK_AGAIN_BIO: String = "PREF_DONT_ASK_AGAIN_BIO"

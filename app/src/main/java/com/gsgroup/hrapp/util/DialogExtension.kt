@@ -25,13 +25,11 @@ fun FragmentActivity.showLogoutDialog(onClick: () -> Unit) {
 fun Activity.showExitDialog() {
     val dialog = SweetAlertDialog(this)
         .setContentText(getString(R.string.exit_app))
-        .setConfirmText(getString(R.string.exit))
-        .setConfirmClickListener { sDialog ->
-            sDialog.closeDialog()
+        .setConfirmButton(getString(R.string.exit)) {
+            it.closeDialog()
             finishAffinity()
         }
-        .setCancelText(getString(R.string.cancel))
-        .setCancelClickListener { sDialog ->
+        .setCancelButton(getString(R.string.cancel)) { sDialog ->
             sDialog.closeDialog()
         }
         .setConfirmButtonBackgroundColor(getColorFromRes(R.color.colorPrimary))

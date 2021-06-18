@@ -14,8 +14,7 @@ import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.ui.fragment.login.LoginFragment
-import com.gsgroup.hrapp.util.SharedPrefUtil.setData
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefs
 import timber.log.Timber
 import java.util.concurrent.Executor
 
@@ -110,8 +109,7 @@ object BiometricUtils {
             }
             .setNeutralButton(fragment.getString(R.string.dont_ask_again)) {
                 it.closeDialog()
-                fragment.requireActivity().sharedPrefs<String>(ConstString.PREF_DONT_ASK_AGAIN_BIO)
-                    .setData("true")
+                fragment.requireActivity().setPrefs(ConstString.PREF_DONT_ASK_AGAIN_BIO, true)
                 continueCallBack.invoke()
             }
         dialog.show()

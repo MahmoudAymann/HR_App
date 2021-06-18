@@ -12,19 +12,16 @@ import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.remote.ApiHelper
 import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.Resource
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefs
 
 open class AndroidBaseViewModel(val app: Application) : AndroidViewModel(app), Observable {
     private val mCallBacks: PropertyChangeRegistry = PropertyChangeRegistry()
     val mutableLiveData = MutableLiveData<Any?>()
     var isLoading = ObservableBoolean()
-    val userData by app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA)
+    val userData : DataUser?  =  app.getPrefs(ConstString.PREF_USER_DATA)
     val apiHelper = ApiHelper(RetrofitBuilder(app).apiService)
     //for network
     val resultLiveData = MutableLiveData<Resource<Any?>?>()
-    override fun onCleared() {
-        super.onCleared()
-    }
 
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {

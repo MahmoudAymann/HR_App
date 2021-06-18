@@ -5,13 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.databinding.FragmentCompanyPoliciesBinding
 import com.gsgroup.hrapp.ui.fragment.news.NewsItem
 import com.gsgroup.hrapp.ui.fragment.news.NewsFragmentDirections
-import com.gsgroup.hrapp.util.Status
-import com.gsgroup.hrapp.util.navigateSafe
-import com.gsgroup.hrapp.util.observe
-import com.gsgroup.hrapp.util.showErrorDialog
+import com.gsgroup.hrapp.util.*
 
 class CompanyPoliciesFragment :
     BaseFragment<FragmentCompanyPoliciesBinding, CompanyPoliciesViewModel>() {
@@ -23,7 +21,16 @@ class CompanyPoliciesFragment :
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
-
+                    is CompanyPolicyItem -> {
+                        if (it.file != null)
+                            it.file.asUri().openInBrowser(requireActivity())
+//                            navigateSafe(
+//                                CompanyPoliciesFragmentDirections.actionCompanyPoliciesFragmentToWebViewFragment(
+//                                    it.title,
+//                                    it.file
+//                                )
+//                            )
+                    }
                 }
             }
             observe(resultLiveData) {

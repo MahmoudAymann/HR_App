@@ -9,11 +9,13 @@ import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.util.AppUtil
 import com.gsgroup.hrapp.util.BiometricUtils
 import com.gsgroup.hrapp.util.Resource
+import com.gsgroup.hrapp.util.SharedPrefUtil.getBooleanPrefs
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
-import com.gsgroup.hrapp.util.SharedPrefUtil.setData
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefs
 import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefLanguage
-import com.gsgroup.hrapp.util.SharedPrefUtil.sharedPrefs
+import com.gsgroup.hrapp.util.SharedPrefUtil.setPrefs
 import com.gsgroup.hrapp.util.requestNewCallDeferred
+import timber.log.Timber
 
 class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsIsArabic = ObservableBoolean(app.getPrefLanguage() == ConstString.LANG_AR)
@@ -21,10 +23,24 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     val request = LoginRequest()
     val obsIsRememberMe = ObservableBoolean()
     val obsShowBiometricButton = ObservableBoolean()
+    var biometricIsAvail = false
 
-    private val rememberMeRequest by app.sharedPrefs<RememberMeRequest>(ConstString.PREF_USER_LOGIN_REMEMBER_ME_DATA)
-    private val biometricRequest by app.sharedPrefs<BiometricRequest>(ConstString.PREF_USER_LOGIN_BIOMETRIC_DATA)
-    private val dontAskForBiometric by app.sharedPrefs<String>(ConstString.PREF_DONT_ASK_AGAIN_BIO, )
+    private val rememberMeRequest: RememberMeRequest? by lazy {
+        app.getPrefs(
+            ConstString.PREF_USER_LOGIN_REMEMBER_ME_DATA
+        )
+    }
+
+    private val biometricRequest: BiometricRequest? by lazy {
+        app.getPrefs(
+            ConstString.PREF_USER_LOGIN_BIOMETRIC_DATA
+        )
+    }
+
+    private val dontAskForBiometric by lazy {
+        app.getBooleanPrefs(ConstString.PREF_DONT_ASK_AGAIN_BIO, false)
+    }
+
 
     fun onLangClick(isArabic: Boolean) {
         selectedLang = if (isArabic) ConstString.LANG_AR else ConstString.LANG_EN
@@ -34,10 +50,10 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun onBiometricClick() {
-       setValue(Codes.LOGIN_WITH_BIOMETRIC)
+        setValue(Codes.LOGIN_WITH_BIOMETRIC)
     }
 
-    fun loginWithBiometricData(){
+    fun loginWithBiometricData() {
         request.natId = biometricRequest?.natId
         request.password = biometricRequest?.password
         doLogin()
@@ -56,6 +72,9 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun onLoginClick() {
+
+        request.natId = "11111222225555"
+        request.password = "12345678"
         if (request.isValid()) {
             doLogin()
         } else {
@@ -67,26 +86,33 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
         requestNewCallDeferred({ loginCallAsync() }) {
             saveUserDataInPrefs(it.response?.dataUser)
             postResult(Resource.success())
-
-            if(hasBiometricData()){
-               postValue(Codes.HOME_SCREEN)
-            }else{
-                if(AppUtil.isOldDevice()){
+            if (hasBiometricData()) {
+                postValue(Codes.HOME_SCREEN)
+            } else {
+                if (AppUtil.isOldDevice()) {
                     postValue(Codes.HOME_SCREEN)
-                    return@requestNewCallDeferred
+                } else {
+                    if (biometricIsAvail && !dontAskForBiometric)
+                        postValue(Codes.SHOW_BIOMETRIC_ASK_DIALOG)
+                    else {
+                        postValue(Codes.HOME_SCREEN)
+                    }
                 }
-                postValue(Codes.SHOW_BIOMETRIC_ASK_DIALOG)
             }
         }
     }
 
     private fun saveUserDataInPrefs(data: DataUser?) {
-        app.sharedPrefs<DataUser>(ConstString.PREF_USER_DATA).setData(data)
+        app.setPrefs<DataUser?>(ConstString.PREF_USER_DATA, data)
+        val data = app.getPrefs<DataUser?>(ConstString.PREF_USER_DATA)
+        Timber.e(" hii $data")
         if (obsIsRememberMe.get()) {
             rememberMeRequest?.natId = request.natId
             rememberMeRequest?.password = request.password
-            app.sharedPrefs<RememberMeRequest>(ConstString.PREF_USER_LOGIN_REMEMBER_ME_DATA)
-                .setData((rememberMeRequest))
+            app.setPrefs<RememberMeRequest?>(
+                ConstString.PREF_USER_LOGIN_REMEMBER_ME_DATA,
+                rememberMeRequest
+            )
         }
     }
 
@@ -104,25 +130,27 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
     fun isBiometricHardwareAvail(code: Int) {
         when (code) {
             BiometricUtils.BiometricCodes.CAN_USE_BIOMETRIC -> {
-                if (dontAskForBiometric == "true")
-                    obsShowBiometricButton.set(false)
-                else
+                biometricIsAvail = true
+                if (hasBiometricData())
                     obsShowBiometricButton.set(true)
+                else
+                    obsShowBiometricButton.set(false)
             }
             else -> {
                 obsShowBiometricButton.set(false)
+                biometricIsAvail = false
             }
         }
     }
 
-    fun hasBiometricData() = biometricRequest?.natId != null
+    private fun hasBiometricData() = biometricRequest?.natId != null
 
 
-    fun saveBiometricData(){
+    fun saveBiometricData() {
         val request = BiometricRequest()
         request.natId = this.request.natId
         request.password = this.request.password
-        app.sharedPrefs<BiometricRequest>(ConstString.PREF_USER_LOGIN_BIOMETRIC_DATA).setData(request)
+        app.setPrefs(ConstString.PREF_USER_LOGIN_BIOMETRIC_DATA, request)
     }
 
 }

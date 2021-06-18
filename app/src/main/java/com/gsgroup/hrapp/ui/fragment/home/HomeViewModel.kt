@@ -11,16 +11,23 @@ import com.gsgroup.hrapp.util.isNull
 import timber.log.Timber
 import javax.inject.Inject
 
-class HomeViewModel (app: Application) : AndroidBaseViewModel(app) {
+class HomeViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     val adapter = HomeAdapter(::onAdapterItemClick)
     val obsIsCheckedIn = ObservableBoolean()
+    val obsIsFullDocument = ObservableBoolean()
+
     private fun onAdapterItemClick(item: HomeItem) {
         setValue(item.id)
     }
 
     fun onImageClick() {
 
+    }
+
+    fun onErrorClick() {
+        if (!obsIsFullDocument.get())
+            setValue(Codes.MISSED_DOCUMENT)
     }
 
     init {
@@ -35,8 +42,9 @@ class HomeViewModel (app: Application) : AndroidBaseViewModel(app) {
             setValue(Codes.CHECK_OUT)
     }
 
-    fun hideCheckInButton() {
+    fun refreshData() {
+        notifyChange() // to refresh dates
         obsIsCheckedIn.set(!userData?.attendance?.timeIn.isNullOrBlank())
-        notifyChange()
+        obsIsFullDocument.set(userData?.hasFulldocument == true)
     }
 }
