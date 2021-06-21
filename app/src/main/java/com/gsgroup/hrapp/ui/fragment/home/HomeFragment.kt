@@ -30,7 +30,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
 
     override val mViewModel: HomeViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         register = registerForActivityResult(
@@ -50,7 +49,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
                 }
             }
         }
-        activity?.showSuccessfulDialog("ss")
     }
 
     private fun navigateToMap(isCheckIn: Boolean) {
@@ -91,8 +89,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
     }
 
     override fun onResume() {
-        mViewModel.refreshData()
         super.onResume()
+        mViewModel.refreshData()
     }
 
     override fun onActivityResult(result: ActivityResult?) {

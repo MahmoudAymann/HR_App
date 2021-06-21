@@ -74,15 +74,17 @@ fun <T : Any> Fragment.listenForResult(key: String, callback: (T?) -> Unit) {
             callback(result)
         })
 }
+
 fun Fragment.setResultToFragment(key: String, it: SearchItemInterface?) {
     val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
     savedStateHandle?.set(key, it)
     findNavController().navigateUp()
 }
-fun String.stringPathToFile(app:Application): File? {
+
+fun String.stringPathToFile(app: Application): File? {
     FileManager(app.applicationContext.cacheDir).extractAndCompress(this)?.let {
         return it
-    }?:return null
+    } ?: return null
 }
 
 fun File.toMultiPart(key: String): MultipartBody.Part {
@@ -97,7 +99,6 @@ fun File.toMultiPart(key: String): MultipartBody.Part {
 
 fun <T : Any> T.toRequestBodyParam(): RequestBody =
     RequestBody.create(MediaType.parse("text/plain"), this.toString())
-
 
 
 inline fun <reified T : AppCompatActivity> Activity.showActivity(
@@ -135,8 +136,8 @@ fun AppCompatActivity.findFragmentById(id: Int): Fragment? {
 fun <T : Any> AndroidBaseViewModel.requestNewCallDeferred(
     networkCall: () -> Deferred<T>,
     successCallBack: (T) -> Unit
-) {
-    if(!AppUtil.isNetworkAvailable(app.applicationContext)){
+){
+    if (!AppUtil.isNetworkAvailable(app.applicationContext)) {
         postResult(Resource.message(getString(R.string.network_error)))
         return
     }
@@ -236,7 +237,6 @@ fun ImageView.loadImageFromURL(url: String, progressBar: ProgressBar? = null) {
         })
         .into(this)
 }
-
 
 
 fun String.removeSpaces(): String = this.replace(" ", "").trim()
@@ -344,7 +344,7 @@ fun Context.showSuccessfulDialog(message: String?, onClick: () -> Unit = {}) {
         this,
         SweetAlertDialog.SUCCESS_TYPE
     )
-        .setConfirmButton(getString(R.string.yes)) { sDialog ->
+        .setConfirmButton(getString(R.string.continue_)) { sDialog ->
             sDialog.closeDialog()
             onClick()
         }

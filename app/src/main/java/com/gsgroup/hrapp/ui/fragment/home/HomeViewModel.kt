@@ -5,8 +5,11 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.viewModelScope
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
 import com.gsgroup.hrapp.constants.Codes
+import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.HomeItem
 import com.gsgroup.hrapp.data.remote.ApiService
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefFirebaseToken
+import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefs
 import com.gsgroup.hrapp.util.isNull
 import timber.log.Timber
 import javax.inject.Inject
@@ -43,8 +46,10 @@ class HomeViewModel(app: Application) : AndroidBaseViewModel(app) {
     }
 
     fun refreshData() {
-        notifyChange() // to refresh dates
+        userData = app.getPrefs(ConstString.PREF_USER_DATA, userData)
         obsIsCheckedIn.set(!userData?.attendance?.timeIn.isNullOrBlank())
         obsIsFullDocument.set(userData?.hasFulldocument == true)
+        notifyChange() // to refresh dates
+        Timber.tag("home").e(userData.toString())
     }
 }

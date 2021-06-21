@@ -86,6 +86,8 @@ class MapViewModel(app: Application) : AndroidBaseViewModel(app) {
         val newUserData = userData
         newUserData?.attendance = attendance
         app.setPrefs(ConstString.PREF_USER_DATA, newUserData)
+        Timber.e("${newUserData?.attendance}")
+        Timber.e("${userData}")
     }
 
     private fun checkInCallAsync() = apiHelper.checkInAsync(request)

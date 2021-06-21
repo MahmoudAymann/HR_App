@@ -73,8 +73,8 @@ class LoginViewModel(app: Application) : AndroidBaseViewModel(app) {
 
     fun onLoginClick() {
 
-        request.natId = "11111222225555"
-        request.password = "12345678"
+//        request.natId = "11111222225555"
+//        request.password = "12345678"
         if (request.isValid()) {
             doLogin()
         } else {

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 
 
 private const val BASE_URL =
-    "http://142.93.226.68/api/"
+    "http://104.248.89.169:9000/api/"
 
 /*
 *add this if you want a static header in all requests

@@ -49,7 +49,6 @@ object SharedPrefUtil {
                 is Double -> putString(key, value.toString()).apply()
                 is Parcelable -> {
                     val gson by lazy { Gson() }
-                    Timber.tag("hii").e(value.toString())
                     putString(key, gson.toJson(value)).apply()
                 }
             }
@@ -66,7 +65,8 @@ object SharedPrefUtil {
                 is Double -> getString(key, defaultValue as String) as T
                 is Parcelable -> {
                     val gson by lazy { Gson() }
-                    val jsonString = getString(key, null)
+                    val jsonString = getString(key, gson.toJson(defaultValue))
+                    Timber.tag("shared").e("${jsonString}")
                     gson.fromJson(jsonString, T::class.java)
                 }
                 else -> throw ClassCastException("no such type for : $t")

@@ -5,7 +5,6 @@
     >
 
     <data>
-
         <variable
             name="viewModel"
             type="com.gsgroup.hrapp.ui.fragment.home.HomeViewModel"
@@ -15,7 +14,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingTop="@dimen/_8sdp"
         tools:background="@drawable/app_background"
         >
 
@@ -59,6 +61,8 @@
                     app:layout_constraintTop_toTopOf="@id/img_profile"
                     android:src="@{viewModel.obsIsFullDocument ? @drawable/ic_check : @drawable/ic_error_check}"
                     tools:ignore="ContentDescription"
+                    tools:src="@drawable/ic_check"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     />
 
 
@@ -84,7 +88,9 @@
                     android:gravity="start"
                     android:text="@{viewModel.userData.name}"
                     android:textAlignment="viewStart"
+                    app:autoSizeTextType="uniform"
                     android:textStyle="bold"
+                    android:maxLines="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_profile"
                     app:layout_constraintTop_toTopOf="@+id/img_profile"
@@ -100,6 +106,7 @@
                     android:text="@{viewModel.userData.code}"
                     android:textAlignment="viewStart"
                     app:autoSizeTextType="uniform"
+                    android:maxLines="1"
                     app:layout_constraintEnd_toStartOf="@+id/tv_job_title"
                     app:layout_constraintStart_toStartOf="@id/tv_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_name"
@@ -112,7 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:text="@{viewModel.userData.jobtitle}"
                     android:textAlignment="viewStart"
                     app:autoSizeTextType="uniform"
@@ -128,6 +135,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
+                    app:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     android:text="@{viewModel.userData.company.name}"
                     android:textAlignment="viewStart"
                     app:layout_constraintEnd_toStartOf="@+id/tv_location"
@@ -142,8 +151,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:text="Egypt"
+                    android:text="@{viewModel.userData.citities.get(0).name()}"
                     android:textAlignment="viewStart"
+                    app:autoSizeTextType="uniform"
+                    android:maxLines="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_company"
                     app:layout_constraintTop_toTopOf="@+id/tv_company"
@@ -260,7 +271,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             app:adapter="@{viewModel.adapter}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/btn_attend"
@@ -284,9 +295,7 @@
             app:layout_constraintEnd_toStartOf="@id/btn_out"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:visibleInVisible="@{!viewModel.obsIsCheckedIn}"
             />
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_out"
