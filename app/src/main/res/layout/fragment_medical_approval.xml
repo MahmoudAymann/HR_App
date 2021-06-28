@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:background="@drawable/app_background"
-            android:padding="@dimen/_8sdp">
+            android:padding="@dimen/_16sdp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_1"
@@ -21,6 +21,7 @@
                 style="@style/SubmitButton"
                 android:text="@string/medical_approval_to_treat_a_chronic_disease"
                 app:icon="@drawable/ic_enter_arrow"
+                android:onClick="@{()->viewModel.onButtonClick(false)}"
                 app:iconGravity="end"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +35,7 @@
                 style="@style/SubmitButton"
                 android:text="@string/normal_medical_approval"
                 app:icon="@drawable/ic_enter_arrow"
+                android:onClick="@{()->viewModel.onButtonClick(true)}"
                 app:iconGravity="end"
                 android:layout_marginTop="@dimen/_16sdp"
                 app:layout_constraintTop_toBottomOf="@id/btn_1"

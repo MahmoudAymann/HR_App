@@ -1,7 +1,13 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
-    val MISSED_DOCUMENT: Int = 1043
+    val NORMAL_MEDICAL: Int = 1049
+    const val PHYSICAL_MEDICAL: Int = 1048
+    const val SURGENT_MEDICAL: Int = 1047
+    const val XRAY_MEDICAL: Int = 1046
+    const val CHRONICAL_MEDICAL: Int = 1045
+    const val ANALYSIS_MEDICAL: Int = 1044
+    const val MISSED_DOCUMENT: Int = 1043
     val LOGIN_WITH_BIOMETRIC: Int = 1042
     val SHOW_BIOMETRIC_ASK_DIALOG: Int = 1041
     val REQUESTS_SENT_TO_ME_SCREEN: Int= 1040

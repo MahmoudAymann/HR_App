@@ -199,13 +199,28 @@
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
     <string name="still_working_on_it">Still working on it</string>
-    <string name="biometric_dont_have">looks like you don\'t have a biometric initialized yet, want to create a new one ?</string>
+    <string name="biometric_dont_have">Looks like you don\'t have a biometric initialized yet, want to create a new one ?</string>
     <string name="dont_ask_again">Don\'t Ask Again</string>
     <string name="biometric_login">Biometric Login</string>
     <string name="login_fast">Log in fast and securely using your biometric credential</string>
     <string name="not_now">Not Now</string>
     <string name="biometric_ask_to_use_next_login">do you want to login using your fingerprint instead of password?</string>
     <string name="missed_document">some of your documents is missed, please contact HR</string>
+    <string name="please_send_an_email_to">Please send an email to:</string>
+    <string name="and_attach_the_required_documents">and attach the required documents</string>
+    <string name="the_required_documents_are">The Required Documents Are:</string>
+    <string name="the_required_docs_chronic_disease">- Print of Medical Card.\n
+        - Print of Diagnostic Prescription.\n
+    - Print of Medicine Prescription</string>
+    <string name="the_required_docs_xrays">- Print of Medical Card.\n
+        - Print of Status Report.</string>
+    <string name="the_required_docs_xrays_and_analysis">- Print of Medical Card.\n
+        - Print of Status Report.</string>
+    <string name="the_required_docs_surgent_and_physcal_training">- Print of Medical Card.\n
+        - Print of Status Report.\n
+    - Print of X-Rays.</string>
+    <string name="chronical_mail" translatable="false">Chronic.post1@metlifeegypt.com</string>
+    <string name="normal_mail" translatable="false">Approval.request@metlife.com</string>
 
     <string-array name="months">
         <item>January</item>

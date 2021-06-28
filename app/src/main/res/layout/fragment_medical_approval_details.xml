@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/app_background"
+            android:padding="@dimen/_16sdp"
+            >
+
+            <TextView
+                android:id="@+id/tv_send_mail_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/please_send_an_email_to"
+                android:layout_marginTop="@dimen/_32sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_mail"
+                style="@style/SubmitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:onClick="@{()->viewModel.onMailClick()}"
+                android:text="@{viewModel.obsMail}"
+                app:layout_constraintTop_toBottomOf="@id/tv_send_mail_to"
+                tools:text="click"
+                />
+
+            <TextView
+                android:id="@+id/tv_attach_papers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/and_attach_the_required_documents"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_mail"
+                />
+
+            <TextView
+                android:id="@+id/tv_req_docs_static"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/the_required_documents_are"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_attach_papers"
+                />
+
+            <TextView
+                android:id="@+id/tv_req_docs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                tools:text="notes"
+                android:text="@{viewModel.obsNotes}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_req_docs_static"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gsgroup.hrapp.ui.fragment.requests.medical_approval.MedicalApprovalDetailsViewModel"
+            />
+    </data>
+</layout>

@@ -11,28 +11,31 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_75sdp"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/_6sdp"
         app:cardElevation="@dimen/_4sdp"
         app:cardCornerRadius="@dimen/_8sdp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:drawablePadding="@dimen/_8sdp"
             android:maxLines="2"
             android:padding="@dimen/_8sdp"
             android:text="@{item.title}"
             setTvDrawableTopIcon="@{item.icon}"
+            android:breakStrategy="high_quality"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:autoSizeMinTextSize="@dimen/_8ssp"
             tools:drawableTopCompat="@drawable/ic_requests"
             app:autoSizeTextType="uniform"
             app:autoSizeMaxTextSize="@dimen/_16ssp"
-            tools:text="@string/my_hr"
+            tools:text="@tools:sample/lorem/random"
+            tools:ignore="UnusedAttribute"
             />
 
     </com.google.android.material.card.MaterialCardView>

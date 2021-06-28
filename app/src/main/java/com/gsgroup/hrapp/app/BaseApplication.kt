@@ -13,7 +13,6 @@ import timber.log.Timber.DebugTree
 
 class BaseApplication : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
         initTimber()

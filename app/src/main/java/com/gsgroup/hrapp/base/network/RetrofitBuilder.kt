@@ -19,11 +19,12 @@ import java.util.concurrent.TimeUnit
 
 
 private const val BASE_URL =
-    "http://104.248.89.169:9000/api/"
+    "http://104.248.89.169:8000/api/"
 
 /*
 *add this if you want a static header in all requests
 **/
+
 fun getHeaderInterceptor(app: Application): Interceptor {
     return Interceptor { chain ->
         val token = app.getPrefs<DataUser?>(ConstString.PREF_USER_DATA)?.token

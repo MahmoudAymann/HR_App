@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginEnd="@dimen/_6sdp"
             app:cardCornerRadius="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,13 +112,14 @@
                     tools:text="AM_123"
                     />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_job_title"
                     style="@style/BlackTextColor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:text="@{viewModel.userData.jobtitle}"
                     android:textAlignment="viewStart"
                     app:autoSizeTextType="uniform"

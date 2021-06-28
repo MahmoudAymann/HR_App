@@ -316,7 +316,12 @@
         android:name="com.gsgroup.hrapp.ui.fragment.requests.medical_approval.MedicalApprovalFragment"
         android:label="MedicalApprovalFragment"
         tools:layout="@layout/fragment_medical_approval"
-        />
+        >
+        <action
+            android:id="@+id/action_medicalApprovalFragment_to_medicalApprovalDetailsFragment"
+            app:destination="@id/medicalApprovalDetailsFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/medicalCardFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.requests.medical_card.MedicalCardFragment"
@@ -424,6 +429,22 @@
             android:name="url"
             app:argType="string"
             app:nullable="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalApprovalDetailsFragment"
+        android:name="com.gsgroup.hrapp.ui.fragment.requests.medical_approval.MedicalApprovalDetailsFragment"
+        android:label="MedicalApprovalDetailsFragment"
+        tools:layout="@layout/fragment_medical_approval_details"
+        >
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            />
+        <argument
+            android:name="type"
+            app:argType="integer"
             />
     </fragment>
 

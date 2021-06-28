@@ -23,7 +23,6 @@ class DetailsActivity : BaseActivity<ActivityDetailsBinding, DetailsViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupNavController()
-        mViewModel.showProgressBar = baseShowProgress
         mViewModel.apply {
             showProgressBar = baseShowProgress
             observe(mutableLiveData) {

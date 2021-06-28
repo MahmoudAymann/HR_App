@@ -33,6 +33,4 @@ object ExceptionUtil {
             else -> this.toString()
         }
     }
-
-
 }

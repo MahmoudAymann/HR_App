@@ -198,4 +198,26 @@
     <string name="decline">رفض</string>
     <string name="still_working_on_it">جارى العمل عليها</string>
     <string name="new_">جديد</string>
+    <string name = "biometric_dont_have">يبدو أنه ليس لديك بصمة مسجلة ، هل تريد إنشاء واحدة جديدة؟</string>
+    <string name = "dont_ask_again">لا تسأل مرة أخرى</string>
+    <string name = "biometric_login">تسجيل الدخول بالبصمة</string>
+    <string name = "login_fast">تسجيل الدخول بسرعة وأمان باستخدام بيانات الاعتماد البيومترية الخاصة بك</string>
+    <string name = "not_now">ليس الآن</string>
+    <string name = "biometric_ask_to_use_next_login">هل تريد تسجيل الدخول باستخدام بصمة إصبعك بدلاً من كلمة المرور؟</string>
+    <string name = "missed_document">بعض مستنداتك مفقودة ، يرجى الاتصال بالموارد البشرية</string>
+    <string name = "please_send_an_email_to">الرجاء إرسال بريد إلكتروني إلى:</string>
+    <string name = "and_attach_the_required_documents">وأرفق المستندات المطلوبة</string>
+    <string name = "the_required_documents_are">المستندات المطلوبة هي:</string>
+
+    <string name="the_required_docs_chronic_disease">- صورة من الكارت التأمينى.\n
+        - صورة روشتة بالتشخيص.\n
+    - صورة روشتة بالأدوية.</string>
+    <string name="the_required_docs_xrays">- صورة من الكارت الطبى.\n
+        - صورة من تقرير الحالة.</string>
+    <string name="the_required_docs_xrays_and_analysis">- صورة من الكارت الطبى.\n
+        - صورة من تقرير الحالة.</string>
+    <string name="the_required_docs_surgent_and_physcal_training">- صورة من الكارت التأمينى.\n
+        - صورة من تقرير الحالة.\n
+    - صورة من الأشعة.</string>
+
 </resources>

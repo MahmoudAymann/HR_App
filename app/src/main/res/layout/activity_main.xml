@@ -25,7 +25,6 @@
             app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
             app:layout_constraintTop_toBottomOf="@+id/cl_header"
             app:navGraph="@navigation/main_nav_graph"
-            tools:background="@color/black"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,7 +88,7 @@
                 <ImageView
                     android:layout_width="?actionBarSize"
                     android:layout_height="?actionBarSize"
-                    android:src="@drawable/aman_logo_white"
+                    loadImage="@{viewModel.userData.company.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

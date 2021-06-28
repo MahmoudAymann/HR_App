@@ -109,4 +109,7 @@ dependencies {
     def biometric = '1.2.0-alpha03'
     implementation "androidx.biometric:biometric:$biometric"
     implementation "androidx.biometric:biometric-ktx:$biometric"
+
+    implementation 'me.grantland:autofittextview:0.2.1'
+
 }
