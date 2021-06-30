@@ -23,8 +23,8 @@ android {
         applicationId "com.gsgroup.hrapp"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -96,7 +96,6 @@ dependencies {
     kapt (external.glideCompiler)
     implementation (external.swipeRefresh)
     implementation (external.circularImage)
-    implementation (external.autofitTV)
 
     //For Lite devices
     implementation (lite.multidex)
@@ -110,6 +109,5 @@ dependencies {
     implementation "androidx.biometric:biometric:$biometric"
     implementation "androidx.biometric:biometric-ktx:$biometric"
 
-    implementation 'me.grantland:autofittextview:0.2.1'
 
 }

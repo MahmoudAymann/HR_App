@@ -29,14 +29,14 @@ class SearchAdapter(itemCallback: (SearchItemInterface) -> Unit) : BaseAdapter<S
             }
 
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
-                val queryString = charSequence?.toString()?.toLowerCase(Locale.ROOT)
+                val queryString = charSequence?.toString()?.lowercase(Locale.ROOT)
                 val filterResults = FilterResults()
                 filterResults.values = if (queryString.isNullOrEmpty()) {
                     mCurrentList
                 }
                 else
                     mCurrentList.filter {
-                        it?.name()?.toLowerCase(Locale.ROOT)?.contains(queryString)!!
+                        it?.name()?.lowercase(Locale.ROOT)?.contains(queryString)!!
                     }
                 return filterResults
             }

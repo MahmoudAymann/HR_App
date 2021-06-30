@@ -17,8 +17,11 @@ import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.SearchItemInterface
 import com.gsgroup.hrapp.databinding.FragmentBottomSheetBinding
+import com.gsgroup.hrapp.ui.fragment.requests.medical_approval.MedicalApprovalFragmentDirections
+import com.gsgroup.hrapp.util.navigateSafe
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.setResultToFragment
+import timber.log.Timber
 
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
@@ -35,7 +38,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_sheet, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_bottom_sheet, container, false)
         return binding.root
     }
 
@@ -47,7 +51,20 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> dismiss()
                     is SearchItemInterface -> {
-                        setResultToFragment(ConstString.RESULT_FROM_BOTTOMSHEET_LIST, it)
+                        if (args.autoClose)
+                            setResultToFragment(ConstString.RESULT_FROM_BOTTOMSHEET_LIST, it)
+                        else{
+                            when(it.id()){
+                                Codes.PHYSICAL_MEDICAL, Codes.SURGENT_MEDICAL, Codes.XRAY_MEDICAL, Codes.ANALYSIS_MEDICAL -> {
+                                    navigateSafe(
+                                        BottomSheetFragmentDirections.actionBottomSheetFragmentToMedicalApprovalDetailsFragment(
+                                            getString(R.string.normal_medical_approval),
+                                            it.id().toString().toInt()
+                                        )
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -55,11 +72,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
 
-
     private val callBack = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             mViewModel.handleStates(newState)
         }
+
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             mViewModel.obsShowHeader.set(false)
         }

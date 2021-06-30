@@ -20,7 +20,6 @@ class ShareLocationViewModel(app: Application) : AndroidBaseViewModel(app) {
     val obsLatLng = ObservableField<LatLng>()
     val obsSerial = ObservableField<String>()
     val obsDateTime = ObservableField<String>()
-    val isGranted = ObservableBoolean()
     val request = ShareLocationRequest()
     fun gotData(args: ShareLocationFragmentArgs) {
         val lat = args.lat
@@ -28,17 +27,12 @@ class ShareLocationViewModel(app: Application) : AndroidBaseViewModel(app) {
         obsLatLng.set(LatLng(lat.toDouble(), lng.toDouble()))
         request.lat = lat
         request.lng = lng
-
-
-        val serial = userData?.serial ?: AppUtil.getDeviceSerial(app.applicationContext)
+        val serial = AppUtil.getDeviceSerial(app.applicationContext)
         obsSerial.set(serial)
 
 
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm aa", Locale.ENGLISH)
         obsDateTime.set(sdf.format(Calendar.getInstance().time))
-        if (PermissionUtil.hasAllPhoneCriticalPermissions(app.applicationContext)) {
-            isGranted.set(true)
-        }
     }
 
     fun onAllowPermissionClick() {
@@ -56,17 +50,5 @@ class ShareLocationViewModel(app: Application) : AndroidBaseViewModel(app) {
         }
     }
     private fun shareLocationCallAsync() = apiHelper.shareLocationAsync(request)
-
-
-    fun permissionResult(it: PermissionUtil.AppPermissionResult) {
-        when (it) {
-            ALL_GOOD -> isGranted.set(true)
-            OPEN_SETTING -> {
-                Codes.OPEN_PERMISSION_SETTING
-                isGranted.set(false)
-            }
-            else -> isGranted.set(false)
-        }
-    }
 
 }

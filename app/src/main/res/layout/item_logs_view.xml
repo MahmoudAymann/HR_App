@@ -11,7 +11,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         >
 
-        <com.lb.auto_fit_textview.AutoResizeTextView
+        <TextView
             android:id="@+id/tv_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,6 +22,7 @@
             tools:text="@tools:sample/date/day_of_week"
             android:textAlignment="center"
             android:textColor="@color/black"
+            app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="@id/fab_day"
             app:layout_constraintStart_toStartOf="@id/fab_day"
             app:layout_constraintTop_toTopOf="parent"

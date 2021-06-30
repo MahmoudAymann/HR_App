@@ -24,6 +24,7 @@ class MedicalApprovalDetailsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel.apply {
+            gotData(args)
             observe(mutableLiveData) {
                 when (it) {
                     Codes.CHRONICAL_MEDICAL -> { requireActivity().openMailIntent(obsMail.get()) }

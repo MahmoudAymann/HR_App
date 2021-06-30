@@ -20,7 +20,7 @@ import com.gsgroup.hrapp.util.*
 import com.gsgroup.hrapp.util.PermissionUtil.goToSettingsPermissions
 import com.gsgroup.hrapp.util.PermissionUtil.requestAppPermissions
 
-class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityResult> {
+class ShareLocationFragment : DialogFragment(){
 
     lateinit var binding: FragmentShareLocationBinding
     val mViewModel: ShareLocationViewModel by viewModels()
@@ -30,9 +30,6 @@ class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_TITLE, R.style.MY_DIALOG_FRAGMENT)
-        register = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(), this
-        )
     }
 
     override fun onCreateView(
@@ -47,13 +44,6 @@ class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityR
             observe(mutableLiveData) {
                 when (it) {
                     Codes.BACK_BUTTON_PRESSED -> dismiss()
-                    Codes.ALLOW_PERMISSION -> activity?.requestAppPermissions(PermissionUtil.getPhoneCriticalPermissions()) {
-                        mViewModel.permissionResult(it)
-                    }
-                    Codes.OPEN_PERMISSION_SETTING -> activity?.goToSettingsPermissions(
-                        getString(R.string.please_allow_permission_phone_critical),
-                        register
-                    )
                 }
             }
             observe(resultLiveData) {
@@ -78,13 +68,5 @@ class ShareLocationFragment : DialogFragment(), ActivityResultCallback<ActivityR
         castToActivity<DetailsActivity> {
             it?.baseShowProgress?.set(b)
         }
-    }
-
-
-    override fun onActivityResult(result: ActivityResult?) {
-        if (PermissionUtil.hasAllPhoneCriticalPermissions(requireContext())) {
-            mViewModel.isGranted.set(true)
-        } else
-            mViewModel.isGranted.set(false)
     }
 }

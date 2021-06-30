@@ -135,15 +135,4 @@ object PermissionUtil {
         return permissionList
     }
 
-    fun hasAllPhoneCriticalPermissions(context: Context): Boolean {
-        return if (isGranted(context, Manifest.permission.READ_PHONE_STATE)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                isGranted(context, Manifest.permission.READ_PRECISE_PHONE_STATE)
-            }
-            true
-        } else {
-            false
-        }
-    }
-
 }

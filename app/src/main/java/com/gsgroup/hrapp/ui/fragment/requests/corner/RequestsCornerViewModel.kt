@@ -5,8 +5,6 @@ import com.gsgroup.hrapp.constants.Codes
 
 class RequestsCornerViewModel : BaseViewModel() {
 
-
-
     fun onRequestClick(isHr:Boolean){
         if(isHr){
             setValue(Codes.HR_REQUESTS_SCREEN)

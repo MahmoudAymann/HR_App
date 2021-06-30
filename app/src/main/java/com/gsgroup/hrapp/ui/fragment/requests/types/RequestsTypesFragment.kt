@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.databinding.FragmentRequestsTypesBinding
 import com.gsgroup.hrapp.ui.fragment.requests.types.RequestTypes.*
-import com.gsgroup.hrapp.util.Status
-import com.gsgroup.hrapp.util.navigateSafe
-import com.gsgroup.hrapp.util.observe
-import com.gsgroup.hrapp.util.showErrorDialog
+import com.gsgroup.hrapp.util.*
 
 class RequestsTypesFragment : BaseFragment<FragmentRequestsTypesBinding, RequestsTypesViewModel>() {
 
@@ -57,9 +55,12 @@ class RequestsTypesFragment : BaseFragment<FragmentRequestsTypesBinding, Request
             MEDICAL_APPROVAL -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToMedicalApprovalFragment())
             AUTH_AREA -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToAuthAreaFragment())
 //            BORROW -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToFragmentBorrow())
+            BORROW -> activity?.showWarningDialog(getString(R.string.still_working_on_it))
             EXP_CERTIFICATE -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToExpCertificateFragment())
             HIRE_EMPLOYEE -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToHireEmployeeFragment())
             RESIGN -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToResignFragment())
+            PENALTY -> activity?.showWarningDialog(getString(R.string.still_working_on_it))
+            VACATION -> activity?.showWarningDialog(getString(R.string.still_working_on_it))
 //            PENALTY -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToPenaltyFragment())
 //            VACATION -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToVacationFragment())
             EXCUSE -> navigateSafe(RequestsTypesFragmentDirections.actionRequestsTypesFragmentToPermissionFragment())

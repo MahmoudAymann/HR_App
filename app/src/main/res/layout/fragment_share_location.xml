@@ -87,19 +87,6 @@
                     />
 
                 <com.google.android.material.button.MaterialButton
-                    style="@style/TextButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/get_serial"
-                    android:textColor="@color/black"
-                    android:onClick="@{()->viewModel.onAllowPermissionClick()}"
-                    android:id="@+id/btn_get_permission"
-                    app:visibleInVisible="@{!viewModel.isGranted()}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_device_serial"
-                    />
-
-                <com.google.android.material.button.MaterialButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/send"
@@ -109,7 +96,8 @@
                     android:textColor="@color/white"
                     android:onClick="@{()->viewModel.onSubmitClick()}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_get_permission"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_device_serial"
                     />
 
 
@@ -122,10 +110,8 @@
                     android:onClick="@{()->viewModel.onCancelClick()}"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_get_permission"
+                    app:layout_constraintTop_toTopOf="@id/btn_send"
                     />
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

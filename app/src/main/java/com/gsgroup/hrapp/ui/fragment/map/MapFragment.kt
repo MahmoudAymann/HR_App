@@ -54,7 +54,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             gotArgs(args)
             observe(mutableLiveData) {
                 when (it) {
-                    Codes.SHARE_LOCATION_CLICK->openShareLocationScreen()
+                    Codes.SHARE_LOCATION_CLICK->navigateToShareLocationScreen()
                     Codes.OPEN_CITY_LIST -> navigateSafe(
                         MapFragmentDirections.actionMapFragmentToBottomSheetFragment(
                             citiesList
@@ -86,23 +86,6 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), OnMapReady
             }
         }
     }
-
-    private fun openShareLocationScreen() {
-        if (PermissionUtil.hasAllPhoneCriticalPermissions(requireActivity())) {
-            navigateToShareLocationScreen()
-        }else{
-            requireActivity().requestAppPermissions(PermissionUtil.getPhoneCriticalPermissions()){
-                when(it){
-                    ALL_GOOD -> navigateToShareLocationScreen()
-                    OPEN_SETTING -> requireActivity().goToSettingsPermissions(getString(R.string.please_allow_permission_phone_critical),registerForActivityResult(
-                        ActivityResultContracts.StartActivityForResult()) {
-                        openShareLocationScreen()
-                    })
-                }
-            }
-        }
-    }
-
     private fun navigateToShareLocationScreen(){
         navigateSafe(
             MapFragmentDirections.actionMapFragmentToShareLocationFragment(

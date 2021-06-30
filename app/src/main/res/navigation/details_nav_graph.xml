@@ -23,8 +23,7 @@
         android:id="@+id/loginFragment"
         android:name="com.gsgroup.hrapp.ui.fragment.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"
-        ></fragment>
+        tools:layout="@layout/fragment_login"/>
 
     <fragment
         android:id="@+id/directManagerFragment"
@@ -166,6 +165,15 @@
             android:name="data"
             app:argType="com.gsgroup.hrapp.data.model.SearchItemInterface[]"
             app:nullable="true"
+            />
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_medicalApprovalDetailsFragment"
+            app:destination="@id/medicalApprovalDetailsFragment"
+            />
+        <argument
+            android:name="autoClose"
+            app:argType="boolean"
+            android:defaultValue="true"
             />
     </dialog>
     <fragment
@@ -320,6 +328,10 @@
         <action
             android:id="@+id/action_medicalApprovalFragment_to_medicalApprovalDetailsFragment"
             app:destination="@id/medicalApprovalDetailsFragment"
+            />
+        <action
+            android:id="@+id/action_medicalApprovalFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment"
             />
     </fragment>
     <fragment

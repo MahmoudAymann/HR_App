@@ -24,18 +24,20 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/tv_request_type_bg"
                 android:elevation="@dimen/_2sdp"
+                tools:text="type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="UnusedAttribute"
-                tools:text="@tools:sample/first_names"
                 />
 
-            <com.gsgroup.hrapp.ui.customeviews.BlackTextView
+            <TextView
+                android:textColor="@color/black"
                 android:id="@+id/tv_date_static"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date_"
+                tools:text="@tools:sample/date/ddmmyy"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_type"
                 />

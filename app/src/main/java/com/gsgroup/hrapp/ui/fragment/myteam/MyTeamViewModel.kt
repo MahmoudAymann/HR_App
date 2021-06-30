@@ -11,7 +11,7 @@ import com.gsgroup.hrapp.util.requestNewCallDeferred
 class MyTeamViewModel( app: Application) : AndroidBaseViewModel(app) {
 
     val adapter = MyTeamAdapter(::onChangePasswordClick, ::onLogsClick)
-    val obsShowEmpty = ObservableBoolean()
+    private val obsShowEmpty = ObservableBoolean()
     lateinit var item : MyTeamItem
     private fun onLogsClick(item: MyTeamItem) {
             this.item = item

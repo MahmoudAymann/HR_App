@@ -5,10 +5,12 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.gsgroup.hrapp.R
 import com.gsgroup.hrapp.base.BaseFragment
+import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentFaqBinding
 import com.gsgroup.hrapp.util.Status
 import com.gsgroup.hrapp.util.observe
 import com.gsgroup.hrapp.util.showErrorDialog
+import com.gsgroup.hrapp.util.showWarningDialog
 
 class FAQFragment : BaseFragment<FragmentFaqBinding, FAQViewModel>() {
     override fun pageTitle(): String = getString(R.string.faq)
@@ -18,7 +20,7 @@ class FAQFragment : BaseFragment<FragmentFaqBinding, FAQViewModel>() {
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
-
+                    Codes.GUIDE_CLICK->requireActivity().showWarningDialog(getString(R.string.still_working_on_it))
                 }
             }
             observe(resultLiveData) {

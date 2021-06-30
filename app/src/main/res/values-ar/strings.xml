@@ -212,8 +212,6 @@
     <string name="the_required_docs_chronic_disease">- صورة من الكارت التأمينى.\n
         - صورة روشتة بالتشخيص.\n
     - صورة روشتة بالأدوية.</string>
-    <string name="the_required_docs_xrays">- صورة من الكارت الطبى.\n
-        - صورة من تقرير الحالة.</string>
     <string name="the_required_docs_xrays_and_analysis">- صورة من الكارت الطبى.\n
         - صورة من تقرير الحالة.</string>
     <string name="the_required_docs_surgent_and_physcal_training">- صورة من الكارت التأمينى.\n

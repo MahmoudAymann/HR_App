@@ -9,6 +9,7 @@ import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.databinding.FragmentRequestsCornerBinding
 import com.gsgroup.hrapp.util.navigateSafe
 import com.gsgroup.hrapp.util.observe
+import com.gsgroup.hrapp.util.showWarningDialog
 
 class RequestsCornerFragment :
     BaseFragment<FragmentRequestsCornerBinding, RequestsCornerViewModel>() {
@@ -20,9 +21,11 @@ class RequestsCornerFragment :
         mViewModel.apply {
             observe(mutableLiveData) {
                 when (it) {
+                    Codes.AUDIT_SCREEN->activity?.showWarningDialog(getString(R.string.still_working_on_it))
                     Codes.HR_REQUESTS_SCREEN -> showRequestTypesScreen(true)
                     Codes.DM_REQUESTS_SCREEN -> showRequestTypesScreen(false)
-                    Codes.MY_REQUESTS_SCREEN -> navigateSafe(RequestsCornerFragmentDirections.actionRequestsCornerFragmentToMyRequestsFragment())
+//                    Codes.MY_REQUESTS_SCREEN -> navigateSafe(RequestsCornerFragmentDirections.actionRequestsCornerFragmentToMyRequestsFragment())
+                    Codes.MY_REQUESTS_SCREEN -> activity?.showWarningDialog(getString(R.string.still_working_on_it))
                 }
             }
         }

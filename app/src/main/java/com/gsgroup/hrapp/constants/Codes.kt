@@ -1,6 +1,7 @@
 package com.gsgroup.hrapp.constants
 
 object Codes {
+    val GUIDE_CLICK: Int = 1050
     val NORMAL_MEDICAL: Int = 1049
     const val PHYSICAL_MEDICAL: Int = 1048
     const val SURGENT_MEDICAL: Int = 1047

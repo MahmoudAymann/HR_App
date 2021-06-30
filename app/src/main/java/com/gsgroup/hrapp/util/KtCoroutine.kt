@@ -11,10 +11,10 @@ import timber.log.Timber
 class KtCoroutine {
 
     companion object {
-        fun delayJob(delayInSeconds: Long): Job {
+        fun delayJob(delayInSeconds: Long, action: () -> Unit): Job {
             return GlobalScope.launch {
                 delay(delayInSeconds * 1000)
-                Timber.e("run sepcific action")
+                action.invoke()
             }
         }
 

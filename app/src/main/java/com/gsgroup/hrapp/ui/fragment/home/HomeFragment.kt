@@ -53,19 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(),
 
     private fun navigateToMap(isCheckIn: Boolean) {
         this.isCheckIn = isCheckIn
-        if (!PermissionUtil.hasAllPhoneCriticalPermissions(requireContext())) {
-            requireActivity().requestAppPermissions(PermissionUtil.getPhoneCriticalPermissions()) {
-                when (it) {
-                    ALL_GOOD -> showMapScreen()
-                    OPEN_SETTING -> requireActivity().goToSettingsPermissions(
-                        getString(R.string.please_allow_permission_phone_critical),
-                        register
-                    )
-                }
-            }
-        } else {
-            showDetailsActivity(R.id.mapFragment, getIntentForMap(isCheckIn))
-        }
+        showMapScreen()
     }
 
     private fun showMapScreen() {

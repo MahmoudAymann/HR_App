@@ -3,6 +3,7 @@ package com.gsgroup.hrapp.ui.fragment.faq
 import android.app.Application
 import androidx.databinding.ObservableBoolean
 import com.gsgroup.hrapp.base.AndroidBaseViewModel
+import com.gsgroup.hrapp.constants.Codes
 import com.gsgroup.hrapp.util.Resource
 import com.gsgroup.hrapp.util.requestNewCallDeferred
 
@@ -33,7 +34,7 @@ class FAQViewModel(app:Application) : AndroidBaseViewModel(app) {
 
 
     fun onUserGuideClick(){
-
+        setValue(Codes.GUIDE_CLICK)
     }
 
     private  fun faqsCallAsync() = apiHelper.getFaqsAsync()

@@ -78,7 +78,7 @@ fun <T : Any> Fragment.listenForResult(key: String, callback: (T?) -> Unit) {
 fun Fragment.setResultToFragment(key: String, it: SearchItemInterface?) {
     val savedStateHandle = findNavController().previousBackStackEntry?.savedStateHandle
     savedStateHandle?.set(key, it)
-    findNavController().navigateUp()
+    findNavController().popBackStack()
 }
 
 fun String.stringPathToFile(app: Application): File? {

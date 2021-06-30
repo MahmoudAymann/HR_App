@@ -211,16 +211,18 @@
     <string name="the_required_documents_are">The Required Documents Are:</string>
     <string name="the_required_docs_chronic_disease">- Print of Medical Card.\n
         - Print of Diagnostic Prescription.\n
-    - Print of Medicine Prescription</string>
-    <string name="the_required_docs_xrays">- Print of Medical Card.\n
-        - Print of Status Report.</string>
+        - Print of Medicine Prescription</string>
     <string name="the_required_docs_xrays_and_analysis">- Print of Medical Card.\n
         - Print of Status Report.</string>
     <string name="the_required_docs_surgent_and_physcal_training">- Print of Medical Card.\n
         - Print of Status Report.\n
-    - Print of X-Rays.</string>
+        - Print of X-Rays.</string>
     <string name="chronical_mail" translatable="false">Chronic.post1@metlifeegypt.com</string>
     <string name="normal_mail" translatable="false">Approval.request@metlife.com</string>
+    <string name="xray_approval">X-RAY Approval</string>
+    <string name="analysis_approval">Analysis Approval</string>
+    <string name="surgent_approval">Surgeon Approval</string>
+    <string name="physical_approval">Physical Approval</string>
 
     <string-array name="months">
         <item>January</item>

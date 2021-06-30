@@ -1,6 +1,5 @@
 package com.gsgroup.hrapp.util
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -43,77 +42,16 @@ import kotlin.collections.ArrayList
 
 object AppUtil {
 
-    @SuppressLint("MissingPermission", "HardwareIds")
+    @SuppressLint( "HardwareIds")
     fun getDeviceSerial(applicationContext: Context): String {
-
-        var serialNumber: String
-
-        try {
-            val c = Class.forName("android.os.SystemProperties")
-            val get = c.getMethod("get", String::class.java)
-
-            serialNumber = get.invoke(c, "gsm.sn1") as String
-
-            when (serialNumber) {
-                "" -> serialNumber = get.invoke(c, "ril.serialnumber") as String
-            }
-
-            when (serialNumber) {
-                "" -> serialNumber = get.invoke(c, "ro.serialno") as String
-            }
-
-            when (serialNumber) {
-                "" -> serialNumber = get.invoke(c, "sys.serialnumber") as String
-            }
-
-            when (serialNumber) {
-                "" -> serialNumber = Build.SERIAL
-            }
-
-            when (serialNumber) {
-                "" -> serialNumber = applicationContext.getPrefFirebaseToken()
-            }
-
-        } catch (e: Exception) {
-            Timber.e(e)
-            serialNumber = applicationContext.getPrefFirebaseToken()
+        return try {
+            val result = Settings.Secure.getString(applicationContext.contentResolver,
+                Settings.Secure.ANDROID_ID)
+            result
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            applicationContext.getPrefFirebaseToken()
         }
-
-        if (serialNumber == "unknown") {
-            try {
-                val c = Class.forName("android.os.SystemProperties")
-                val get = c.getMethod(
-                    "get",
-                    String::class.java,
-                    String::class.java
-                )
-                serialNumber = get.invoke(c, "ril.serialnumber", "unknown") as String
-            } catch (ignored: Exception) {
-                Timber.d("BuildSerialException getDeviceSerial: $ignored")
-            }
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && serialNumber == "unknown") {
-            if (PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PHONE_STATE)) {
-                serialNumber = Settings.Secure.getString(
-                    applicationContext.contentResolver,
-                    Settings.Secure.ANDROID_ID
-                )
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && serialNumber == "unknown") {
-            if (PermissionUtil.isGranted(applicationContext, Manifest.permission.READ_PHONE_STATE)
-                && PermissionUtil.isGranted(
-                    applicationContext,
-                    Manifest.permission.READ_PRECISE_PHONE_STATE
-                )
-            ) {
-                serialNumber = Build.getSerial()
-            }
-        }
-        if (serialNumber == "unknown"){
-            serialNumber =  applicationContext.getPrefFirebaseToken()
-        }
-        return serialNumber
     }
 
     fun Context.getDrawableForLiteVersions(@DrawableRes drawableRes: Int): Drawable? {
