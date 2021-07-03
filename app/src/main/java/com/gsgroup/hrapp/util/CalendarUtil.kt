@@ -27,7 +27,7 @@ class CalendarUtil(val ctx: Context, val year: Int, val month: Int) {
         val cal = Calendar.getInstance()
         cal.time = Date()
         cal[Calendar.MONTH] = month - 1
-        cal[Calendar.DAY_OF_MONTH] = Calendar.SUNDAY
+        cal[Calendar.DAY_OF_MONTH] = Calendar.SATURDAY
         return when (cal.get(Calendar.DAY_OF_WEEK)) {
             Calendar.SUNDAY -> 2
             Calendar.MONDAY -> 3
@@ -47,7 +47,7 @@ class CalendarUtil(val ctx: Context, val year: Int, val month: Int) {
                 val startingDay = getFirstDayNameInMonth(month)
                 var startPutDayNumbers = false
                 var dayCounter = 1
-                for (i in 0 until 7) {// to start with day names
+                for (i in 0 until 7) { // to start with day names
                     val item = LogsItem()
                     item.dayName = getDayName(ctx, i)
                     item.textColor = getColorFromRes(R.color.black)
@@ -71,7 +71,7 @@ class CalendarUtil(val ctx: Context, val year: Int, val month: Int) {
                 }
                 this@flow.emit(list)
             }
-        }.flowOn(Dispatchers.Default)
+        }.flowOn(Dispatchers.IO)
     }
 
     private fun getDayName(ctx: Context, i: Int): String? {
@@ -95,7 +95,6 @@ class CalendarUtil(val ctx: Context, val year: Int, val month: Int) {
 
 
     enum class CalendarDateType {
-        NORMAL_WORKING_DAY,
         CASUAL_VACATION,
         FRIDAY_VACATION
     }
