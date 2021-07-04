@@ -66,7 +66,6 @@ object MapUtil {
                         val location = locationResult.locations[0]
                         if (location.isMockLocationEnabled(activity)) {
                             activity.showErrorDialog("ALERT!, Fake location Detected")
-
                         } else {
                             callback(location)
                             Timber.i("$location")

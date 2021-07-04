@@ -16,7 +16,7 @@ import com.gsgroup.hrapp.util.bindView
  * Created by MahmoudAyman on 7/17/2020.
  **/
 
-abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity <B : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
     val baseShowProgress = ObservableBoolean()
     protected abstract val mViewModel: VM

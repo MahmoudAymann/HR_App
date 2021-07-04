@@ -16,9 +16,6 @@ import androidx.lifecycle.withStateAtLeast
 import androidx.navigation.fragment.navArgs
 import com.gsgroup.hrapp.base.BaseFragment
 import com.gsgroup.hrapp.databinding.FragmentWebViewBinding
-import com.gsgroup.hrapp.util.AppUtil
-import com.gsgroup.hrapp.util.asUri
-import com.gsgroup.hrapp.util.openInBrowser
 import com.gsgroup.hrapp.util.showErrorDialog
 import kotlinx.coroutines.launch
 import timber.log.Timber

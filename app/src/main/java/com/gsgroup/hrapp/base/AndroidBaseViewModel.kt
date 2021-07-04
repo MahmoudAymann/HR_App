@@ -20,6 +20,7 @@ open class AndroidBaseViewModel(val app: Application) : AndroidViewModel(app), O
     var isLoading = ObservableBoolean()
     var userData : DataUser?  =  app.getPrefs(ConstString.PREF_USER_DATA)
     val apiHelper = ApiHelper(RetrofitBuilder(app).apiService)
+
     //for network
     val resultLiveData = MutableLiveData<Resource<Any?>?>()
 

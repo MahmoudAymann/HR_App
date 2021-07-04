@@ -1,17 +1,11 @@
 package com.gsgroup.hrapp.data.remote
 
-import android.content.Context
-import com.google.gson.GsonBuilder
-import com.gsgroup.hrapp.BuildConfig
-import com.gsgroup.hrapp.base.network.response.NetworkResponseAdapterFactory
-import com.gsgroup.hrapp.constants.ConstString
 import com.gsgroup.hrapp.data.model.AllCitiesAreaResponse
 import com.gsgroup.hrapp.data.model.BaseObjectResponse
 import com.gsgroup.hrapp.data.model.DirectManagerOrHrResponse
 import com.gsgroup.hrapp.ui.fragment.changepassword.ChangePasswordRequest
 import com.gsgroup.hrapp.ui.fragment.company_polices.PolicesResponse
 import com.gsgroup.hrapp.ui.fragment.faq.FAQsResponse
-import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.ui.fragment.login.LoginRequest
 import com.gsgroup.hrapp.ui.fragment.login.LoginResponse
 import com.gsgroup.hrapp.ui.fragment.map.AttendanceRequest

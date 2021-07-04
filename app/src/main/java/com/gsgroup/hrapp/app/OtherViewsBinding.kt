@@ -44,7 +44,6 @@ import timber.log.Timber
 
 class OtherViewsBinding {
 
-
     @BindingAdapter("setCardBackgroundColor")
     fun setCardViewBg(cv: MaterialCardView, color: Int?) {
         color?.let {

@@ -14,8 +14,8 @@ import timber.log.Timber
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun pageTitle(): String = getString(R.string.login)
-    override val mViewModel: LoginViewModel by viewModels()
 
+    override val mViewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

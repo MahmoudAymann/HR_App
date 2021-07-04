@@ -37,6 +37,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> :
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
+
         savedInstanceState: Bundle?
     ): View? {
         binding = bindView()

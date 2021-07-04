@@ -15,7 +15,6 @@ class CalendarUtil(val ctx: Context, val year: Int, val month: Int) {
     // return num of days in specific month
     //this will be the max counter to loop in
 
-
     private fun getDaysInMonth(year: Int, month: Int): Int {
         val c = Calendar.getInstance()
         c[Calendar.YEAR] = year

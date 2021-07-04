@@ -8,7 +8,6 @@ import com.gsgroup.hrapp.data.remote.ApiService
 import com.gsgroup.hrapp.ui.fragment.login.DataUser
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefLanguage
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.gsgroup.hrapp.base.network.response.NetworkResponseAdapterFactory
 import com.gsgroup.hrapp.util.SharedPrefUtil.getPrefs
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -16,7 +15,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
 
 private const val BASE_URL =
     "http://104.248.89.169:8000/api/"
@@ -40,11 +38,11 @@ fun getHeaderInterceptor(app: Application): Interceptor {
 private fun createOkHttpClient(app: Application): OkHttpClient {
     return OkHttpClient.Builder()
         .apply {
+            addInterceptor(getHeaderInterceptor(app))
             if (BuildConfig.DEBUG) {
                 addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             }
-            addInterceptor(getHeaderInterceptor(app))
-            readTimeout(120, TimeUnit.SECONDS)
+            readTimeout( 120, TimeUnit.SECONDS)
             connectTimeout(120, TimeUnit.SECONDS)
             writeTimeout(120, TimeUnit.SECONDS)
         }

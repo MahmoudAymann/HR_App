@@ -42,7 +42,7 @@ import kotlin.collections.ArrayList
 
 object AppUtil {
 
-    @SuppressLint( "HardwareIds")
+    @SuppressLint("HardwareIds")
     fun getDeviceSerial(applicationContext: Context): String {
         return try {
             val result = Settings.Secure.getString(applicationContext.contentResolver,

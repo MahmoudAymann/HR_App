@@ -23,9 +23,9 @@ data class FAQItem(
 	val answer: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int = 0
-) : Parcelable,BaseParcelable{
-	override fun unique() = id
+	val id: Int? = null
+) : Parcelable, BaseParcelable{
+	override fun unique() = id ?: 0
 }
 
 @Parcelize

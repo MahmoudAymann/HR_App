@@ -17,11 +17,13 @@ abstract class BaseAdapter<T : BaseParcelable>(
 
     var mCurrentList = arrayListOf<T?>()
 
-    private var position: Int = 0
+    private var mPosition: Int = 0
 
     @LayoutRes
     abstract fun layoutRes(): Int
+
     abstract fun onViewHolderCreated(viewHolder: BaseViewHolder<T>)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(parent.context),
@@ -32,7 +34,7 @@ abstract class BaseAdapter<T : BaseParcelable>(
         return BaseViewHolder<T>(binding).apply {
             onViewHolderCreated(this)
             itemView.setOnClickListener {
-                this@BaseAdapter.position = adapterPosition
+                this@BaseAdapter.mPosition = adapterPosition
                 itemClick(getItem(adapterPosition))
             }
         }
@@ -43,7 +45,7 @@ abstract class BaseAdapter<T : BaseParcelable>(
     }
 
     fun removeItem(item: T?, isListEmpty: (Boolean) -> Unit = {}) {
-        Timber.e("deleting > $item in pos: $position")
+        Timber.e("deleting > $item in pos: $mPosition")
         item?.let {
             mCurrentList.remove(it)
             submitList(mCurrentList.toMutableList())
@@ -72,7 +74,7 @@ abstract class BaseAdapter<T : BaseParcelable>(
 
     fun editItem(item: T?) {
         item?.let {
-            mCurrentList[position] = item
+            mCurrentList[mPosition] = item
             submitList(mCurrentList.toMutableList())
         } ?: Timber.e("item is null")
     }
